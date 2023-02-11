@@ -1,24 +1,29 @@
 <template>
-  <FormAuth/>
+  
+    <router-link to="/test">test</router-link> |
+    <router-link to="/">Home</router-link>
+  
+    <!-- <FormAuth/> -->
+    <div>
+
+      <router-view></router-view>
+    </div>
 </template>
 
 <script>
-import FormAuth from './components/FormAuth.vue';
+// import FormAuth from './components/FormAuth.vue';
+
 export default {
   name: 'App',
   components: {
-    FormAuth
+    // FormAuth,
+    
   }
 }
+
+
+
+
+
 </script>
 
-<style>
-body{
-  background: rgb(132, 210, 197);
-
-}
-#app{
-  margin: 10px;
-
-}
-</style>
