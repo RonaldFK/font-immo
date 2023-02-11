@@ -1,9 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import TestView from "../src/views/TestView.vue";
+import EstatetView from "../src/views/EstatetView.vue";
 import FormAuth from "../src/views/FormAuth.vue";
 // import App from "../src/App.vue";
 const routes = [
-  { path: "/test", component: TestView },
+  { path: "/estate", component: EstatetView },
   { path: "/login", component: FormAuth },
   //   { path: "/", component: App },
 ];

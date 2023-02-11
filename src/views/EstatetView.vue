@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'TestView'
+  name: 'EstatetView'
 
   }
 </script>
