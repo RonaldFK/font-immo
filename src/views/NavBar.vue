@@ -1,27 +1,15 @@
 <template>
-      <nav>
+          <nav>
         <router-link to="/">Home</router-link> |
         <router-link to="/login">Login</router-link> |
-        <router-link to="/test">Test</router-link>
+        <!-- <router-link to="/sign-in">Login</router-link> -->
         <!-- <button @click="handleSignOut" v-if="isLoggedIn">Sign out</button> -->
       </nav>
-  <router-view />
 </template>
 
 <script>
-// import FormAuth from './components/FormAuth.vue';
-
 export default {
-  name: 'App',
-  components: {
-    // FormAuth,
-    
+  name: 'NavBar'
+
   }
-}
-
-// 
-
-
-
 </script>
-
