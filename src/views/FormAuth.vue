@@ -17,7 +17,7 @@
                 <span v-if="errMsg">Login ou mot de passe incorrect</span>
             <h2 class="section__form-title">Se connecter</h2>
                 <button class="btn" type="submit" form="form-login"  @click="sendRequestLogin">
-                    LogIn
+                    Valider
                 </button>
         </form>
         <!-- Form request acces -->
@@ -63,7 +63,7 @@
                         <input class="input-form" type="password" placeholder="******" id="firstname" name="login" v-model="userToCreate.checkPassword" required>
                     </div>
                     <h2 class="section__form-title">Créer un compte</h2>
-                    <button class="btn" type="submit" form="form-acces" @click="sendRequestAccess">Request acces</button>
+                    <button class="btn" type="submit" form="form-acces" @click="sendRequestAccess">Valider</button>
                     
                 </div>
             </div>
