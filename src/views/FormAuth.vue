@@ -62,7 +62,7 @@
                         <label for="">Confirmer : </label>
                         <input class="input-form" type="password" placeholder="******" id="firstname" name="login" v-model="userToCreate.checkPassword" required>
                     </div>
-                    <h2 class="section__form-title">Créer un compte</h2>
+                    <h2 class="section__form-title">Demander l'accès</h2>
                     <button class="btn" type="submit" form="form-acces" @click="sendRequestAccess">Valider</button>
                     
                 </div>

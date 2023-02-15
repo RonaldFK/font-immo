@@ -1,25 +1,18 @@
 <template>
-      <nav class="navbar">
-        <div>
-          <router-link to="/dashboard">Dashboard</router-link> |
-          <router-link to="/estate" >Les Biens</router-link> |
-          <router-link to="/test">Les Managers</router-link> |
-          <router-link to="/test">Les Cliens</router-link> |
-        </div>
-        <div class="div-connect">
-          <router-link to="/login">Se connecter</router-link>
-        </div>
-      </nav>
+      <NavBar/>
   <router-view></router-view>
+  <!-- <FooterView/> -->
+  <router-view class="view two" name="wiew_two"></router-view>
 </template>
 
 <script>
-// import TestView from './views/TestView.vue'
-
+import NavBar from './views/navigate/NavBar.vue'
+// import FooterView from './views/Footer.vue'
 export default {
   name: 'App',
   components: {
-    // TestView
+    NavBar,
+    // FooterView
     
   },
   data(){

@@ -1,5 +1,5 @@
 <template>
-<router-view name="test" ></router-view>
+<router-view></router-view>
   <div v-if="data" class="content-view">
     <div v-for="estate in estates" :key="estate.id" class="content-view__list">
       <h1>{{ estate.name }}</h1>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'EstatetView',
+  name: 'EstateView',
   data(){
     return{
       baseUrl:'http://localhost:3000',
@@ -58,17 +58,16 @@ export default {
   flex-wrap: wrap;
   height: 100vh;
   margin-top: 10rem;
-  margin-left: 10rem;
+  margin-left: 15rem;
   margin-right: 10rem;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  /* position: relative; */
 }
 .content-view__list{
   border: 3px solid rgb(34, 124, 112);
-  min-width: 49%;
-  height: 30rem;
+  min-width: 45%;
+  height: 25rem;
   border-radius: 10px;
   width: 250px;
   position: relative;
