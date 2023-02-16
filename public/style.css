@@ -4,7 +4,7 @@ body{
     background: rgb(45, 71, 127);
     display: flex;
     align-items: center;
-    /* position: relative; */
+    position: relative;
   
   }
   #app{
@@ -21,7 +21,7 @@ body{
     position: fixed;
     top: 0px;
     left: 0px;
-    height: 2rem;
+    height: 6rem;
     z-index: 1;
   }
 .navbar div {

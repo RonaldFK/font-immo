@@ -8,7 +8,16 @@
       <router-link :to="'/estate/'+estate.id">Détails</router-link>
       <img src="../assets/img/house3.jpg" alt="" >
     </div>
+    
   </div>
+  <div class="content-view msg-err" v-else>
+    <div class="content-view__list" >
+  
+      <h1 >Aucune données</h1>
+    </div>
+
+  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -66,7 +75,7 @@ export default {
 }
 .content-view__list{
   border: 3px solid rgb(34, 124, 112);
-  min-width: 45%;
+  min-width: 34rem;
   height: 25rem;
   border-radius: 10px;
   width: 250px;
@@ -95,5 +104,10 @@ export default {
 .content-view__list  a:hover{
     text-decoration: none;
     color: black;
+}
+.msg-err{
+  margin-left: 49rem;
+  text-align: center;
+
 }
 </style>

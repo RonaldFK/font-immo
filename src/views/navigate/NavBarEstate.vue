@@ -2,7 +2,7 @@
     <nav class="sidenav">
         <div>
           <router-link to="/estate" >Mes Biens</router-link>
-          <router-link to="/test">Rechercher un bien</router-link>
+          <router-link to="/dashboard">Rechercher un bien</router-link>
           <router-link to="/test">Voir les prêts de clés</router-link>
           <router-link to="/test">Biens sous compromis</router-link>
         </div>
@@ -18,7 +18,7 @@ export default {
 
 .sidenav {
   height: 100%;
-  margin-top: 4rem; 
+  /* margin-top: 4rem;  */
   width: 14rem; 
   position: fixed; 
   z-index: 1; 
