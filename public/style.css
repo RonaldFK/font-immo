@@ -1,22 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 body{
     font-family: 'Poppins', sans-serif;
-    background: rgb(45, 71, 127);
+    background: rgb(236, 229, 199);
     display: flex;
     align-items: center;
     position: relative;
   
   }
   #app{
-    margin: 10px;
-  
+    margin: 10px; 
   }
   .navbar{
-      color: white;
+    color: white;
+    background: rgb(53, 66, 89);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    width: 100%;
     font-size: 20px;
     position: fixed;
     top: 0px;
@@ -38,7 +40,9 @@ body{
 }
 .navbar div a:hover{
     text-decoration: none;
-    color: black;
+    color: rgb(236, 229, 199);
+    font-weight: bold;
+    transition: 0.2s;
 }
 .div-connect{
     position: absolute;

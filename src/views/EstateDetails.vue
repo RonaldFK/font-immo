@@ -1,8 +1,18 @@
 <template>
   <router-view></router-view>
-  <div v-for=" info in oneEstate" :key="info.id">
-
+  <div v-for=" info in oneEstate" :key="info.id" class="main_details_div">
     <h1>{{info.name}}</h1>
+    <div>
+      <p>Prix du bien : {{ info.price }}</p>
+      <p>Type de bien : {{ info.type }}</p>
+      <p>Localisation : {{ info.location.num }} {{ info.location.street }} {{ info.location.city }}</p>
+      <p>Code postale : {{ info.location.code }}</p>
+    </div>
+    <div>
+      <p>{{ info.manager.firstname }}</p>
+      <p>{{ info.manager.lastname }}</p>
+      <p>{{ info.manager.email }}</p>
+    </div>
   </div>
   
 </template>
@@ -34,7 +44,7 @@ export default {
             this.oneEstate = result
             this.data = true
             // this.estates.push(response)
-            console.log('result',this.oneEstate);
+            console.log(result);
             
         } catch(err){
             console.log(err,'TEST ICI');
@@ -48,6 +58,13 @@ export default {
 
   }
 </script>
+
+
+<style>
+.main_details_div{
+  
+}
+</style>
 
 
   

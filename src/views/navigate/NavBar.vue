@@ -2,7 +2,7 @@
     <nav class="navbar">
         <div>
           <router-link to="/dashboard">Dashboard</router-link> |
-          <router-link to="/estate" >Les Biens</router-link> |
+          <router-link to="/estate" v-if="this.$route = '/estate'">Les Biens</router-link> |
           <router-link to="/test">Les Managers</router-link> |
           <router-link to="/test">Les Cliens</router-link> |
         </div>
@@ -14,5 +14,6 @@
 <script>
 export default {
     name: 'NavBar',
+    
 }
 </script>

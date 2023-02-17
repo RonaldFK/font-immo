@@ -5,28 +5,31 @@
           <router-link to="/dashboard">Rechercher un bien</router-link>
           <router-link to="/test">Voir les prêts de clés</router-link>
           <router-link to="/test">Biens sous compromis</router-link>
+          
         </div>
       </nav>
 </template>
 <script>
 export default {
     name: 'NavBarEstate',
+    
 }
 </script>
 
 <style>
 
 .sidenav {
-  height: 100%;
-  /* margin-top: 4rem;  */
-  width: 14rem; 
+  height: 80%;
+  margin-top: 12rem; 
+  width: 18rem; 
   position: fixed; 
   z-index: 1; 
   top: 0; 
   left: 0;
-  background-color: rgb(34, 124, 112);
-  border: 2px solid rgb(228, 201, 136);
-  border-top-right-radius: 10px; 
+  background-color: rgb(53, 66, 89);
+  /* border: 2px solid rgb(228, 201, 136); */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px; 
   overflow-x: hidden; 
   padding-top: 20px;
 }
@@ -42,7 +45,9 @@ export default {
 
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  color: rgb(53, 66, 89);
+  font-weight: bold;
+  transition: 0.2s;
 }
 
 </style>
