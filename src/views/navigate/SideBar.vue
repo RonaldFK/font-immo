@@ -45,7 +45,7 @@ export default {
 
 
 .sidenav a:hover {
-  color: rgb(53, 66, 89);
+  color: rgb(236, 229, 199);
   font-weight: bold;
   transition: 0.2s;
 }

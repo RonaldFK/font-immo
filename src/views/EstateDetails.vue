@@ -1,20 +1,48 @@
 <template>
   <router-view></router-view>
-  <div v-for=" info in oneEstate" :key="info.id" class="main_details_div">
-    <h1>{{info.name}}</h1>
-    <div>
-      <p>Prix du bien : {{ info.price }}</p>
-      <p>Type de bien : {{ info.type }}</p>
-      <p>Localisation : {{ info.location.num }} {{ info.location.street }} {{ info.location.city }}</p>
-      <p>Code postale : {{ info.location.code }}</p>
+  <div class="main-details-div">
+    <div class="describe-estate" v-for=" info in oneEstate" :key="info.id">
+      <h1>{{info.name}}</h1>
+      <div>
+          <p>Prix du bien : {{ info.price }}</p>
+          <p>Type de bien : {{ info.type }}</p>
+          <p>Localisation : {{ info.location.num }} {{ info.location.street }} {{ info.location.city }}</p>
+          <p>Code postale : {{ info.location.code }}</p>
+      </div>
+      
     </div>
-    <div>
-      <p>{{ info.manager.firstname }}</p>
-      <p>{{ info.manager.lastname }}</p>
-      <p>{{ info.manager.email }}</p>
+    <div class="handle-div-describe">
+
+      <div class="describe-manager" v-for=" info in oneEstate" :key="info.id">
+        <p>Prenom : {{ info.manager.firstname }}</p>
+        <p>Nom : {{ info.manager.lastname }}</p>
+        <p>Mail : {{ info.manager.email }}</p>
+      </div>
+      <div class="describe-client" v-for=" info in oneEstate" :key="info.id">
+        <p>Prenom : {{ info.customer.firstname }}</p>
+        <p>Nom : {{ info.customer.lastname }}</p>
+        <p>Numéro : {{ info.customer.tel }}</p>
+        <p>Type client : {{ info.customer.type }}</p>
+        <p>Paiement : {{ info.customer?.cash_or_credit }}</p>
+      </div>
     </div>
   </div>
   
+  <div class="describe-photo">
+<div>
+
+  <img src="../assets/img/house1.jpg" alt="">
+  <img src="../assets/img/house1.jpg" alt="">
+  <img src="../assets/img/house1.jpg" alt="">
+  <img src="../assets/img/house1.jpg" alt="">
+  <img src="../assets/img/house1.jpg" alt="">
+  <img src="../assets/img/house1.jpg" alt="">
+  <img src="../assets/img/house1.jpg" alt="">
+  <img src="../assets/img/house1.jpg" alt="">
+</div>
+  </div>
+
+
 </template>
 
 <script>
@@ -61,8 +89,60 @@ export default {
 
 
 <style>
-.main_details_div{
-  
+.main-details-div{
+  display: flex;
+  margin-top:12rem;
+  margin-left:20rem;
+  margin-right:20rem;
+  background: red;
+  width: 80rem;
+  height: 50rem;
+}
+.describe-estate{
+  background: black;
+  width: 50%;
+}
+.describe-manager{
+  background: blue;
+  height: 50%;
+}
+.describe-client{
+  background:mediumturquoise;
+  height: 50%;
+}
+.describe-photo{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-left:20rem;
+  margin-right:20rem;
+  background: red;
+  width: 80rem;
+  height: 30rem;
+  position: relative;
+  margin: auto;
+  /*  */
+  /* overflow-y:auto; */
+    /* overflow-x:hidden; */
+}
+.describe-photo div{
+    display: flex;
+    gap: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    overflow-y:auto;
+
+}
+.describe-photo img{
+  margin-top: 50px;
+  width: 32rem;
+  height: 20rem;
+  vertical-align: middle;
+}
+.handle-div-describe{
+  background: palegreen;
+  width: 50%;
 }
 </style>
 

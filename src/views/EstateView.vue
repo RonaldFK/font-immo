@@ -72,7 +72,6 @@ export default {
 .content-view{
   display: flex;
   flex-wrap: wrap;
-  /* border-left-color: red; */
   /* height: 100vh; */
   margin-top: 15%;
   margin-left: 15rem;
@@ -88,9 +87,10 @@ export default {
   border: 3px solid rgba(167, 206, 201, 0.739);
   min-width: 34rem;
   margin-left: 8rem;
-  height: 8rem;
+  height: 7rem;
   border-radius: 10px;
   width: 250px;
+  border-left-color: rgb(228, 201, 136);
   position: relative;
   background: rgb(194, 222, 209);
 }
@@ -109,14 +109,14 @@ export default {
     right: 5px;
     bottom: 5px;
 }
-.content-view__list img{
+/* .content-view__list img{
     border-radius: 10%;
     position: absolute;
     width: 15rem;
     height: 12rem;
     right: 5px;
     top: 5px;
-}
+} */
 .content-view__list  a:link, a:visited,a:active{
     text-decoration: none;
     color: white;
