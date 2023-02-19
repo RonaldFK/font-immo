@@ -29,18 +29,9 @@
   </div>
   
   <div class="describe-photo">
-<div>
-
-  <img src="../assets/img/house1.jpg" alt="">
-  <img src="../assets/img/house1.jpg" alt="">
-  <img src="../assets/img/house1.jpg" alt="">
-  <img src="../assets/img/house1.jpg" alt="">
-  <img src="../assets/img/house1.jpg" alt="">
-  <img src="../assets/img/house1.jpg" alt="">
-  <img src="../assets/img/house1.jpg" alt="">
-  <img src="../assets/img/house1.jpg" alt="">
-
-</div>
+      <div>
+        <img :src="photo.url" alt="" v-for="photo in photoUrl" :key="photo.name">
+      </div>
 <div class="div-form">
 <form action="" method="POST" enctype="multipart/form-data">
 
@@ -49,11 +40,10 @@
        name="photo"
        accept="image/png, image/jpeg">
       <input type="submit" value="Valider" class="btn" @click="addPhoto">
-       
-</form>
+    </form>
+<button @click="getPhoto">test</button>
 </div>
 </div>
-
 
 </template>
 
@@ -65,12 +55,39 @@ export default {
       baseUrl:'http://localhost:3000',
       oneEstate:[],
       data:false,
+      photoUrl:[]
       
     }
   },
-  created: async function(){
+  methods:{
+    addPhoto(e){
+      e.preventDefault()
+      console.log('test');
+    },
+    async getPhoto(){
+    console.log('TESTGET');
+      try{
+            const response = await fetch(`http://localhost:3000/photo`,
+            {
+                method:'GET',
+                headers:{
+                    "Content-Type": "multipart/form-data",
+                    "Access-Control-Allow-Origin":"http://localhost:8080"
+                }
+            })
+            let  result = await response.json()
+            result = result.filter(elem => elem.name != '.DS_Store')
+            console.log(result,'TEST');
+            this.photoUrl = result
+            
+            
+        } catch(err){
+            console.log(err,'TEST ICI');
+        }
+  },
+  async getEstate(){
     const id = this.$route.params.id
-      console.log(id);
+      // console.log(id);
       try{
             const response = await fetch(`${this.baseUrl}/estate/${id}`,
             {
@@ -84,19 +101,19 @@ export default {
             this.oneEstate = result
             this.data = true
             // this.estates.push(response)
-            console.log(result);
+            // console.log(result);
             
         } catch(err){
             console.log(err,'TEST ICI');
         }
   },
-  
-  methods:{
-    addPhoto(e){
-      e.preventDefault()
-      console.log('test');
-    }
-
+  created(){
+    this.getEstate()
+    this.getPhoto()
+  },
+  beforeMount() {
+   
+},
   }
 
   }
