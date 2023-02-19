@@ -39,8 +39,20 @@
   <img src="../assets/img/house1.jpg" alt="">
   <img src="../assets/img/house1.jpg" alt="">
   <img src="../assets/img/house1.jpg" alt="">
+
 </div>
-  </div>
+<div class="div-form">
+<form action="" method="POST" enctype="multipart/form-data">
+
+  <label for="">Ajouter des photos</label>
+      <input type="file"
+       name="photo"
+       accept="image/png, image/jpeg">
+      <input type="submit" value="Valider" class="btn" @click="addPhoto">
+       
+</form>
+</div>
+</div>
 
 
 </template>
@@ -80,7 +92,10 @@ export default {
   },
   
   methods:{
-    
+    addPhoto(e){
+      e.preventDefault()
+      console.log('test');
+    }
 
   }
 
@@ -114,6 +129,7 @@ export default {
   display: flex;
   align-content: center;
   justify-content: center;
+  flex-direction: column;
   gap: 1rem;
   margin-left:20rem;
   margin-right:20rem;
@@ -135,6 +151,7 @@ export default {
 
 }
 .describe-photo img{
+  border-radius: 5px;
   margin-top: 50px;
   width: 32rem;
   height: 20rem;
@@ -143,6 +160,29 @@ export default {
 .handle-div-describe{
   background: palegreen;
   width: 50%;
+}
+.div-form{
+  justify-content: center;
+
+    display: flex;
+    width: 80rem;
+}
+.div-form label{
+color: white;
+}
+.div-form input{
+
+    color: white;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: rgb(100, 98, 98);
+}
+.btn{
+    color: white;
+    border: 3px solid rgb(228, 201, 136);
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: rgb(100, 98, 98);
 }
 </style>
 
