@@ -31,8 +31,8 @@
   </div>
   
   <div class="describe-photo">
-      <div>
-        <img :src="photo.url" alt="" v-for="photo in photoUrl" :key="photo.name">
+      <div v-for="info in oneEstate" :key="info.id">
+        <img :src="'http://localhost:3000/estate/'+ this.id +'/photo/' + photo.name " v-for="photo in info.photos" :key="photo.id">
       </div>
 <div class="div-form">
 <form action="" method="POST" enctype="multipart/form-data">
@@ -55,15 +55,16 @@ export default {
       baseUrl:'http://localhost:3000',
       oneEstate:[],
       data:false,
-      photoUrl:[]
+      photoUrl:[],
+      id:this.$route.params.id
       
     }
   },
   created: async function getEstateDetails(){
-    const id = this.$route.params.id
+    
       // console.log(id);
       try{
-            const response = await fetch(`${this.baseUrl}/estate/${id}`,
+            const response = await fetch(`${this.baseUrl}/estate/${this.id}`,
             {
                 method:'GET',
                 headers:{
@@ -75,33 +76,33 @@ export default {
             this.oneEstate = result
             this.data = true
             // this.estates.push(response)
-            // console.log(result);
+            console.log(result[0].photos[0]);
             
         } catch(err){
             console.log(err,'TEST ICI');
         }
   },
-  beforeCreate: async function getPhoto(){
-    console.log('TESTGET');
-      try{
-            const response = await fetch(`http://localhost:3000/photo`,
-            {
-                method:'GET',
-                headers:{
-                    "Content-Type": "multipart/form-data",
-                    "Access-Control-Allow-Origin":"http://localhost:8080"
-                }
-            })
-            let  result = await response.json()
-            result = result.filter(elem => elem.name != '.DS_Store')
-            console.log(result,'TEST');
-            this.photoUrl = result
+  // beforeCreate: async function getPhoto(){
+  //   console.log('TESTGET');
+  //     try{
+  //           const response = await fetch(`http://localhost:3000/estate/${this.id}/photo/bien2-photo1.jpg`,
+  //           {
+  //               method:'GET',
+  //               headers:{
+  //                   "Content-Type": "multipart/form-data",
+  //                   "Access-Control-Allow-Origin":"http://localhost:8080"
+  //               }
+  //           })
+  //           let  result = await response.json()
+  //           result = result.filter(elem => elem.name != '.DS_Store')
+  //           console.log(result,'TEST');
+  //           this.photoUrl = result
             
             
-        } catch(err){
-            console.log(err,'TEST ICI');
-        }
-  },
+  //       } catch(err){
+  //           console.log(err,'TEST ICI');
+  //       }
+  // },
   methods:{
     async addPhoto(){
       try{
