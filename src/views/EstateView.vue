@@ -3,7 +3,7 @@
   <ModalCreateEstate @openModal="closeModal"></ModalCreateEstate>
   </div>
   <div class="div-create-estate" @click="openModal">
-    <button>CREER</button>
+    <button>Créer un nouveau bien</button>
   </div>
   <div v-if="data" class="content-view">
     <div v-for="estate in estates" :key="estate.id" class="content-view__list">
