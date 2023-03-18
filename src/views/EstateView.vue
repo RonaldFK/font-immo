@@ -55,7 +55,7 @@ export default {
             this.estates = result
             this.data = true
             // this.estates.push(response)
-            console.log(result,this.data);
+            console.log(result);
             
         } catch(err){
             console.log(err,'TEST ICI');

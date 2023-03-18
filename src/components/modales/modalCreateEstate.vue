@@ -10,9 +10,14 @@
                     
                     <form action="" method="POST">
                         <label for="">Nom du bien</label>
-                        <input v-model="estateToCreate.nom" type="text">
+                        <input v-model="estateToCreate.name" type="text">
                         <label for="">Prix du bien</label>
                         <input v-model="estateToCreate.price" type="text">
+                        <!-- <label for="">Type</label>
+                        <input v-model="estateToCreate.type" type="text"> -->
+                        <select v-model="estateToCreate.type" name="" id="">
+                            <option v-for="typeEstate in typeEstates" :key="typeEstate.value" :value="typeEstate.value" >{{typeEstate.label}}</option>
+                        </select>
                         <label for="">Numéro</label>
                         <input v-model="estateToCreate.num" type="text">
                         <label for="">Rue</label>
@@ -46,19 +51,19 @@ export default {
        return{
         baseUrl: 'http://localhost:3000',
         selectedOption: null,
-        typeEstate: [
+        typeEstates: [
             { value: 'apartment', label: 'Apartement' },
-            { value: 'villa', label: 'Villa' },
+            { value: 'maison', label: 'Maison' },
             { value: 'parking', label: 'Parking' }
         ],
         locations:[],
         estateToCreate:{
-            nom:'',
+            name:'',
             price:'',
-            street:'',
-            city:'',
-            num:'',
-            code:''
+            statut:'',
+            type:'',
+            // num:'',
+            // code:''
         }
        }
     },
@@ -84,23 +89,24 @@ export default {
             console.log(this.estateToCreate);
         },
         async createEstate(){
-            this.$emit('closeEmit')
             const form = new FormData()
             const url  = 'http://localhost:3000/estate'
-            form.append('estate',this.estateToCreate)
+            form.append('estate',JSON.stringify(this.estateToCreate))
             console.log(JSON.stringify(this.estateToCreate))
             try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "multipart/form-data"
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+            'Accept': 'application/json',
+            // 'Content-Type': 'multipart/form-data'
         //   'Access-Control-Allow-Origin': 'http://localhost:8080'
-        },
-        body: JSON.stringify(form)
-      });
-      const result = response.json()
-      console.log(result);
+    } ,
+    body: form
+});
+const result = await response.json()
+console.log(result);
 
+this.$emit('closeEmit')
     } catch (err) {
       console.log(err, 'TEST ICI')
     }
