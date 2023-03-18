@@ -28,6 +28,8 @@
                         <input v-model="estateToCreate.country" type="text">
                         <label for="">Code postale</label>
                         <input v-model="estateToCreate.code" type="text">
+                        <label for="photos">Photos:</label>
+                        <input type="file" id="photos" ref="photos" multiple>
                         <!-- <select name="" id="">
                             <option v-for="estate in typeEstate" :key="estate.value" >{{ estate.label }} </option> 
                         </select>
@@ -92,7 +94,10 @@ export default {
             const form = new FormData()
             const url  = 'http://localhost:3000/estate'
             form.append('estate',JSON.stringify(this.estateToCreate))
-            console.log(JSON.stringify(this.estateToCreate))
+            for (let i = 0; i < this.$refs.photos.files.length; i++) {
+                form.append('photo', this.$refs.photos.files[i])
+      }
+            console.log(this.$refs.photos)
             try {
                 const response = await fetch(url, {
                     method: 'POST',
