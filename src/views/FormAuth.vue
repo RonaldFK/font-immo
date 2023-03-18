@@ -73,8 +73,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: 'FormAuth',
   props: {
