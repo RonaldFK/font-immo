@@ -9,7 +9,6 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
     "rules": {
@@ -18,8 +17,5 @@
     "no-multi-spaces": "error",
     "no-trailing-spaces": "error",
     "eol-last": "error"
-    },
-    "plugins": [
-        "@typescript-eslint"
-      ]
+    }
     }

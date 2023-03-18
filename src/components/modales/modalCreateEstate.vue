@@ -31,7 +31,7 @@
                         </select> -->
                     </form>
                 </div>
-                <button @click="handleModa">Valider</button>   
+                <button @click="createEstate">Valider</button>   
             </div>
         </div>
         </div>
@@ -82,6 +82,28 @@ export default {
         handleModa(){
             this.$emit('openModal')
             console.log(this.estateToCreate);
+        },
+        async createEstate(){
+            this.$emit('closeEmit')
+            const form = new FormData()
+            const url  = 'http://localhost:3000/estate'
+            form.append('estate',this.estateToCreate)
+            console.log(JSON.stringify(this.estateToCreate))
+            try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "multipart/form-data"
+        //   'Access-Control-Allow-Origin': 'http://localhost:8080'
+        },
+        body: JSON.stringify(form)
+      });
+      const result = response.json()
+      console.log(result);
+
+    } catch (err) {
+      console.log(err, 'TEST ICI')
+    }
         }
     }
 }
@@ -125,7 +147,7 @@ export default {
     /* justify-content: center; */
     align-items: center;
     height: 41rem;
-    background: rgba(168, 162, 162, 0.433);
+    background: rgba(210, 204, 204, 0.433);
 }
 .overlay {
     /* background: rgba(0, 0, 0, 0.5); */

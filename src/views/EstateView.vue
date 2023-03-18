@@ -1,6 +1,6 @@
 <template>
   <div class="modal" v-if="modal" >
-  <ModalCreateEstate @openModal="closeModal"></ModalCreateEstate>
+  <ModalCreateEstate @closeEmit="closeModal"></ModalCreateEstate>
   </div>
   <div class="div-create-estate" @click="openModal">
     <button>Créer un nouveau bien</button>
@@ -79,7 +79,7 @@ export default {
 <style>
 .div-create-estate{
   position: fixed;
-    top: 20%;
+    top: 8rem;
     left: 5%;
 }
 .bold{
