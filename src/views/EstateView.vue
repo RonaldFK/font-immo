@@ -1,6 +1,10 @@
 <template>
-<router-view></router-view>
-
+  <div class="modal" v-if="modal" >
+  <ModalCreateEstate @openModal="closeModal"></ModalCreateEstate>
+  </div>
+  <div class="div-create-estate" @click="openModal">
+    <button>CREER</button>
+  </div>
   <div v-if="data" class="content-view">
     <div v-for="estate in estates" :key="estate.id" class="content-view__list">
       <h2>{{ estate.name }}</h2>
@@ -22,15 +26,16 @@
 </template>
 
 <script>
-
+import ModalCreateEstate from '../components/modales/ModalCreateEstate.vue';
 export default {
   name: 'EstateView',
-  
+  components:{ModalCreateEstate},
   data(){
     return{
       baseUrl:'http://localhost:3000',
       estates:[],
       data:false,
+      modal:false
       
     }
   },
@@ -58,6 +63,13 @@ export default {
     }
   },
   methods:{
+    closeModal(){
+      this.modal= false
+      console.log('TEST');
+    },
+    openModal(){
+      this.modal=true
+    }
 
   }
 
@@ -65,6 +77,11 @@ export default {
 </script>
 
 <style>
+.div-create-estate{
+  position: fixed;
+    top: 20%;
+    left: 5%;
+}
 .bold{
   font-size: 20px;
   font-weight: bold;
@@ -72,7 +89,6 @@ export default {
 .content-view{
   display: flex;
   flex-wrap: wrap;
-  /* height: 100vh; */
   margin-top: 15%;
   margin-left: 15rem;
   margin-right: 10rem;
