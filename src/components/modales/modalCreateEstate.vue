@@ -113,6 +113,7 @@ export default {
         statut: '',
         type: '',
         manager_id: '',
+        location_id: '',
       },
       locationToCreate: {
         num: '',
@@ -153,17 +154,14 @@ export default {
     },
     async createEstate() {
       this.$emit('closeEmit');
+      const urlLocation = 'http://localhost:3000/location';
       const form = new FormData();
       const urlEstate = 'http://localhost:3000/estate';
-      const urlLocation = 'http://localhost:3000/location';
-      // const location = JSON.parse(this.locationToCreate);
-      console.log(location, 'LOCATION');
-      form.append('estate', JSON.stringify(this.estateToCreate));
       for (let i = 0; i < this.$refs.photos.files.length; i++) {
         form.append('photo', this.$refs.photos.files[i]);
       }
       try {
-        await fetch(urlLocation, {
+        const location = await fetch(urlLocation, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -171,9 +169,16 @@ export default {
           },
           body: JSON.stringify(this.locationToCreate),
         });
+        const result = await location.json();
+        // console.log(result[0].id, 'ID');
+        result[0].id
+          ? (this.estateToCreate.location_id = result[0].id)
+          : (this.estateToCreate.location_id = null);
+        // console.log(location.json(), 'result');
       } catch (err) {
         console.log(err, 'TEST ICI');
       }
+      form.append('estate', JSON.stringify(this.estateToCreate));
       try {
         await fetch(urlEstate, {
           method: 'POST',
