@@ -6,7 +6,7 @@
         >Les Biens</router-link
       >
       | <router-link to="/test">Les Managers</router-link> |
-      <router-link to="/test">Les Cliens</router-link> |
+      <router-link to="/customer">Les Cliens</router-link> |
     </div>
     <div class="div-connect">
       <router-link to="/login">Se connecter</router-link>
