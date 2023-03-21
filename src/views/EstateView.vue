@@ -1,13 +1,17 @@
 <template>
-  <button class="btn-estate" @click="modalCreateEstate" role="button">
-    Créer une activité
-  </button>
+  <div class="modal" v-if="modal">
+    <ModalCreateEstate @closeEmit="closeModal"></ModalCreateEstate>
+  </div>
+  <div class="div-create-estate" @click="openModal">
+    <button>Créer un nouveau bien</button>
+  </div>
   <div v-if="data" class="content-view">
     <div v-for="estate in estates" :key="estate.id" class="content-view__list">
       <h2>{{ estate.name }}</h2>
       <p><span class="bold">Prix :</span> {{ estate.price }} euros</p>
       <p><span class="bold">Type du bien:</span> {{ estate.type }}</p>
       <router-link :to="'/estate/' + estate.id">Détails</router-link>
+      <!-- <img src="../assets/img/house3.jpg" alt="" > -->
     </div>
   </div>
   <div class="content-view msg-err" v-else>
@@ -15,93 +19,59 @@
       <h1>Aucune données</h1>
     </div>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
+import ModalCreateEstate from '@/components/modales/ModalCreateEstate.vue';
 export default {
   name: 'EstateView',
-
+  components: { ModalCreateEstate },
   data() {
     return {
       baseUrl: 'http://localhost:3000',
       estates: [],
-      data: false
-    }
+      data: false,
+      modal: false,
+    };
   },
   created: async function () {
     {
-      console.log('test')
+      console.log('test');
       try {
         const response = await fetch(`${this.baseUrl}/estate`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:8080'
-          }
-        })
-        const result = await response.json()
-        this.estates = result
-        this.data = true
-        // console.log(result, this.data)
-      } catch (err) {}
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+          },
+        });
+        const result = await response.json();
+        this.estates = result;
+        this.data = true;
+        // this.estates.push(response)
+        console.log(result);
+      } catch (err) {
+        console.log(err, 'TEST ICI');
+      }
     }
   },
   methods: {
-    modalCreateEstate() {
-      console.log('test')
-    }
-  }
-}
+    closeModal() {
+      this.modal = false;
+      console.log('TEST');
+    },
+    openModal() {
+      this.modal = true;
+    },
+  },
+};
 </script>
 
 <style>
-.btn-estate {
-  /* width: 500px; */
-  top: 17vh;
-  left: 50%;
-}
-.btn-estate {
-  background-color: #e1ecf4;
-  border-radius: 3px;
-  border: 1px solid #7aa7c7;
-  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
-  box-sizing: border-box;
-  color: #39739d;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system, system-ui, 'Segoe UI', 'Liberation Sans',
-    sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.15385;
-  margin: 0;
-  outline: none;
-  padding: 8px 0.8em;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  white-space: nowrap;
-}
-
-.btn-estate :hover,
-.btn-estate :focus {
-  background-color: #b3d3ea;
-  color: #2c5777;
-}
-
-.btn-estate :focus {
-  box-shadow: 0 0 0 4px rgba(0, 149, 255, 0.15);
-}
-
-.btn-estate :active {
-  background-color: #a0c7e4;
-  box-shadow: none;
-  color: #2c5777;
+.div-create-estate {
+  position: fixed;
+  top: 8rem;
+  left: 5%;
 }
 .bold {
   font-size: 20px;
@@ -110,7 +80,6 @@ export default {
 .content-view {
   display: flex;
   flex-wrap: wrap;
-  /* height: 100vh; */
   margin-top: 15%;
   margin-left: 15rem;
   margin-right: 10rem;
@@ -149,13 +118,13 @@ p {
   bottom: 5px;
 }
 /* .content-view__list img{
-      border-radius: 10%;
-      position: absolute;
-      width: 15rem;
-      height: 12rem;
-      right: 5px;
-      top: 5px;
-  } */
+    border-radius: 10%;
+    position: absolute;
+    width: 15rem;
+    height: 12rem;
+    right: 5px;
+    top: 5px;
+} */
 .content-view__list a:link,
 a:visited,
 a:active {

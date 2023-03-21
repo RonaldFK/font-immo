@@ -6,26 +6,27 @@
       <div>
         <p>Prix du bien : {{ info.price }}</p>
         <p>Type de bien : {{ info.type }}</p>
-        <p>
-          Localisation : {{ info.location.num }} {{ info.location.street }}
-          {{ info.location.city }}
+        <p v-if="info.location?.num">
+          Localisation : {{ info.location.num }} {{ info.location?.street }}
+          {{ info.location?.city }}
         </p>
-        <p>Code postale : {{ info.location.code }}</p>
+        <p v-else>Localisation :</p>
+        <p>Code postale : {{ info.location?.code }}</p>
       </div>
     </div>
     <div class="handle-div-describe">
       <div class="describe-manager" v-for="info in oneEstate" :key="info.id">
         <h2>Manager en charge</h2>
-        <p>Prenom : {{ info.manager.firstname }}</p>
-        <p>Nom : {{ info.manager.lastname }}</p>
-        <p>Mail : {{ info.manager.email }}</p>
+        <p>Prenom : {{ info.manager?.firstname }}</p>
+        <p>Nom : {{ info.manager?.lastname }}</p>
+        <p>Mail : {{ info.manager?.email }}</p>
       </div>
       <div class="describe-client" v-for="info in oneEstate" :key="info.id">
         <h2>Propriétaire</h2>
-        <p>Prenom : {{ info.customer.firstname }}</p>
-        <p>Nom : {{ info.customer.lastname }}</p>
-        <p>Numéro : {{ info.customer.tel }}</p>
-        <p>Type client : {{ info.customer.type }}</p>
+        <p>Prenom : {{ info.customer?.firstname }}</p>
+        <p>Nom : {{ info.customer?.lastname }}</p>
+        <p>Numéro : {{ info.customer?.tel }}</p>
+        <p>Type client : {{ info.customer?.type }}</p>
         <p>Paiement : {{ info.customer?.cash_or_credit }}</p>
       </div>
     </div>
@@ -58,8 +59,8 @@ export default {
       oneEstate: [],
       data: false,
       photoUrl: [],
-      id: this.$route.params.id
-    }
+      id: this.$route.params.id,
+    };
   },
   created: async function getEstateDetails() {
     // console.log(id);
@@ -68,16 +69,16 @@ export default {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'http://localhost:8080'
-        }
-      })
-      const result = await response.json()
-      this.oneEstate = result
-      this.data = true
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
+        },
+      });
+      const result = await response.json();
+      this.oneEstate = result;
+      this.data = true;
       // this.estates.push(response)
-      console.log(result[0].photos[0])
+      console.log(result[0].photos[0]);
     } catch (err) {
-      console.log(err, 'TEST ICI')
+      console.log(err, 'TEST ICI');
     }
   },
   // beforeCreate: async function getPhoto(){
@@ -107,19 +108,19 @@ export default {
           method: 'GET',
           headers: {
             'Content-Type': 'multipart/form-data',
-            'Access-Control-Allow-Origin': 'http://localhost:8080'
-          }
-        })
-        let result = await response.json()
-        result = result.filter((elem) => elem.name != '.DS_Store')
-        console.log(result, 'TEST')
-        this.photoUrl = result
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+          },
+        });
+        let result = await response.json();
+        result = result.filter((elem) => elem.name != '.DS_Store');
+        console.log(result, 'TEST');
+        this.photoUrl = result;
       } catch (err) {
-        console.log(err, 'TEST ICI')
+        console.log(err, 'TEST ICI');
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
