@@ -170,11 +170,9 @@ export default {
           body: JSON.stringify(this.locationToCreate),
         });
         const result = await location.json();
-        // console.log(result[0].id, 'ID');
         result[0].id
           ? (this.estateToCreate.location_id = result[0].id)
           : (this.estateToCreate.location_id = null);
-        // console.log(location.json(), 'result');
       } catch (err) {
         console.log(err, 'TEST ICI');
       }
@@ -188,7 +186,6 @@ export default {
           },
           body: form,
         });
-        // const result = await response.json();
       } catch (err) {
         console.log(err);
       }
@@ -200,8 +197,6 @@ export default {
 .modal-estate form {
   display: flex;
   flex-wrap: wrap;
-  /* flex-direction: column; */
-  /* background: red; */
   width: 44rem;
   height: 18rem;
   margin-top: 10px;
@@ -220,7 +215,6 @@ export default {
 .modal-estate div {
   width: 54rem;
   display: flex;
-  /* border: 2px solid rgb(10, 9, 9); */
   flex-direction: column;
   padding-right: 10rem;
   padding-left: 10rem;
@@ -254,10 +248,8 @@ export default {
   margin-top: 10px;
   padding-bottom: 10px;
   height: 15px;
-  /* background: rebeccapurple; */
 }
 .overlay {
-  /* background: rgba(0, 0, 0, 0.5); */
   background: rgba(44, 41, 41, 0.433);
   position: fixed;
   top: 0;
