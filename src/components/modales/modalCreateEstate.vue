@@ -4,7 +4,7 @@
       <div class="modal-estate">
         <h1>Création d'un nouveau bien</h1>
         <div>
-          <form class="form" action="" method="POST">
+          <form class="form" action="" method="POST" id="form">
             <h2>Le bien</h2>
             <div>
               <label for="">Nom du bien</label>
@@ -70,9 +70,24 @@
                 <option value="parking">Parking</option>
               </select>
             </div>
+            <div class="button">
+              <input
+                type="button"
+                value="Valider"
+                @click="createEstate"
+                form="form"
+              />
+              <input
+                type="button"
+                value="Annuler"
+                @click="closeModal"
+                form="form"
+              />
+            </div>
+            <!-- <button @click="createEstate" form="estate_form">Valider</button>
+            <button @click="closeModal" form="estate_form">Annuler</button> -->
           </form>
         </div>
-        <button @click="createEstate">Valider</button>
       </div>
     </div>
   </div>
@@ -133,23 +148,34 @@ export default {
     }
   },
   methods: {
-    // handleModa(){
-    //     this.$emit('openModal')
-    //     console.log(this.estateToCreate);
-    // },
+    closeModal() {
+      this.$emit('closeEmit');
+    },
     async createEstate() {
       this.$emit('closeEmit');
       const form = new FormData();
       const urlEstate = 'http://localhost:3000/estate';
       const urlLocation = 'http://localhost:3000/location';
-      const location = JSON.stringify(this.locationToCreate);
-      console.log(location);
+      // const location = JSON.parse(this.locationToCreate);
+      console.log(location, 'LOCATION');
       form.append('estate', JSON.stringify(this.estateToCreate));
       for (let i = 0; i < this.$refs.photos.files.length; i++) {
         form.append('photo', this.$refs.photos.files[i]);
       }
       try {
-        const response = await fetch(urlEstate, {
+        await fetch(urlLocation, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+          },
+          body: JSON.stringify(this.locationToCreate),
+        });
+      } catch (err) {
+        console.log(err, 'TEST ICI');
+      }
+      try {
+        await fetch(urlEstate, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -157,24 +183,9 @@ export default {
           },
           body: form,
         });
-        const result = await response.json();
-        console.log(result);
+        // const result = await response.json();
       } catch (err) {
-        console.log(err, 'TEST ICI');
-      }
-      try {
-        const response = await fetch(urlLocation, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:8080',
-          },
-          body: location,
-        });
-        const result = await response.json();
-        console.log(result);
-      } catch (err) {
-        console.log(err, 'TEST ICI');
+        console.log(err);
       }
     },
   },
@@ -232,12 +243,13 @@ export default {
 }
 .modal-estate form div {
   display: flex;
-  flex-direction: columns;
+  flex-direction: row;
 }
-.modal-estate button {
-  position: fixed;
-  right: 10rem;
-  background: rebeccapurple;
+.button {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  height: 15px;
+  /* background: rebeccapurple; */
 }
 .overlay {
   /* background: rgba(0, 0, 0, 0.5); */
