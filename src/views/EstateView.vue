@@ -1,6 +1,6 @@
 <template>
-  <div class="modal" v-if="modal" >
-  <ModalCreateEstate @closeEmit="closeModal"></ModalCreateEstate>
+  <div class="modal" v-if="modal">
+    <ModalCreateEstate @closeEmit="closeModal"></ModalCreateEstate>
   </div>
   <div class="div-create-estate" @click="openModal">
     <button>Créer un nouveau bien</button>
@@ -10,83 +10,74 @@
       <h2>{{ estate.name }}</h2>
       <p><span class="bold">Prix :</span> {{ estate.price }} euros</p>
       <p><span class="bold">Type du bien:</span> {{ estate.type }}</p>
-      <router-link :to="'/estate/'+estate.id">Détails</router-link>
+      <router-link :to="'/estate/' + estate.id">Détails</router-link>
       <!-- <img src="../assets/img/house3.jpg" alt="" > -->
     </div>
-    
   </div>
   <div class="content-view msg-err" v-else>
-    <div class="content-view__list" >
-  
-      <h1 >Aucune données</h1>
+    <div class="content-view__list">
+      <h1>Aucune données</h1>
     </div>
-
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
-import ModalCreateEstate from '../components/modales/ModalCreateEstate.vue';
+import ModalCreateEstate from '@/components/modales/ModalCreateEstate.vue';
 export default {
   name: 'EstateView',
-  components:{ModalCreateEstate},
-  data(){
-    return{
-      baseUrl:'http://localhost:3000',
-      estates:[],
-      data:false,
-      modal:false
-      
-    }
+  components: { ModalCreateEstate },
+  data() {
+    return {
+      baseUrl: 'http://localhost:3000',
+      estates: [],
+      data: false,
+      modal: false,
+    };
   },
-  created: async function(){
+  created: async function () {
     {
       console.log('test');
-      try{
-            const response = await fetch(`${this.baseUrl}/estate`,
-            {
-                method:'GET',
-                headers:{
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin":"http://localhost:8080"
-                }
-            })
-            const result = await response.json()
-            this.estates = result
-            this.data = true
-            // this.estates.push(response)
-            console.log(result);
-            
-        } catch(err){
-            console.log(err,'TEST ICI');
-        }
+      try {
+        const response = await fetch(`${this.baseUrl}/estate`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+          },
+        });
+        const result = await response.json();
+        this.estates = result;
+        this.data = true;
+        // this.estates.push(response)
+        console.log(result);
+      } catch (err) {
+        console.log(err, 'TEST ICI');
+      }
     }
   },
-  methods:{
-    closeModal(){
-      this.modal= false
+  methods: {
+    closeModal() {
+      this.modal = false;
       console.log('TEST');
     },
-    openModal(){
-      this.modal=true
-    }
-
-  }
-
-  }
+    openModal() {
+      this.modal = true;
+    },
+  },
+};
 </script>
 
 <style>
-.div-create-estate{
+.div-create-estate {
   position: fixed;
-    top: 8rem;
-    left: 5%;
+  top: 8rem;
+  left: 5%;
 }
-.bold{
+.bold {
   font-size: 20px;
   font-weight: bold;
 }
-.content-view{
+.content-view {
   display: flex;
   flex-wrap: wrap;
   margin-top: 15%;
@@ -96,7 +87,7 @@ export default {
   align-items: center;
   gap: 1rem;
 }
-.content-view__list{
+.content-view__list {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -110,20 +101,21 @@ export default {
   position: relative;
   background: rgb(194, 222, 209);
 }
-.content-view__list h2, p{
+.content-view__list h2,
+p {
   margin-top: 1px;
   margin-bottom: 1px;
   color: rgb(53, 66, 89);
 }
-.content-view__list h2{
+.content-view__list h2 {
   text-align: center;
 }
-.content-view__list  a{
-    text-decoration: none;
-    color: white;
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
+.content-view__list a {
+  text-decoration: none;
+  color: white;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
 }
 /* .content-view__list img{
     border-radius: 10%;
@@ -133,18 +125,19 @@ export default {
     right: 5px;
     top: 5px;
 } */
-.content-view__list  a:link, a:visited,a:active{
-    text-decoration: none;
-    color: white;
+.content-view__list a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: white;
 }
-.content-view__list  a:hover{
-    text-decoration: none;
-    color: rgb(53, 66, 89);
-    transition: 0.2s;
+.content-view__list a:hover {
+  text-decoration: none;
+  color: rgb(53, 66, 89);
+  transition: 0.2s;
 }
-.msg-err{
+.msg-err {
   margin-left: 49rem;
   text-align: center;
-
 }
 </style>

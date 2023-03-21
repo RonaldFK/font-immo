@@ -1,14 +1,11 @@
 <template>
-   <h1>dashboard</h1>
-   <p>test</p>
-   <ModalCreateEstate/>
-  </template>
-  
-  <script>
-  
-  export default {
-    name: 'DashboardView',
-    components:{}
-  }
-  </script>
-  
+  <h1>dashboard</h1>
+  <p>test</p>
+</template>
+
+<script>
+export default {
+  name: 'DashboardView',
+  components: {},
+};
+</script>
