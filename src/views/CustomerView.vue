@@ -1,6 +1,12 @@
 <template>
   <div class="modal" v-if="modal">
-    <ModalHandleCustomer @emitCloseModal="closeModal"></ModalHandleCustomer>
+    <ModalHandleCustomer
+      @emitCloseModal="closeModal"
+      v-bind="{
+        currentIdentity: currentCustomer.firstname,
+        currentIdentity2: currentCustomer.lastname,
+      }"
+    ></ModalHandleCustomer>
   </div>
   <!-- <ModalCreateCustomerVue></ModalCreateCustomerVue> -->
   <div class="content-view">
@@ -14,14 +20,11 @@
       <p>Type de paiement : {{ customer.cash_or_credit }}</p>
       <p>Type de client : {{ customer.type_of_customer }}</p>
       <input type="button" @click="openModal" value="Modifier client" />
-      <!-- <router-link :to="'/customer/' + customer.id"
-        >Modifier client</router-link
-      > -->
     </div>
   </div>
 </template>
+
 <script>
-// import ModalCreateCustomerVue from '@/components/modales/ModalCreateCustomer.vue';
 import ModalHandleCustomer from '@/components/modales/ModalHandleCustomer.vue';
 export default {
   name: 'CustomerView',
@@ -31,6 +34,10 @@ export default {
       baseUrl: 'http://localhost:3000',
       customers: [],
       modal: false,
+      currentCustomer: {
+        firstname: 'bobi',
+        lastname: 'jhon',
+      },
     };
   },
   created: async function getAllCustomer() {

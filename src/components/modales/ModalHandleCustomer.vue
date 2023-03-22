@@ -2,7 +2,9 @@
   <div>
     <div class="modal-estate">
       <button @click="closeModal">X</button>
-      <h1>Modification du client X</h1>
+      <h1>
+        Modification du client X {{ currentIdentity }} {{ currentIdentity2 }}
+      </h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi,
         mollitia. Doloribus sed, assumenda, aspernatur quasi corporis qui
@@ -27,6 +29,10 @@ export default {
   name: 'ModalHandleCustomer',
   data() {
     return {};
+  },
+  props: {
+    currentIdentity: String,
+    currentIdentity2: String,
   },
   methods: {
     closeModal() {
