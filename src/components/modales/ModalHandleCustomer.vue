@@ -2,10 +2,14 @@
   <div>
     <div class="modal-estate">
       <button @click="closeModal">X</button>
-      <h2>Identité : {{ customerIdentity }}</h2>
-      <p>Téléphone : {{ tel }}</p>
-      <p>Type de paiement : {{ payment_type }}</p>
-      <p>Type de client : {{ client_type }}</p>
+      <h3>Identité :</h3>
+      <input type="text" :value="customerIdentity" />
+      <h3>Téléphone :</h3>
+      <input type="text" :value="tel" />
+      <h3>Type de paiement :</h3>
+      <input type="text" :value="payment_type" />
+      <h3>Type de client :</h3>
+      <input type="text" :value="client_type" />
     </div>
   </div>
 </template>
@@ -39,7 +43,7 @@ export default {
   margin-right: 20%;
   margin-top: 8%;
   display: flex;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   overflow-x: hidden;
   align-items: center;
   height: 40rem;
