@@ -1,6 +1,6 @@
 <template>
   <div class="modal" v-if="modal">
-    <ModalHandleCustomer></ModalHandleCustomer>
+    <ModalHandleCustomer @emitCloseModal="closeModal"></ModalHandleCustomer>
   </div>
   <!-- <ModalCreateCustomerVue></ModalCreateCustomerVue> -->
   <div class="content-view">
@@ -55,6 +55,10 @@ export default {
     openModal() {
       console.log('bobi');
       this.modal = true;
+    },
+    closeModal() {
+      console.log('test');
+      this.modal = false;
     },
   },
 };
