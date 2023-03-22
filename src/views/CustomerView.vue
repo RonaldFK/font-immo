@@ -1,7 +1,8 @@
 <template>
-  <div class="div-create-estate" @click="openModal">
-    <button>Créer un nouveau client</button>
+  <div class="modal" v-if="modal">
+    <ModalHandleCustomer></ModalHandleCustomer>
   </div>
+  <!-- <ModalCreateCustomerVue></ModalCreateCustomerVue> -->
   <div class="content-view">
     <div
       v-for="customer in customers"
@@ -12,17 +13,24 @@
       <p>Téléphone : {{ customer.tel }}</p>
       <p>Type de paiement : {{ customer.cash_or_credit }}</p>
       <p>Type de client : {{ customer.type_of_customer }}</p>
-      <router-link :to="'/customer/' + customer.id">Détails</router-link>
+      <input type="button" @click="openModal" value="Modifier client" />
+      <!-- <router-link :to="'/customer/' + customer.id"
+        >Modifier client</router-link
+      > -->
     </div>
   </div>
 </template>
 <script>
+// import ModalCreateCustomerVue from '@/components/modales/ModalCreateCustomer.vue';
+import ModalHandleCustomer from '@/components/modales/ModalHandleCustomer.vue';
 export default {
   name: 'CustomerView',
+  components: { ModalHandleCustomer },
   data() {
     return {
       baseUrl: 'http://localhost:3000',
       customers: [],
+      modal: false,
     };
   },
   created: async function getAllCustomer() {
@@ -42,6 +50,12 @@ export default {
         console.log(err, 'TEST ICI');
       }
     }
+  },
+  methods: {
+    openModal() {
+      console.log('bobi');
+      this.modal = true;
+    },
   },
 };
 </script>
