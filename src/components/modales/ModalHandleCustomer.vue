@@ -2,24 +2,10 @@
   <div>
     <div class="modal-estate">
       <button @click="closeModal">X</button>
-      <h1>
-        Modification du client X {{ currentIdentity }} {{ currentIdentity2 }}
-      </h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi,
-        mollitia. Doloribus sed, assumenda, aspernatur quasi corporis qui
-        exercitationem consectetur illo repellendus molestias nemo quia. Velit
-        eius impedit natus veritatis maiores. Sunt aspernatur totam quidem
-        officiis necessitatibus in harum vel ipsum. Sunt est optio iusto! Eum
-        delectus, ipsa neque veritatis recusandae nam fugit ad enim ex doloribus
-        debitis? Aliquid, reiciendis nemo. In officiis iste suscipit ducimus
-        nostrum ut aspernatur reiciendis maiores qui distinctio libero vero
-        mollitia molestias maxime soluta, velit totam voluptate quidem
-        dignissimos corporis cupiditate modi architecto illum voluptas! Quos!
-        Iste commodi officia quae, ipsa perferendis ipsum non inventore
-        quibusdam aliquam consectetur magni fugiat, alias praesentium
-        perspiciatis nulla iure error! Natus laboriosam culpa atque minima
-      </p>
+      <h2>Identité : {{ customerIdentity }}</h2>
+      <p>Téléphone : {{ tel }}</p>
+      <p>Type de paiement : {{ payment_type }}</p>
+      <p>Type de client : {{ client_type }}</p>
     </div>
   </div>
 </template>
@@ -31,8 +17,10 @@ export default {
     return {};
   },
   props: {
-    currentIdentity: String,
-    currentIdentity2: String,
+    customerIdentity: String,
+    tel: Number,
+    payment_type: String,
+    client_type: String,
   },
   methods: {
     closeModal() {

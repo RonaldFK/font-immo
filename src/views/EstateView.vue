@@ -48,7 +48,6 @@ export default {
         const result = await response.json();
         this.estates = result;
         this.data = true;
-        // this.estates.push(response)
         console.log(result);
       } catch (err) {
         console.log(err, 'TEST ICI');
@@ -67,7 +66,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .div-create-estate {
   position: fixed;
   top: 8rem;
