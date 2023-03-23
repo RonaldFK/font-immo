@@ -14,9 +14,19 @@
     ></ModalHandleCustomer>
   </div>
   <!-- <ModalCreateCustomerVue></ModalCreateCustomerVue> -->
+  <div class="div-create-customer">
+    <input
+      type="button"
+      value="Ajouter un client"
+      @click="openModalCreateCustomer"
+      form="form"
+    />
+  </div>
   <div class="content-view">
     <div v-if="modalCreateCustomer">
-      <ModalCreateCustomer @emitCloseModal="closeModal"></ModalCreateCustomer>
+      <ModalCreateCustomer
+        @CloseModalCreateCustomer="closeModal"
+      ></ModalCreateCustomer>
       <input type="button" value="X" />
     </div>
     <div
@@ -43,6 +53,7 @@
 <script>
 import ModalHandleCustomer from '@/components/modales/ModalHandleCustomer.vue';
 import ModalCreateCustomer from '@/components/modales/ModalCreateCustomer.vue';
+
 export default {
   name: 'CustomerView',
   components: { ModalHandleCustomer, ModalCreateCustomer },
@@ -51,7 +62,7 @@ export default {
       baseUrl: 'http://localhost:3000',
       customers: [],
       modal: false,
-      modalCreateCustomer: true,
+      modalCreateCustomer: false,
       currentCustomer: {
         identidyFirstname: String,
         identidyLastname: String,
@@ -82,18 +93,11 @@ export default {
   },
 
   methods: {
-    openModal(e) {
-      const target = e.target.parentNode;
-      this.currentCustomer = {
-        identidyFirstname: target.childNodes[1].textContent,
-        identidyLastname: target.childNodes[2].textContent,
-        tel: parseInt(target.childNodes[4].textContent),
-        paymentType: target.childNodes[6].textContent,
-        clientType: target.childNodes[8].textContent,
-        clientNumber: parseInt(target.childNodes[10].textContent),
-      };
-      console.log(target.childNodes);
+    openModal() {
       this.modal = true;
+    },
+    openModalCreateCustomer() {
+      this.modalCreateCustomer = true;
     },
     closeModal() {
       this.modal = false;
@@ -104,7 +108,7 @@ export default {
 };
 </script>
 <style scoped>
-.div-create-estate {
+.div-create-customer {
   position: fixed;
   top: 8rem;
   left: 5%;

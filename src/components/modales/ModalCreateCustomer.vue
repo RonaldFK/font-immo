@@ -26,7 +26,7 @@
             :key="typeOfPayment.id"
             :value="typeOfPayment.value"
           >
-            {{ typeOfPayment.value }}
+            {{ typeOfPayment.label }}
           </option>
         </select>
       </span>
@@ -68,8 +68,8 @@ export default {
         { id: 4, value: 'lessor', label: 'Bailleur' },
       ],
       typeOfPayments: [
-        { id: 1, value: 'cash' },
-        { id: 2, value: 'credit' },
+        { id: 1, value: 'cash', label: 'Paiement comptant' },
+        { id: 2, value: 'credit', label: 'Paiement crédit' },
       ],
       buildCustomer: {
         firstname: '',
@@ -83,7 +83,7 @@ export default {
 
   methods: {
     closeModal() {
-      this.$emit('emitCloseModal');
+      this.$emit('CloseModalCreateCustomer');
     },
     async createCustomer() {
       const newCustomer = {
@@ -94,19 +94,19 @@ export default {
         type_of_customer: this.buildCustomer.type_of_customer || null,
       };
       console.log(newCustomer);
-      // try {
-      //   await fetch(`${this.baseUrl}/customer/${parseInt(this.clientNumber)}`, {
-      //     method: 'PATCH',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       'Access-Control-Allow-Origin': 'http://localhost:8080',
-      //     },
-      //     body: JSON.stringify(''),
-      //   });
-      //   this.$emit('emitCloseModal');
-      // } catch (err) {
-      //   console.log(err);
-      // }
+      try {
+        await fetch(`${this.baseUrl}/customer`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+          },
+          body: JSON.stringify(newCustomer),
+        });
+        this.$emit('CloseModalCreateCustomer');
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };
