@@ -3,6 +3,7 @@ import EstateView from '../src/views/EstateView.vue';
 import FormAuth from '../src/views/FormAuth.vue';
 import DashboardView from '../src/views/DashboardView.vue';
 import EstateDetails from '../src/views/EstateDetails.vue';
+import CustomerView from '@/views/CustomerView.vue';
 // import NavBarEstate from "../src/views/navigate/NavBarEstate.vue";
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
     path: '/dashboard',
     component: DashboardView,
   },
+  { path: '/customer', component: CustomerView },
 ];
 
 export const router = createRouter({
