@@ -73,6 +73,9 @@ export default {
       }
     }
   },
+  //   updated: async function () {
+  //     console.log('updated');
+  //   },
   methods: {
     openModal(e) {
       const target = e.target.parentNode;
@@ -88,7 +91,7 @@ export default {
       this.modal = true;
     },
     closeModal() {
-      console.log('test');
+      this.$router.go();
       this.modal = false;
     },
   },

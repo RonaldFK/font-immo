@@ -42,11 +42,11 @@ export default {
     },
     async modifyCustomer() {
       const buildCustomer = {
-        firstname: this.$refs.firstname.value,
-        lastname: this.$refs.lastname.value,
-        tel: this.$refs.tel.value,
-        cash_or_credit: this.$refs.paymentType.value,
-        type_of_customer: this.$refs.clientType.value,
+        firstname: this.$refs.firstname?.value,
+        lastname: this.$refs.lastname?.value,
+        tel: this.$refs.tel?.value,
+        cash_or_credit: this.$refs.paymentType?.value,
+        type_of_customer: this.$refs.clientType?.value,
       };
       try {
         await fetch(`${this.baseUrl}/customer/${parseInt(this.clientNumber)}`, {
@@ -59,7 +59,7 @@ export default {
         });
         this.$emit('emitCloseModal');
       } catch (err) {
-        console.log(err, 'TEST ICI');
+        console.log(err);
       }
     },
   },
