@@ -3,11 +3,13 @@
     <ModalHandleCustomer
       @emitCloseModal="closeModal"
       v-bind="{
-        customerIdentity: currentCustomer.identidy,
+        customerFirstname: currentCustomer.identidyFirstname,
+        customerLastname: currentCustomer.identidyLastname,
         // customerIdentity2: currentCustomer.lastname,
         tel: currentCustomer.tel,
-        payment_type: currentCustomer.payment_type,
-        client_type: currentCustomer.client_type,
+        paymentType: currentCustomer.paymentType,
+        clientType: currentCustomer.clientType,
+        clientNumber: currentCustomer.clientNumber,
       }"
     ></ModalHandleCustomer>
   </div>
@@ -19,13 +21,16 @@
       class="content-view__list"
     >
       <h3>Identité :</h3>
-      <p ref="customerName">{{ customer.firstname }} {{ customer.lastname }}</p>
+      <p>{{ customer.firstname }}</p>
+      <p>{{ customer.lastname }}</p>
       <h3>Téléphone :</h3>
       <p>{{ customer.tel }}</p>
       <h3>Type de paiement :</h3>
       <p>{{ customer.cash_or_credit }}</p>
       <h3>Type de client :</h3>
       <p>{{ customer.type_of_customer }}</p>
+      <h3>Identifiant Client :</h3>
+      <p>{{ customer.id }}</p>
       <input type="button" @click="openModal" value="Modifier client" />
     </div>
   </div>
@@ -42,10 +47,12 @@ export default {
       customers: [],
       modal: false,
       currentCustomer: {
-        identidy: 'bobi',
-        tel: parseInt('05'),
-        payment_type: 'cash',
-        client_type: 'seller',
+        identidyFirstname: String,
+        identidyLastname: String,
+        tel: parseInt(''),
+        paymentType: String,
+        clientType: String,
+        clientNumber: Number,
       },
     };
   },
@@ -61,7 +68,6 @@ export default {
         });
         const result = await response.json();
         this.customers = result;
-        console.log(result);
       } catch (err) {
         console.log(err, 'TEST ICI');
       }
@@ -71,11 +77,14 @@ export default {
     openModal(e) {
       const target = e.target.parentNode;
       this.currentCustomer = {
-        identidy: target.childNodes[1].textContent,
-        tel: parseInt(target.childNodes[3].textContent),
-        payment_type: target.childNodes[5].textContent,
-        client_type: target.childNodes[7].textContent,
+        identidyFirstname: target.childNodes[1].textContent,
+        identidyLastname: target.childNodes[2].textContent,
+        tel: parseInt(target.childNodes[4].textContent),
+        paymentType: target.childNodes[6].textContent,
+        clientType: target.childNodes[8].textContent,
+        clientNumber: parseInt(target.childNodes[10].textContent),
       };
+      console.log(target.childNodes);
       this.modal = true;
     },
     closeModal() {
@@ -112,7 +121,7 @@ export default {
   border: 3px solid rgba(167, 206, 201, 0.739);
   min-width: 34rem;
   margin-left: 8rem;
-  height: 24rem;
+  height: 30rem;
   border-radius: 10px;
   width: 250px;
   border-left-color: rgb(228, 201, 136);
