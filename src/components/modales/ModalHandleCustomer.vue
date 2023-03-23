@@ -1,6 +1,7 @@
 <template>
   <div class="overlay">
     <div class="modal-estate">
+      <h2>Modidification d'un client</h2>
       <h3>Numéro client : {{ clientNumber }}</h3>
       <h3>Identité :</h3>
       <input type="text" :value="customerFirstname" ref="firstname" />

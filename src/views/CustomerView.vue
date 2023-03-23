@@ -15,6 +15,10 @@
   </div>
   <!-- <ModalCreateCustomerVue></ModalCreateCustomerVue> -->
   <div class="content-view">
+    <div v-if="modalCreateCustomer">
+      <ModalCreateCustomer @emitCloseModal="closeModal"></ModalCreateCustomer>
+      <input type="button" value="X" />
+    </div>
     <div
       v-for="customer in customers"
       :key="customer.id"
@@ -38,14 +42,16 @@
 
 <script>
 import ModalHandleCustomer from '@/components/modales/ModalHandleCustomer.vue';
+import ModalCreateCustomer from '@/components/modales/ModalCreateCustomer.vue';
 export default {
   name: 'CustomerView',
-  components: { ModalHandleCustomer },
+  components: { ModalHandleCustomer, ModalCreateCustomer },
   data() {
     return {
       baseUrl: 'http://localhost:3000',
       customers: [],
       modal: false,
+      modalCreateCustomer: true,
       currentCustomer: {
         identidyFirstname: String,
         identidyLastname: String,
@@ -67,15 +73,14 @@ export default {
           },
         });
         const result = await response.json();
+        // const filter = result.filter(elem=>(elem))
         this.customers = result;
       } catch (err) {
         console.log(err, 'TEST ICI');
       }
     }
   },
-  //   updated: async function () {
-  //     console.log('updated');
-  //   },
+
   methods: {
     openModal(e) {
       const target = e.target.parentNode;
@@ -91,8 +96,9 @@ export default {
       this.modal = true;
     },
     closeModal() {
-      this.$router.go();
       this.modal = false;
+      this.modalCreateCustomer = false;
+      this.$router.go();
     },
   },
 };
