@@ -1,56 +1,47 @@
 <template>
   <div class="overlay">
     <div class="modal-customer">
-      <h2>Création d'un client</h2>
-      <h3>Identité :</h3>
-      <span
-        >Prénom :
-
-        <input type="text" v-model="buildCustomer.firstname" />
-      </span>
-      <span>
-        Nom :
-        <input type="text" ref="lastname" v-model="buildCustomer.lastname" />
-      </span>
-      <span>
-        Téléphone :
-        <input type="text" ref="tel" v-model="buildCustomer.tel" />
-      </span>
-      <span
-        >Type de paiement :
-
-        <select v-model="buildCustomer.cash_or_credit" id="">
-          <option value=""></option>
-          <option
-            v-for="typeOfPayment in typeOfPayments"
-            :key="typeOfPayment.id"
-            :value="typeOfPayment.value"
-          >
-            {{ typeOfPayment.label }}
-          </option>
-        </select>
-      </span>
-      <span
-        >Type de Client :
-
-        <select v-model="buildCustomer.type_of_customer" id="">
-          <option value=""></option>
-          <option
-            v-for="typeOfClient in typeOfClients"
-            :key="typeOfClient.id"
-            :value="typeOfClient.value"
-          >
-            {{ typeOfClient.label }}
-          </option>
-        </select>
-      </span>
-      <input
-        type="button"
-        @click="createCustomer"
-        value="Valider"
-        form="form"
-      />
-      <input type="button" value="Annuler" @click="closeModal" form="form" />
+      <v-card max-width="500" class="w-50">
+        <v-row align="center" justify="center">
+          <v-col cols="auto">
+            <v-card-title>Création d'un client</v-card-title>
+          </v-col>
+        </v-row>
+        <v-card-subtitle class="text-subtitle-1"> Prénom :</v-card-subtitle>
+        <v-text-field v-model="buildCustomer.firstname"></v-text-field>
+        <v-card-subtitle class="text-subtitle-1"> Nom :</v-card-subtitle>
+        <v-text-field v-model="buildCustomer.lastname"></v-text-field>
+        <v-card-subtitle class="text-subtitle-1"> Téléphone :</v-card-subtitle>
+        <v-text-field v-model="buildCustomer.tel"></v-text-field>
+        <v-card-subtitle class="text-subtitle-1">
+          Type de paiement :</v-card-subtitle
+        >
+        <v-select
+          v-model="buildCustomer.cash_or_credit"
+          :items="typeOfPayments"
+          item-title="label"
+          item-value="value"
+        >
+        </v-select>
+        <v-card-subtitle class="text-subtitle-1">
+          Type de client :</v-card-subtitle
+        >
+        <v-select
+          v-model="buildCustomer.type_of_customer"
+          :items="typeOfClients"
+          item-title="label"
+          item-value="value"
+        >
+        </v-select>
+        <v-row align="center" justify="center">
+          <v-col cols="auto">
+            <v-btn @click="createCustomer">Valider</v-btn>
+          </v-col>
+          <v-col cols="auto">
+            <v-btn @click="closeModal">Annuler</v-btn>
+          </v-col>
+        </v-row>
+      </v-card>
     </div>
   </div>
 </template>
@@ -112,6 +103,10 @@ export default {
 };
 </script>
 <style scoped>
+.w-50 {
+  padding-right: 5rem;
+  padding-left: 5rem;
+}
 .modal-customer {
   display: flex;
   flex-direction: column;
@@ -124,10 +119,10 @@ export default {
   overflow-x: hidden;
   align-items: center;
   height: 40rem;
-  background: rgba(236, 232, 232, 0.825);
+  /* background: rgba(236, 232, 232, 0.825); */
 }
 .overlay {
-  /* background: rgba(44, 41, 41, 0.433); */
+  background: rgba(44, 41, 41, 0.433);
   position: fixed;
   top: 0;
   bottom: 0;

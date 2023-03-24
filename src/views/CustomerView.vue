@@ -25,7 +25,7 @@
   <div class="content-view">
     <div v-if="modalCreateCustomer">
       <ModalCreateCustomer
-        @CloseModalCreateCustomer="closeModal"
+        @CloseModalCreateCustomer="closeModalCreateCustomer"
       ></ModalCreateCustomer>
       <input type="button" value="X" />
     </div>
@@ -101,6 +101,9 @@ export default {
     },
     closeModal() {
       this.modal = false;
+      this.$router.go();
+    },
+    closeModalCreateCustomer() {
       this.modalCreateCustomer = false;
       this.$router.go();
     },
