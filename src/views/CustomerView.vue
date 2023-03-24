@@ -135,7 +135,17 @@ export default {
   },
 
   methods: {
-    openModal() {
+    openModal(e) {
+      const target = e.target.parentNode;
+      this.currentCustomer = {
+        identidyFirstname: target.childNodes[1].textContent,
+        identidyLastname: target.childNodes[2].textContent,
+        tel: parseInt(target.childNodes[4].textContent),
+        paymentType: target.childNodes[6].textContent,
+        clientType: target.childNodes[8].textContent,
+        clientNumber: parseInt(target.childNodes[10].textContent),
+      };
+      console.log(target.childNodes);
       this.modal = true;
     },
     openModalCreateCustomer() {
