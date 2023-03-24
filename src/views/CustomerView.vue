@@ -6,7 +6,6 @@
         <v-btn @click="openModalCreateCustomer" prepend-icon="mdi-check-circle"
           >Créer un nouveau client</v-btn
         >
-        <!-- <v-btn density="compact" icon="mdi-vuetify"></v-btn> -->
       </v-col>
     </v-row>
   </div>
@@ -77,6 +76,15 @@
             variant="tonal"
             size="x-small"
             >Modifier ce client</v-btn
+          >
+        </v-col>
+        <v-col cols="auto">
+          <v-btn
+            class="btn-left"
+            @click="deleteCustomer(customer)"
+            variant="tonal"
+            size="x-small"
+            >Suprimer ce client</v-btn
           >
         </v-col>
       </v-row>
@@ -157,6 +165,26 @@ export default {
       this.modalCreateCustomer = false;
       this.$router.go();
     },
+    async deleteCustomer(customer) {
+      console.log(this.clientNumber);
+      try {
+        const response = await fetch(
+          `${this.baseUrl}/customer/${customer.id}`,
+          {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:8080',
+            },
+          },
+        );
+        const result = await response.json();
+        console.log(result);
+        // this.$emit('emitCloseModal');
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>
@@ -165,6 +193,12 @@ export default {
   color: rebeccapurple;
   position: absolute;
   right: 20px;
+  bottom: 10px;
+}
+.btn-left {
+  color: rgb(172, 38, 38);
+  position: absolute;
+  left: 20px;
   bottom: 10px;
 }
 .div-create-btn {
