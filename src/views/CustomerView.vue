@@ -1,4 +1,45 @@
 <template>
+  <div class="div-create-btn">
+    <v-row align="center" justify="center">
+      <v-col cols="auto">
+        <v-btn @click="openModalCreateCustomer">Créer un nouveau client</v-btn>
+      </v-col>
+    </v-row>
+  </div>
+  <div
+    class="div-create-customer d-flex mr-5 ml-15 flex-wrap justify-center"
+    max-width="500"
+    max-height="300"
+  >
+    <v-card
+      class="w-50 ma-5 pa-5 h-100"
+      max-width="344"
+      v-for="customer in customers"
+      :key="customer.id"
+    >
+      <v-card-subtitle class="text-subtitle-1 text-indigo-darken-2" color="red">
+        Identité :</v-card-subtitle
+      >
+      <v-card-text>{{ customer.firstname }}</v-card-text>
+      <v-card-text>{{ customer.lastname }}</v-card-text>
+      <v-card-subtitle class="text-subtitle-1"> Téléphone :</v-card-subtitle>
+      <v-card-text>{{ customer.tel }}</v-card-text>
+      <v-card-subtitle class="text-subtitle-1">
+        Type de paiement :</v-card-subtitle
+      >
+      <v-card-text>{{ customer.cash_or_credit }}</v-card-text>
+      <v-card-subtitle class="text-subtitle-1">
+        Type de client :</v-card-subtitle
+      >
+      <v-card-text>{{ customer.type_of_customer }}</v-card-text>
+      <v-card-subtitle class="text-subtitle-1">
+        Identifiant Client :</v-card-subtitle
+      >
+      <v-card-text>{{ customer.id }}</v-card-text>
+    </v-card>
+  </div>
+</template>
+<!-- <template>
   <div class="modal" v-if="modal">
     <ModalHandleCustomer
       @emitCloseModal="closeModal"
@@ -13,7 +54,7 @@
       }"
     ></ModalHandleCustomer>
   </div>
-  <!-- <ModalCreateCustomerVue></ModalCreateCustomerVue> -->
+  <ModalCreateCustomerVue></ModalCreateCustomerVue>
   <div class="div-create-customer">
     <input
       type="button"
@@ -33,8 +74,8 @@
       v-for="customer in customers"
       :key="customer.id"
       class="content-view__list"
-    >
-      <h3>Identité :</h3>
+    > -->
+<!-- <h3>Identité :</h3>
       <p>{{ customer.firstname }}</p>
       <p>{{ customer.lastname }}</p>
       <h3>Téléphone :</h3>
@@ -48,7 +89,7 @@
       <input type="button" @click="openModal" value="Modifier client" />
     </div>
   </div>
-</template>
+</template> -->
 
 <script>
 import ModalHandleCustomer from '@/components/modales/ModalHandleCustomer.vue';
@@ -63,6 +104,7 @@ export default {
       customers: [],
       modal: false,
       modalCreateCustomer: false,
+      reveal: false,
       currentCustomer: {
         identidyFirstname: String,
         identidyLastname: String,
@@ -97,6 +139,7 @@ export default {
       this.modal = true;
     },
     openModalCreateCustomer() {
+      console.log('test');
       this.modalCreateCustomer = true;
     },
     closeModal() {
@@ -107,14 +150,32 @@ export default {
       this.modalCreateCustomer = false;
       this.$router.go();
     },
+    test() {
+      console.log('true');
+      this.reveal = true;
+    },
   },
 };
 </script>
 <style scoped>
-.div-create-customer {
+.div-create-btn {
   position: fixed;
   top: 8rem;
-  left: 5%;
+  width: 100%;
+}
+.div-create-customer {
+  position: absolute;
+  top: 15rem;
+  /* width: 100%; */
+  /* overflow-y: scroll; */
+  /* left: 35%; */
+}
+/*
+.v-card--reveal {
+  bottom: 0;
+  opacity: 1 !important;
+  position: absolute;
+  width: 100%;
 }
 .bold {
   font-size: 20px;
@@ -173,6 +234,6 @@ a:active {
 }
 .msg-err {
   margin-left: 49rem;
-  text-align: center;
-}
+  text-align: center; */
+/* } */
 </style>
