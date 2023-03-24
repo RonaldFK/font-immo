@@ -74,7 +74,7 @@ export default {
 
   methods: {
     closeModal() {
-      this.$emit('CloseModalCreateCustomer');
+      this.$emit('closeModalNothingChange');
     },
     async createCustomer() {
       const newCustomer = {
