@@ -7,12 +7,19 @@
             <v-card-title>Création d'un client</v-card-title>
           </v-col>
         </v-row>
-        <v-card-subtitle class="text-subtitle-1"> Prénom :</v-card-subtitle>
-        <v-text-field v-model="buildCustomer.firstname"></v-text-field>
-        <v-card-subtitle class="text-subtitle-1"> Nom :</v-card-subtitle>
-        <v-text-field v-model="buildCustomer.lastname"></v-text-field>
-        <v-card-subtitle class="text-subtitle-1"> Téléphone :</v-card-subtitle>
-        <v-text-field v-model="buildCustomer.tel"></v-text-field>
+        <v-text-field
+          :rules="rules"
+          v-model="buildCustomer.firstname"
+          label="Prénom :"
+        ></v-text-field>
+        <v-text-field
+          v-model="buildCustomer.lastname"
+          label="Nom :"
+        ></v-text-field>
+        <v-text-field
+          v-model="buildCustomer.tel"
+          label="Téléphone :"
+        ></v-text-field>
         <v-card-subtitle class="text-subtitle-1">
           Type de paiement :</v-card-subtitle
         >
@@ -34,10 +41,10 @@
         >
         </v-select>
         <v-row align="center" justify="center">
-          <v-col cols="auto">
+          <v-col cols="auto" class="mb-2">
             <v-btn @click="createCustomer">Valider</v-btn>
           </v-col>
-          <v-col cols="auto">
+          <v-col cols="auto" class="mb-2">
             <v-btn @click="closeModal">Annuler</v-btn>
           </v-col>
         </v-row>
@@ -53,12 +60,14 @@ export default {
     return {
       baseUrl: 'http://localhost:3000',
       typeOfClients: [
+        { id: 0, value: '', label: ' ' },
         { id: 1, value: 'seller', label: 'Vendeur' },
         { id: 2, value: 'renter', label: 'Locataire' },
         { id: 3, value: 'buyer', label: 'Acheteur' },
         { id: 4, value: 'lessor', label: 'Bailleur' },
       ],
       typeOfPayments: [
+        { id: 0, value: '', label: ' ' },
         { id: 1, value: 'cash', label: 'Paiement comptant' },
         { id: 2, value: 'credit', label: 'Paiement crédit' },
       ],
@@ -69,6 +78,10 @@ export default {
         cash_or_credit: '',
         type_of_customer: '',
       },
+      rules: [
+        (value) => !!value || 'Required.',
+        (value) => (value && value.length >= 3) || 'Min 3 characters',
+      ],
     };
   },
 

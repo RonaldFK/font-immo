@@ -1,7 +1,7 @@
 <template>
   <div class="overlay">
     <div class="modal-customer">
-      <v-card max-width="500" class="w-100">
+      <v-card max-width="500" class="w-50">
         <v-row align="center" justify="center">
           <v-col cols="auto">
             <v-card-title>Modification client</v-card-title>
@@ -15,7 +15,6 @@
           label="Prénom :"
           v-model="buildCustomer.firstname"
           ref="firstname"
-          @input="updateUser"
         ></v-text-field>
         <!-- <v-card-subtitle class="text-subtitle-1"> Nom :</v-card-subtitle> -->
         <v-text-field
@@ -46,15 +45,15 @@
           :items="typeOfClients"
           item-title="label"
           item-value="value"
-          v-model="buildCustomer.type_of_customer"
+          :value="buildCustomer.type_of_customer"
           ref="clientType"
         >
         </v-select>
         <v-row align="center" justify="center">
-          <v-col cols="auto">
+          <v-col cols="auto" class="mb-2">
             <v-btn @click="modifyCustomer">Valider</v-btn>
           </v-col>
-          <v-col cols="auto">
+          <v-col cols="auto" class="mb-2">
             <v-btn @click="closeModal">Annuler</v-btn>
           </v-col>
         </v-row>
@@ -89,6 +88,10 @@ export default {
         cash_or_credit: this.paymentType || null,
         type_of_customer: this.clientType || null,
       },
+      rules: [
+        (value) => !!value || 'Required.',
+        (value) => (value && value.length >= 3) || 'Min 3 characters',
+      ],
     };
   },
   props: {
@@ -105,15 +108,15 @@ export default {
       this.$emit('closeModalNothingChange');
     },
     // mise à jour avec la valeur input
-    updateUser() {
-      this.buildCustomer = {
-        firstname: this.$refs.firstname?.value || null,
-        lastname: this.$refs.lastname?.value || null,
-        tel: this.$refs.tel?.value || null,
-        cash_or_credit: this.$refs.paymentType?.value || null,
-        type_of_customer: this.$refs.clientType?.value || null,
-      };
-    },
+    // updateUser() {
+    //   this.buildCustomer = {
+    //     firstname: this.$refs.firstname?.value || null,
+    //     lastname: this.$refs.lastname?.value || null,
+    //     tel: this.$refs.tel?.value || null,
+    //     cash_or_credit: this.$refs.paymentType?.value || null,
+    //     type_of_customer: this.$refs.clientType?.value || null,
+    //   };
+    // },
     async modifyCustomer() {
       console.log('result :', this.buildCustomer);
 
@@ -140,6 +143,10 @@ export default {
 };
 </script>
 <style scoped>
+.w-50 {
+  padding-right: 5rem;
+  padding-left: 5rem;
+}
 .modal-customer {
   display: flex;
   flex-direction: column;
@@ -152,10 +159,10 @@ export default {
   overflow-x: hidden;
   align-items: center;
   height: 40rem;
-  background: rgba(236, 232, 232, 0.825);
+  /* background: rgba(236, 232, 232, 0.825); */
 }
 .overlay {
-  /* background: rgba(44, 41, 41, 0.433); */
+  background: rgba(44, 41, 41, 0.433);
   position: fixed;
   top: 0;
   bottom: 0;

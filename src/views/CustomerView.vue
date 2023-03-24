@@ -2,7 +2,11 @@
   <div class="div-create-btn">
     <v-row align="center" justify="center">
       <v-col cols="auto">
-        <v-btn @click="openModalCreateCustomer">Créer un nouveau client</v-btn>
+        <v-icon>mdi-home</v-icon>
+        <v-btn @click="openModalCreateCustomer" prepend-icon="mdi-check-circle"
+          >Créer un nouveau client</v-btn
+        >
+        <!-- <v-btn density="compact" icon="mdi-vuetify"></v-btn> -->
       </v-col>
     </v-row>
   </div>
@@ -34,7 +38,7 @@
     max-height="300"
   >
     <v-card
-      class="w-50 ma-5 pa-5 h-100 rounded-shaped"
+      class="w-50 ma-5 pa-5 h-300 rounded-shaped"
       max-width="344"
       v-for="customer in customers"
       :key="customer.id"
@@ -67,7 +71,11 @@
 
       <v-row align="center" justify="end">
         <v-col cols="auto">
-          <v-btn @click="openModal(customer)" variant="tonal" size="x-small"
+          <v-btn
+            class="btn"
+            @click="openModal(customer)"
+            variant="tonal"
+            size="x-small"
             >Modifier ce client</v-btn
           >
         </v-col>
@@ -153,6 +161,12 @@ export default {
 };
 </script>
 <style scoped>
+.btn {
+  color: rebeccapurple;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
 .div-create-btn {
   position: absolute;
   top: 8rem;
