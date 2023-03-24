@@ -37,7 +37,7 @@
     max-height="300"
   >
     <v-card
-      class="w-50 ma-5 pa-5 h-300 rounded-shaped"
+      class="w-100 ma-5 pa-5 h-300 rounded-shaped"
       max-width="344"
       v-for="customer in customers"
       :key="customer.id"
@@ -62,13 +62,17 @@
       <v-card-subtitle class="text-subtitle-2 text-teal-darken-1">
         Type de paiement :</v-card-subtitle
       >
-      <v-card-text>{{ customer.cash_or_credit }}</v-card-text>
+      <v-card-text>{{
+        convertLabelPayment(customer.cash_or_credit)
+      }}</v-card-text>
       <v-card-subtitle class="text-subtitle-2 text-teal-darken-1">
         Type de client :</v-card-subtitle
       >
-      <v-card-text>{{ customer.type_of_customer }}</v-card-text>
+      <v-card-text>{{
+        convertLabelCustomer(customer.type_of_customer)
+      }}</v-card-text>
 
-      <v-row align="center" justify="end">
+      <v-row align="center" justify="center" class="w-100">
         <v-col cols="auto">
           <v-btn
             class="btn"
@@ -78,9 +82,10 @@
             >Modifier ce client</v-btn
           >
         </v-col>
+
         <v-col cols="auto">
           <v-btn
-            class="btn-left"
+            class="btn btn-left"
             @click="deleteCustomer(customer)"
             variant="tonal"
             size="x-small"
@@ -135,6 +140,37 @@ export default {
   },
 
   methods: {
+    convertLabelPayment(data) {
+      switch (data) {
+        case 'cash':
+          return 'Paiement comptant';
+          // eslint-disable-next-line no-unreachable
+          break;
+        case 'credit':
+          return 'Paiement crédit';
+        default:
+          return 'inconnu';
+      }
+    },
+    convertLabelCustomer(data) {
+      switch (data) {
+        case 'seller':
+          return 'Vendeur';
+          // eslint-disable-next-line no-unreachable
+          break;
+        case 'renter':
+          return 'Locataire';
+          break;
+        case 'buyer':
+          return 'Acheteur';
+          break;
+        case 'lessor':
+          return 'Bailleur';
+          break;
+        default:
+          return 'inconnu';
+      }
+    },
     openModal(customer) {
       this.currentCustomer = {
         identidyFirstname: customer.firstname,
@@ -157,7 +193,6 @@ export default {
       this.$router.go();
     },
     closeModalNothingChange() {
-      console.log('ici');
       this.modalCreateCustomer = false;
       this.modal = false;
     },
@@ -191,15 +226,15 @@ export default {
 <style scoped>
 .btn {
   color: rebeccapurple;
-  position: absolute;
-  right: 20px;
-  bottom: 10px;
+  /* position: absolute; */
+  /* right: 20px;
+  bottom: 10px; */
 }
 .btn-left {
   color: rgb(172, 38, 38);
-  position: absolute;
-  left: 20px;
-  bottom: 10px;
+  /* position: absolute; */
+  /* left: 20px;
+  bottom: 10px; */
 }
 .div-create-btn {
   position: absolute;

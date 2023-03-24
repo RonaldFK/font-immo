@@ -1,7 +1,7 @@
 <template>
   <div class="overlay">
     <div class="modal-customer">
-      <v-card max-width="500" class="w-50">
+      <v-card max-width="500" class="w-100">
         <v-row align="center" justify="center">
           <v-col cols="auto">
             <v-card-title>Création d'un client</v-card-title>
@@ -42,10 +42,10 @@
         </v-select>
         <v-row align="center" justify="center">
           <v-col cols="auto" class="mb-2">
-            <v-btn @click="createCustomer">Valider</v-btn>
+            <v-btn @click="createCustomer" size="x-small">Valider</v-btn>
           </v-col>
           <v-col cols="auto" class="mb-2">
-            <v-btn @click="closeModal">Annuler</v-btn>
+            <v-btn @click="closeModal" size="x-small">Annuler</v-btn>
           </v-col>
         </v-row>
       </v-card>
@@ -116,9 +116,9 @@ export default {
 };
 </script>
 <style scoped>
-.w-50 {
-  padding-right: 5rem;
-  padding-left: 5rem;
+.w-100 {
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .modal-customer {
   display: flex;

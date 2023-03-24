@@ -1,7 +1,7 @@
 <template>
   <div class="overlay">
     <div class="modal-customer">
-      <v-card max-width="500" class="w-50">
+      <v-card max-width="500" class="w-100">
         <v-row align="center" justify="center">
           <v-col cols="auto">
             <v-card-title>Modification client</v-card-title>
@@ -10,19 +10,16 @@
             <v-card-title>Client numéro : {{ clientNumber }}</v-card-title>
           </v-col>
         </v-row>
-        <!-- <v-card-subtitle class="text-subtitle-1"> Prénom :</v-card-subtitle> -->
         <v-text-field
           label="Prénom :"
           v-model="buildCustomer.firstname"
           ref="firstname"
         ></v-text-field>
-        <!-- <v-card-subtitle class="text-subtitle-1"> Nom :</v-card-subtitle> -->
         <v-text-field
           v-model="buildCustomer.lastname"
           ref="lastname"
           label="Nom :"
         ></v-text-field>
-        <!-- <v-card-subtitle class="text-subtitle-1"> Téléphone :</v-card-subtitle> -->
         <v-text-field
           v-model="buildCustomer.tel"
           ref="tel"
@@ -45,16 +42,16 @@
           :items="typeOfClients"
           item-title="label"
           item-value="value"
-          :value="buildCustomer.type_of_customer"
+          v-model="buildCustomer.type_of_customer"
           ref="clientType"
         >
         </v-select>
         <v-row align="center" justify="center">
           <v-col cols="auto" class="mb-2">
-            <v-btn @click="modifyCustomer">Valider</v-btn>
+            <v-btn @click="modifyCustomer" size="x-small">Valider</v-btn>
           </v-col>
           <v-col cols="auto" class="mb-2">
-            <v-btn @click="closeModal">Annuler</v-btn>
+            <v-btn @click="closeModal" size="x-small">Annuler</v-btn>
           </v-col>
         </v-row>
       </v-card>
@@ -143,9 +140,9 @@ export default {
 };
 </script>
 <style scoped>
-.w-50 {
-  padding-right: 5rem;
-  padding-left: 5rem;
+.w-100 {
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .modal-customer {
   display: flex;
