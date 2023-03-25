@@ -1,7 +1,7 @@
 <!-- eslint-disable indent -->
 <!-- eslint-disable indent -->
 <template>
-  <!-- <div class="div-create-btnn">
+  <div class="div-create-btnn">
     <v-row align="center" justify="center">
       <v-col cols="auto">
         <v-btn @click="openModalCreateCustomer" prepend-icon="mdi-plus"
@@ -31,7 +31,7 @@
       @closeModalNothingChange="closeModalNothingChange"
     ></ModalCreateCustomer>
     <input type="button" value="X" />
-  </div> -->
+  </div>
   <div
     class="div-create-customer d-flex w-100 h-100 flex-wrap justify-end"
     max-width="300"

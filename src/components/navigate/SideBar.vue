@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <v-layout>
-        <v-navigation-drawer class="bg-deep-purple" theme="dark" permanent>
+        <v-navigation-drawer class="bg-cyan-darken-2" theme="dark" permanent>
           <v-list color="transparent">
             <v-list-item
               prepend-icon="mdi-view-dashboard"
