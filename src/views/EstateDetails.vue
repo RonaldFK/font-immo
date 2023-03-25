@@ -1,6 +1,52 @@
 <template>
+  <div class="main-div d-flex w-100 h-100 flex-wrap flex-column justify-center">
+    <v-card
+      class="card ma-5 pa-5 h-100 d-flex flex-wrap flex-column justify-center"
+      v-for="info in oneEstate"
+      :key="info.id"
+    >
+      <v-card-title class="align-self-center">
+        Description du bien
+      </v-card-title>
+      <v-card-text> {{ info.name }}</v-card-text>
+      <v-card-subtitle>Prix du bien :</v-card-subtitle>
+      <v-card-text> {{ info.price }}</v-card-text>
+      <v-card-subtitle>Type du bien :</v-card-subtitle>
+      <v-card-text> {{ info.type }}</v-card-text>
+      <v-card-subtitle>Localisation :</v-card-subtitle>
+      <v-card-text v-if="info.location?.num">
+        {{ info.location.num }} {{ info.location?.street }}
+        {{ info.location?.city }}</v-card-text
+      >
+      <v-card-subtitle>Code postale :</v-card-subtitle>
+      <v-card-text>{{ info.location?.code }}</v-card-text>
+      <v-card-subtitle>Type du bien :</v-card-subtitle>
+      <v-card-text> {{ info.type }}</v-card-text>
+    </v-card>
+    <v-card
+      class="card ma-5 pa-5 h-100 d-flex flex-wrap flex-column justify-center"
+      v-for="info in oneEstate"
+      :key="info.id"
+    >
+      <v-card-title class="align-self-center"> Manager en charge </v-card-title>
+      <v-card-text> {{ info.name }}</v-card-text>
+      <v-card-subtitle>Prix du bien :</v-card-subtitle>
+      <v-card-text> {{ info.price }}</v-card-text>
+      <v-card-subtitle>Type du bien :</v-card-subtitle>
+      <v-card-text> {{ info.type }}</v-card-text>
+      <v-card-subtitle>Localisation :</v-card-subtitle>
+      <v-card-text v-if="info.location?.num">
+        {{ info.location.num }} {{ info.location?.street }}
+        {{ info.location?.city }}</v-card-text
+      >
+      <v-card-subtitle>Code postale :</v-card-subtitle>
+      <v-card-text>{{ info.location?.code }}</v-card-text>
+      <v-card-subtitle>Type du bien :</v-card-subtitle>
+      <v-card-text> {{ info.type }}</v-card-text>
+    </v-card>
+  </div>
   <!-- <router-view></router-view> -->
-  <div class="main-details-div">
+  <!-- <div class="main-details-div">
     <div class="describe-estate" v-for="info in oneEstate" :key="info.id">
       <h2>{{ info.name }}</h2>
       <div>
@@ -47,7 +93,7 @@
         <input type="submit" value="Valider" class="btn" @click="addPhoto" />
       </form>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -75,32 +121,10 @@ export default {
       const result = await response.json();
       this.oneEstate = result;
       this.data = true;
-      // this.estates.push(response)
-      console.log(result[0].photos[0]);
     } catch (err) {
-      console.log(err, 'TEST ICI');
+      console.log(err);
     }
   },
-  // beforeCreate: async function getPhoto(){
-  //   console.log('TESTGET');
-  //     try{
-  //           const response = await fetch(`http://localhost:3000/estate/${this.id}/photo/bien2-photo1.jpg`,
-  //           {
-  //               method:'GET',
-  //               headers:{
-  //                   "Content-Type": "multipart/form-data",
-  //                   "Access-Control-Allow-Origin":"http://localhost:8080"
-  //               }
-  //           })
-  //           let  result = await response.json()
-  //           result = result.filter(elem => elem.name != '.DS_Store')
-  //           console.log(result,'TEST');
-  //           this.photoUrl = result
-
-  //       } catch(err){
-  //           console.log(err,'TEST ICI');
-  //       }
-  // },
   methods: {
     async addPhoto() {
       try {
@@ -124,6 +148,12 @@ export default {
 </script>
 
 <style>
+.main-div {
+  margin-left: 50px;
+}
+.card {
+  max-width: 80%;
+}
 .main-details-div {
   display: flex;
   margin-top: 12rem;

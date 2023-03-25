@@ -1,15 +1,7 @@
 <!-- eslint-disable indent -->
 <!-- eslint-disable indent -->
 <template>
-  <div class="div-create-btnn">
-    <v-row align="center" justify="center">
-      <v-col cols="auto">
-        <v-btn @click="openModalCreateCustomer" prepend-icon="mdi-plus"
-          >Créer un nouveau client</v-btn
-        >
-      </v-col>
-    </v-row>
-  </div>
+  <div class="div-create-btnn"></div>
   <div class="modal" v-if="modal">
     <ModalHandleCustomer
       @emitCloseModal="closeModal"
