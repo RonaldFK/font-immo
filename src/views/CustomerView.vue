@@ -1,7 +1,18 @@
 <template>
+  <div class="div-create-btn">
+    <v-row align="center" justify="center">
+      <v-col cols="auto">
+        <v-icon>mdi-home</v-icon>
+        <v-btn @click="openModalCreateCustomer" prepend-icon="mdi-check-circle"
+          >Créer un nouveau client</v-btn
+        >
+      </v-col>
+    </v-row>
+  </div>
   <div class="modal" v-if="modal">
     <ModalHandleCustomer
       @emitCloseModal="closeModal"
+      @closeModalNothingChange="closeModalNothingChange"
       v-bind="{
         customerFirstname: currentCustomer.identidyFirstname,
         customerLastname: currentCustomer.identidyLastname,
@@ -13,40 +24,76 @@
       }"
     ></ModalHandleCustomer>
   </div>
-  <!-- <ModalCreateCustomerVue></ModalCreateCustomerVue> -->
-  <div class="div-create-customer">
-    <input
-      type="button"
-      value="Ajouter un client"
-      @click="openModalCreateCustomer"
-      form="form"
-    />
+  <div v-if="modalCreateCustomer">
+    <ModalCreateCustomer
+      @CloseModalCreateCustomer="closeModalCreateCustomer"
+      @closeModalNothingChange="closeModalNothingChange"
+    ></ModalCreateCustomer>
+    <input type="button" value="X" />
   </div>
-  <div class="content-view">
-    <div v-if="modalCreateCustomer">
-      <ModalCreateCustomer
-        @CloseModalCreateCustomer="closeModal"
-      ></ModalCreateCustomer>
-      <input type="button" value="X" />
-    </div>
-    <div
+  <div
+    class="div-create-customer d-flex mr-5 ml-15 flex-wrap justify-center"
+    max-width="500"
+    max-height="300"
+  >
+    <v-card
+      class="w-100 ma-5 pa-5 h-300 rounded-shaped"
+      max-width="344"
       v-for="customer in customers"
       :key="customer.id"
-      class="content-view__list"
     >
-      <h3>Identité :</h3>
-      <p>{{ customer.firstname }}</p>
-      <p>{{ customer.lastname }}</p>
-      <h3>Téléphone :</h3>
-      <p>{{ customer.tel }}</p>
-      <h3>Type de paiement :</h3>
-      <p>{{ customer.cash_or_credit }}</p>
-      <h3>Type de client :</h3>
-      <p>{{ customer.type_of_customer }}</p>
-      <h3>Identifiant Client :</h3>
-      <p>{{ customer.id }}</p>
-      <input type="button" @click="openModal" value="Modifier client" />
-    </div>
+      <v-row align="center" justify="center" class="mb-2">
+        <v-col cols="auto">
+          <v-card-subtitle class="text-subtitle-1 text-blue-grey-darken-1">
+            Identifiant Client : {{ customer.id }}</v-card-subtitle
+          >
+        </v-col>
+      </v-row>
+      <v-card-subtitle class="text-subtitle-2 text-teal-darken-1" color="red">
+        Identité :</v-card-subtitle
+      >
+
+      <v-card-text ref="firstname">{{ customer.firstname }}</v-card-text>
+      <v-card-text ref="lastname">{{ customer.lastname }}</v-card-text>
+      <v-card-subtitle class="text-subtitle-2 text-teal-darken-1">
+        Téléphone :</v-card-subtitle
+      >
+      <v-card-text>{{ customer.tel }}</v-card-text>
+      <v-card-subtitle class="text-subtitle-2 text-teal-darken-1">
+        Type de paiement :</v-card-subtitle
+      >
+      <v-card-text>{{
+        convertLabelPayment(customer.cash_or_credit)
+      }}</v-card-text>
+      <v-card-subtitle class="text-subtitle-2 text-teal-darken-1">
+        Type de client :</v-card-subtitle
+      >
+      <v-card-text>{{
+        convertLabelCustomer(customer.type_of_customer)
+      }}</v-card-text>
+
+      <v-row align="center" justify="center" class="w-100">
+        <v-col cols="auto">
+          <v-btn
+            class="btn"
+            @click="openModal(customer)"
+            variant="tonal"
+            size="x-small"
+            >Modifier ce client</v-btn
+          >
+        </v-col>
+
+        <v-col cols="auto">
+          <v-btn
+            class="btn btn-left"
+            @click="deleteCustomer(customer)"
+            variant="tonal"
+            size="x-small"
+            >Suprimer ce client</v-btn
+          >
+        </v-col>
+      </v-row>
+    </v-card>
   </div>
 </template>
 
@@ -63,13 +110,14 @@ export default {
       customers: [],
       modal: false,
       modalCreateCustomer: false,
+      reveal: false,
       currentCustomer: {
         identidyFirstname: String,
         identidyLastname: String,
         tel: parseInt(''),
         paymentType: String,
         clientType: String,
-        clientNumber: Number,
+        clientNumber: '',
       },
     };
   },
@@ -84,92 +132,117 @@ export default {
           },
         });
         const result = await response.json();
-        // const filter = result.filter(elem=>(elem))
         this.customers = result;
       } catch (err) {
-        console.log(err, 'TEST ICI');
+        console.log(err);
       }
     }
   },
 
   methods: {
-    openModal() {
+    convertLabelPayment(data) {
+      switch (data) {
+        case 'cash':
+          return 'Paiement comptant';
+          // eslint-disable-next-line no-unreachable
+          break;
+        case 'credit':
+          return 'Paiement crédit';
+        default:
+          return 'inconnu';
+      }
+    },
+    convertLabelCustomer(data) {
+      switch (data) {
+        case 'seller':
+          return 'Vendeur';
+          // eslint-disable-next-line no-unreachable
+          break;
+        case 'renter':
+          return 'Locataire';
+          break;
+        case 'buyer':
+          return 'Acheteur';
+          break;
+        case 'lessor':
+          return 'Bailleur';
+          break;
+        default:
+          return 'inconnu';
+      }
+    },
+    openModal(customer) {
+      this.currentCustomer = {
+        identidyFirstname: customer.firstname,
+        identidyLastname: customer.lastname,
+        tel: parseInt(customer.tel),
+        paymentType: customer.cash_or_credit,
+        clientType: customer.type_of_customer,
+        clientNumber: parseInt(customer.id),
+      };
+
       this.modal = true;
     },
     openModalCreateCustomer() {
+      console.log(this.modalCreateCustomer);
       this.modalCreateCustomer = true;
+      console.log(this.modalCreateCustomer);
     },
     closeModal() {
       this.modal = false;
+      this.$router.go();
+    },
+    closeModalNothingChange() {
+      this.modalCreateCustomer = false;
+      this.modal = false;
+    },
+    closeModalCreateCustomer() {
       this.modalCreateCustomer = false;
       this.$router.go();
+    },
+    async deleteCustomer(customer) {
+      console.log(this.clientNumber);
+      try {
+        const response = await fetch(
+          `${this.baseUrl}/customer/${customer.id}`,
+          {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:8080',
+            },
+          },
+        );
+        const result = await response.json();
+        console.log(result);
+        // this.$emit('emitCloseModal');
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };
 </script>
 <style scoped>
-.div-create-customer {
-  position: fixed;
-  top: 8rem;
-  left: 5%;
+.btn {
+  color: rebeccapurple;
+  /* position: absolute; */
+  /* right: 20px;
+  bottom: 10px; */
 }
-.bold {
-  font-size: 20px;
-  font-weight: bold;
+.btn-left {
+  color: rgb(172, 38, 38);
+  /* position: absolute; */
+  /* left: 20px;
+  bottom: 10px; */
 }
-.content-view {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 15%;
-  margin-left: 15rem;
-  margin-right: 10rem;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-.content-view__list {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  border: 3px solid rgba(167, 206, 201, 0.739);
-  min-width: 34rem;
-  margin-left: 8rem;
-  height: 30rem;
-  border-radius: 10px;
-  width: 250px;
-  border-left-color: rgb(228, 201, 136);
-  position: relative;
-  background: rgb(194, 222, 209);
-}
-.content-view__list h2,
-p {
-  margin-top: 1px;
-  margin-bottom: 1px;
-  color: rgb(53, 66, 89);
-}
-.content-view__list h2 {
-  text-align: center;
-}
-.content-view__list a {
-  text-decoration: none;
-  color: white;
+.div-create-btn {
   position: absolute;
-  right: 5px;
-  bottom: 5px;
+  top: 8rem;
+  width: 100%;
 }
-.content-view__list a:link,
-a:visited,
-a:active {
-  text-decoration: none;
-  color: white;
-}
-.content-view__list a:hover {
-  text-decoration: none;
-  color: rgb(53, 66, 89);
-  transition: 0.2s;
-}
-.msg-err {
-  margin-left: 49rem;
-  text-align: center;
+.div-create-customer {
+  position: absolute;
+  top: 15rem;
 }
 </style>

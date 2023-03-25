@@ -1,6 +1,6 @@
 <template>
   <NavBar />
-  <SideBar />
+  <!-- <SideBar /> -->
   <router-view></router-view>
   <!-- <FooterView/> -->
   <router-view class="view two" name="wiew_two"></router-view>
