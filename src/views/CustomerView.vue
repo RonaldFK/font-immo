@@ -1,9 +1,10 @@
+<!-- eslint-disable indent -->
+<!-- eslint-disable indent -->
 <template>
-  <div class="div-create-btn">
+  <!-- <div class="div-create-btnn">
     <v-row align="center" justify="center">
       <v-col cols="auto">
-        <v-icon>mdi-home</v-icon>
-        <v-btn @click="openModalCreateCustomer" prepend-icon="mdi-check-circle"
+        <v-btn @click="openModalCreateCustomer" prepend-icon="mdi-plus"
           >Créer un nouveau client</v-btn
         >
       </v-col>
@@ -30,14 +31,13 @@
       @closeModalNothingChange="closeModalNothingChange"
     ></ModalCreateCustomer>
     <input type="button" value="X" />
-  </div>
+  </div> -->
   <div
-    class="div-create-customer d-flex mr-5 ml-15 flex-wrap justify-center"
-    max-width="500"
-    max-height="300"
+    class="div-create-customer d-flex w-100 h-100 flex-wrap justify-end"
+    max-width="300"
   >
     <v-card
-      class="w-100 ma-5 pa-5 h-300 rounded-shaped"
+      class="w-100 ma-5 pa-5 rounded-shaped"
       max-width="344"
       v-for="customer in customers"
       :key="customer.id"
@@ -144,7 +144,7 @@ export default {
       switch (data) {
         case 'cash':
           return 'Paiement comptant';
-          // eslint-disable-next-line no-unreachable
+
           break;
         case 'credit':
           return 'Paiement crédit';
@@ -156,7 +156,6 @@ export default {
       switch (data) {
         case 'seller':
           return 'Vendeur';
-          // eslint-disable-next-line no-unreachable
           break;
         case 'renter':
           return 'Locataire';
@@ -237,12 +236,12 @@ export default {
   bottom: 10px; */
 }
 .div-create-btn {
-  position: absolute;
-  top: 8rem;
+  /* position: absolute; */
+  /* top: 8rem; */
   width: 100%;
 }
 .div-create-customer {
-  position: absolute;
-  top: 15rem;
+  /* position: absolute; */
+  /* top: 15rem; */
 }
 </style>
