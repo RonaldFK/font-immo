@@ -8,8 +8,16 @@
       <ModalCreateEstate @closeEmit="closeModal"></ModalCreateEstate>
     </div>
 
+    <!-- <v-row align="center" justify="center" class="w-100">
+      <v-col cols="auto">
+        <v-btn class="btnn" variant="tonal" size="small" @click="openModal"
+          >Créer un nouveau bien</v-btn
+        >
+      </v-col>
+    </v-row> -->
+
     <v-card
-      class="w-100 ma-5 pa-5 rounded-shaped d-flex flex-column w-100 h-100 flex-wrap justify-center"
+      class="w-100 ma-5 pa-5 rounded d-flex flex-column w-100 h-100 flex-wrap justify-center"
       max-width="35%"
       v-for="estate in estates"
       :key="estate.id"
@@ -19,13 +27,17 @@
       <v-card-text> {{ estate.price }}</v-card-text>
       <v-card-subtitle>Type du bien :</v-card-subtitle>
       <v-card-text> {{ estate.type }}</v-card-text>
-      <v-btn
-        class="btn"
-        variant="tonal"
-        size="x-small"
-        @click="goTo(`/estate/${estate.id}`)"
-        >Détails du bien</v-btn
-      >
+      <v-row align="center" justify="center" class="w-100">
+        <v-col cols="auto">
+          <v-btn
+            class="btn"
+            variant="tonal"
+            size="x-small"
+            @click="goTo(`/estate/${estate.id}`)"
+            >Détails du bien</v-btn
+          >
+        </v-col>
+      </v-row>
     </v-card>
   </div>
   <div
