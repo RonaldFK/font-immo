@@ -25,7 +25,7 @@
     </v-card>
     <div class="card-manager">
       <v-card
-        class="card ma-5 pa-5 d-flex flex-wrap flex-column justify-center"
+        class="card ma-5 pa-5 d-flex flex-wrap w-100 flex-column justify-center"
         v-for="info in oneEstate"
         :key="info.id"
       >
@@ -40,7 +40,7 @@
         <v-card-text> {{ info.manager?.email }}</v-card-text>
       </v-card>
       <v-card
-        class="card-owner ma-5 pa-5 d-flex flex-wrap flex-column justify-center"
+        class="card card-owner ma-5 pa-5 d-flex w-100 flex-wrap flex-column justify-center"
         v-for="info in oneEstate"
         :key="info.id"
       >
@@ -63,20 +63,21 @@
     </div>
 
     <v-card
-      class="card-photos ma-5 pa-5 d-flex flex-wrap flex-column justify-center"
+      class="card-photos ma-5 pa-5 d-flex flex-wrap flex-column justify-center overflow-x-auto"
       v-for="info in oneEstate"
       :key="info.id"
     >
-      <div class="d-flex flex-row overflow-x-auto">
-        <v-img
-          v-for="photo in info.photos"
-          :key="photo.id"
-          :width="373"
-          aspect-ratio="16/9"
-          cover
-          :src="'http://localhost:3000/estate/' + id + '/photo/' + photo.name"
-        ></v-img>
-      </div>
+      <!-- <div class="d-flex flex-row w-100"> -->
+      <v-img
+        class="img ma-3 pa-3"
+        v-for="photo in info.photos"
+        :key="photo.id"
+        width="300"
+        aspect-ratio="16/9"
+        cover
+        :src="'http://localhost:3000/estate/' + id + '/photo/' + photo.name"
+      ></v-img>
+      <!-- </div> -->
     </v-card>
   </div>
   <!-- <router-view></router-view> -->
@@ -184,20 +185,16 @@ export default {
 <style>
 .main-div {
   margin-left: 50px;
-  /* width: 72rem; */
   margin-left: 17rem;
-  /* margin-right: 17rem; */
-}
-.card {
-  /* max-width: 80%; */
-  /* width: 45%; */
 }
 .card-estate {
-  height: 500px;
+  height: 687px;
+  min-width: 18rem;
   width: 45%;
 }
 .card-manager {
-  height: 200px;
+  min-width: 30rem;
+  height: 100px;
   width: 45%;
 }
 .card-photos {
@@ -209,7 +206,7 @@ export default {
   height: 550px;
 }
 .card-owner {
-  height: 550px;
+  height: 470px;
   background: red;
 }
 </style>
