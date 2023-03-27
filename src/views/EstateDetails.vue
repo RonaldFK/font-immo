@@ -56,7 +56,7 @@
         <v-card-subtitle>Numéro :</v-card-subtitle>
         <v-card-text> {{ info.customer?.tel }}</v-card-text>
         <v-card-subtitle>Type de client :</v-card-subtitle>
-        <v-card-text> {{ info.customer?.type }}</v-card-text>
+        <v-card-text> {{ info.customer?.type_of_customer }}</v-card-text>
         <v-card-subtitle>Paiment :</v-card-subtitle>
         <v-card-text> {{ info.customer?.cash_or_credit }}</v-card-text>
       </v-card>
@@ -67,68 +67,26 @@
       v-for="info in oneEstate"
       :key="info.id"
     >
-      <!-- <div class="d-flex flex-row w-100"> -->
       <v-img
         class="img ma-3 pa-3"
         v-for="photo in info.photos"
         :key="photo.id"
-        width="300"
+        width="350"
         aspect-ratio="16/9"
         cover
         :src="'http://localhost:3000/estate/' + id + '/photo/' + photo.name"
-      ></v-img>
-      <!-- </div> -->
+      >
+        <template v-slot:placeholder>
+          <div class="d-flex align-center justify-center fill-height">
+            <v-progress-circular
+              color="grey-lighten-4"
+              indeterminate
+            ></v-progress-circular>
+          </div>
+        </template>
+      </v-img>
     </v-card>
   </div>
-  <!-- <router-view></router-view> -->
-  <!-- <div class="main-details-div">
-    <div class="describe-estate" v-for="info in oneEstate" :key="info.id">
-      <h2>{{ info.name }}</h2>
-      <div>
-        <p>Prix du bien : {{ info.price }}</p>
-        <p>Type de bien : {{ info.type }}</p>
-        <p v-if="info.location?.num">
-          Localisation : {{ info.location.num }} {{ info.location?.street }}
-          {{ info.location?.city }}
-        </p>
-        <p v-else>Localisation :</p>
-        <p>Code postale : {{ info.location?.code }}</p>
-      </div>
-    </div>
-    <div class="handle-div-describe">
-      <div class="describe-manager" v-for="info in oneEstate" :key="info.id">
-        <h2>Manager en charge</h2>
-        <p>Prenom : {{ info.manager?.firstname }}</p>
-        <p>Nom : {{ info.manager?.lastname }}</p>
-        <p>Mail : {{ info.manager?.email }}</p>
-      </div>
-      <div class="describe-client" v-for="info in oneEstate" :key="info.id">
-        <h2>Propriétaire</h2>
-        <p>Prenom : {{ info.customer?.firstname }}</p>
-        <p>Nom : {{ info.customer?.lastname }}</p>
-        <p>Numéro : {{ info.customer?.tel }}</p>
-        <p>Type client : {{ info.customer?.type }}</p>
-        <p>Paiement : {{ info.customer?.cash_or_credit }}</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="describe-photo">
-    <div v-for="info in oneEstate" :key="info.id">
-      <img
-        v-for="photo in info.photos"
-        :key="photo.id"
-        :src="'http://localhost:3000/estate/' + id + '/photo/' + photo.name"
-      />
-    </div>
-    <div class="div-form">
-      <form action="" method="POST" enctype="multipart/form-data">
-        <label for="">Ajouter des photos</label>
-        <input type="file" name="photo" accept="image/png, image/jpeg" />
-        <input type="submit" value="Valider" class="btn" @click="addPhoto" />
-      </form>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -184,12 +142,11 @@ export default {
 
 <style>
 .main-div {
-  margin-left: 50px;
-  margin-left: 17rem;
+  margin-left: 272px;
 }
 .card-estate {
-  height: 687px;
-  min-width: 18rem;
+  height: 707px;
+  min-width: 288px;
   width: 45%;
 }
 .card-manager {
@@ -197,16 +154,12 @@ export default {
   height: 100px;
   width: 45%;
 }
-.card-photos {
-  height: 350px;
-  width: 100%;
-}
-.card-photos div {
-  width: 100%;
-  height: 550px;
-}
 .card-owner {
-  height: 470px;
+  height: 490px;
   background: red;
+}
+.card-photos {
+  height: 400px;
+  width: 100%;
 }
 </style>
