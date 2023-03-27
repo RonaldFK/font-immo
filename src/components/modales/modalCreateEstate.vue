@@ -1,94 +1,108 @@
 <template>
-  <div>
-    <div class="overlay">
-      <div class="modal-estate">
-        <h1>Création d'un nouveau bien</h1>
-        <div>
-          <form class="form" action="" method="POST" id="form">
-            <h2>Le bien</h2>
-            <div>
-              <label for="">Nom du bien</label>
-              <input v-model="estateToCreate.name" type="text" />
-              <label for="">Prix du bien</label>
-              <input v-model="estateToCreate.price" type="text" />
-              <!-- <label for="">Type</label>
-                          <input v-model="estateToCreate.type" type="text"> -->
-              <label for="">Type de bien</label>
-              <select v-model="estateToCreate.type" name="" id="">
-                <option value=""></option>
-                <option
-                  v-for="typeEstate in typeEstates"
-                  :key="typeEstate.value"
-                  :value="typeEstate.value"
-                >
-                  {{ typeEstate.label }}
-                </option>
-              </select>
-              <label for="photos">Photos:</label>
-              <input type="file" id="photos" ref="photos" multiple />
-              <!-- <select name="" id="">
-                  <option v-for="estate in typeEstate" :key="estate.value">
-                    {{ estate.label }}
-                  </option>
-                </select>
-                <select name="" id="">
-                  <option v-for="location in locations" :key="location.id">
-                    {{ location.street }}
-                  </option>
-                </select> -->
-            </div>
-            <h2>Le manager</h2>
-            <div>
-              <select v-model="estateToCreate.manager_id" name="" id="">
-                <option value=""></option>
-                <option
-                  v-for="manager in managers"
-                  :key="manager.id"
-                  :value="manager.id"
-                >
-                  {{ manager.firstname }} {{ manager.lastname }}
-                </option>
-              </select>
-            </div>
-            <h2>La localisation</h2>
-            <div>
-              <label for="">Numéro</label>
-              <input v-model="locationToCreate.num" type="text" />
-              <label for="">Rue</label>
-              <input v-model="locationToCreate.street" type="text" />
-              <label for="">Ville</label>
-              <input v-model="locationToCreate.city" type="text" />
-              <label for="">Pays</label>
-              <input v-model="locationToCreate.country" type="text" />
-              <label for="">Code postale</label>
-              <input v-model="locationToCreate.code" type="text" />
-            </div>
-            <h2>LE stationnement</h2>
-            <div>
-              <select name="" id="">
-                <option value=""></option>
-                <option value="parking">Parking</option>
-              </select>
-            </div>
-            <div class="button">
-              <input
-                type="button"
-                value="Valider"
-                @click="createEstate"
-                form="form"
-              />
-              <input
-                type="button"
-                value="Annuler"
-                @click="closeModal"
-                form="form"
-              />
-            </div>
-            <!-- <button @click="createEstate" form="estate_form">Valider</button>
-            <button @click="closeModal" form="estate_form">Annuler</button> -->
-          </form>
-        </div>
-      </div>
+  <div class="overlay">
+    <div class="d-flex flex-wrap h-100 flex-row justify-center">
+      <v-card max-width="500" class="w-100">
+        <v-row align="center" justify="center" class="mb-5">
+          <v-col cols="auto">
+            <v-card-title>Création d'un nouveau bien</v-card-title>
+          </v-col>
+        </v-row>
+        <v-text-field
+          v-model="estateToCreate.name"
+          label="Nom du bien :"
+        ></v-text-field>
+        <v-text-field
+          v-model="estateToCreate.price"
+          label="Prix du bien :"
+        ></v-text-field>
+
+        <v-select
+          v-model="estateToCreate.type"
+          :items="typeEstates"
+          item-title="label"
+          item-value="value"
+          label="Type de bien :"
+        ></v-select>
+        <v-select
+          v-model="estateToCreate.statut"
+          :items="status"
+          item-title="label"
+          item-value="value"
+          label="Statut"
+        >
+        </v-select>
+        <v-file-input label="Ajouter des photos" ref="photos" multiple>
+        </v-file-input>
+      </v-card>
+      <v-card max-width="500" class="w-100 mt-5">
+        <v-row align="center" justify="center" class="mb-5">
+          <v-col cols="auto">
+            <v-card-title>Manager en charge</v-card-title>
+          </v-col>
+        </v-row>
+        <v-select
+          v-model="estateToCreate.manager_id"
+          :items="managers"
+          item-title="firstname"
+          item-value="id"
+          label="Manager"
+        >
+        </v-select>
+      </v-card>
+      <v-card max-width="500" class="w-100 mt-5">
+        <v-text-field
+          v-model="customerToSearch"
+          ref="customerToSearch"
+          label="Propriétaire :"
+        ></v-text-field>
+        <v-select
+          :items="customers"
+          item-title="lastname"
+          item-value="id"
+          label="Nom du propriétaire"
+        >
+        </v-select>
+        <v-select
+          v-model="estateToCreate.customer_id"
+          :items="customers"
+          item-title="firstname"
+          item-value="id"
+          label="prénom"
+        >
+        </v-select>
+      </v-card>
+      <v-card max-width="500" class="w-100 mt-5">
+        <v-row align="center" justify="center" class="mb-5">
+          <v-col cols="auto">
+            <v-card-title>Localisation du bien</v-card-title>
+          </v-col>
+        </v-row>
+        <v-text-field
+          v-model="locationToCreate.num"
+          label="Numéro de rue :"
+        ></v-text-field>
+        <v-text-field
+          v-model="locationToCreate.street"
+          label="Nom de rue :"
+        ></v-text-field>
+        <v-text-field
+          v-model="locationToCreate.city"
+          label="Ville :"
+        ></v-text-field>
+        <v-text-field
+          v-model="locationToCreate.country"
+          label="Pays :"
+        ></v-text-field>
+        <v-text-field
+          v-model="locationToCreate.code"
+          label="Code :"
+        ></v-text-field>
+        <v-row align="center" justify="center">
+          <v-col cols="auto" class="mb-2">
+            <v-btn @click="createEstate">Valider</v-btn>
+          </v-col>
+        </v-row>
+      </v-card>
     </div>
   </div>
 </template>
@@ -101,12 +115,21 @@ export default {
       baseUrl: 'http://localhost:3000',
       selectedOption: null,
       typeEstates: [
+        { value: null, label: null },
         { value: 'apartment', label: 'Apartement' },
         { value: 'maison', label: 'Maison' },
         { value: 'parking', label: 'Parking' },
       ],
+      status: [
+        { value: null, label: null },
+        { value: 'vendu', label: 'Vendu' },
+        { value: 'sous_compromis', label: 'Sous compromis' },
+        { value: 'a_vendre', label: 'A vendre' },
+      ],
       locations: [],
       managers: [],
+      customerToSearch: '',
+      customers: [],
       estateToCreate: {
         name: '',
         price: '',
@@ -114,6 +137,7 @@ export default {
         type: '',
         manager_id: '',
         location_id: '',
+        customer_id: '',
       },
       locationToCreate: {
         num: '',
@@ -124,15 +148,20 @@ export default {
       },
     };
   },
+  watch: {
+    customerToSearch: function (value) {
+      this.searchCustomer(value);
+    },
+  },
   created: async function getAllLocation() {
     try {
-      const response = await fetch(`${this.baseUrl}/location`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-        },
-      });
+      // const response = await fetch(`${this.baseUrl}/location`, {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Access-Control-Allow-Origin': 'http://localhost:8080',
+      //   },
+      // });
       const managers = await fetch(`${this.baseUrl}/manager`, {
         method: 'GET',
         headers: {
@@ -140,8 +169,8 @@ export default {
           'Access-Control-Allow-Origin': 'http://localhost:8080',
         },
       });
-      const result = await response.json();
-      this.locations = result;
+      // const result = await response.json();
+      // this.locations = result;
       this.managers = await managers.json();
       console.log(this.managers, 'managers');
     } catch (err) {
@@ -149,11 +178,38 @@ export default {
     }
   },
   methods: {
+    test(value) {
+      return value;
+    },
+    async searchCustomer(value) {
+      if (value.length > 2) {
+        try {
+          const customer = await fetch(
+            `${this.baseUrl}/customer/search/${value}`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'http://localhost:8080',
+              },
+            },
+          );
+          const result = await customer.json();
+          result.length > 0 && (this.customers = result);
+          console.log(result);
+          // result[0].id
+          //   ? (this.estateToCreate.location_id = result[0].id)
+          //   : (this.estateToCreate.location_id = null);
+        } catch (err) {
+          console.log(err, 'TEST ICI');
+        }
+      }
+    },
     closeModal() {
-      this.$emit('closeEmit');
+      this.$router.push('/estate');
     },
     async createEstate() {
-      this.$emit('closeEmit');
+      console.log(this.estateToCreate.customer_id);
       const urlLocation = 'http://localhost:3000/location';
       const form = new FormData();
       const urlEstate = 'http://localhost:3000/estate';
@@ -227,15 +283,15 @@ export default {
   text-align: center;
 }
 .modal-estate {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   position: relative;
   margin-left: 20%;
   margin-right: 20%;
   margin-top: 8%;
-  display: flex;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  /* display: flex; */
+  /* overflow-y: scroll; */
+  /* overflow-x: hidden; */
   align-items: center;
   height: 40rem;
   background: rgba(210, 204, 204, 0.433);

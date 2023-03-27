@@ -1,18 +1,20 @@
 <template>
   <div class="main-div d-flex flex-wrap h-100 flex-row justify-center">
     <v-card
-      class="card card-estate ma-5 pa-5 d-flex flex-wrap flex-column justify-center"
+      class="card card-estate ma-3 pa-3 d-flex flex-wrap flex-column justify-center"
       v-for="info in oneEstate"
       :key="info.id"
     >
       <v-card-title class="align-self-center">
         Description du bien
       </v-card-title>
-      <v-card-text> {{ info.name }}</v-card-text>
+      <v-card-text class="text-body-2"> {{ info.name }}</v-card-text>
+      <v-card-subtitle>Statut :</v-card-subtitle>
+      <v-card-text> {{ convertLabelStatus(info.statut) }}</v-card-text>
       <v-card-subtitle>Prix du bien :</v-card-subtitle>
       <v-card-text> {{ info.price }}</v-card-text>
       <v-card-subtitle>Type du bien :</v-card-subtitle>
-      <v-card-text> {{ info.type }}</v-card-text>
+      <v-card-text> {{ convertLabelTypeEstate(info.type) }}</v-card-text>
       <v-card-subtitle>Localisation :</v-card-subtitle>
       <v-card-text v-if="info.location?.num">
         {{ info.location.num }} {{ info.location?.street }}
@@ -20,12 +22,10 @@
       >
       <v-card-subtitle>Code postale :</v-card-subtitle>
       <v-card-text>{{ info.location?.code }}</v-card-text>
-      <v-card-subtitle>Type du bien :</v-card-subtitle>
-      <v-card-text> {{ info.type }}</v-card-text>
     </v-card>
     <div class="card-manager">
       <v-card
-        class="card ma-5 pa-5 d-flex flex-wrap w-100 flex-column justify-center"
+        class="card ma-3 pa-3 d-flex flex-wrap w-100 flex-column justify-center"
         v-for="info in oneEstate"
         :key="info.id"
       >
@@ -40,15 +40,12 @@
         <v-card-text> {{ info.manager?.email }}</v-card-text>
       </v-card>
       <v-card
-        class="card card-owner ma-5 pa-5 d-flex w-100 flex-wrap flex-column justify-center"
+        class="card card-owner ma-3 pa-3 d-flex w-100 flex-wrap flex-column justify-center"
         v-for="info in oneEstate"
         :key="info.id"
       >
         <v-card-title class="align-self-center"> Propriétaire </v-card-title>
-        <v-card-text>
-          {{ info.manager?.firstname }}
-          {{ info.manager?.lastname }}</v-card-text
-        >
+
         <v-card-subtitle>Prenom :</v-card-subtitle>
         <v-card-text> {{ info.customer?.firstname }}</v-card-text>
         <v-card-subtitle>Nom :</v-card-subtitle>
@@ -63,7 +60,7 @@
     </div>
 
     <v-card
-      class="card-photos ma-5 pa-5 d-flex flex-wrap flex-column justify-center overflow-x-auto"
+      class="card-photos ma-3 pa-3 d-flex flex-wrap flex-column justify-center overflow-x-auto"
       v-for="info in oneEstate"
       :key="info.id"
     >
@@ -119,6 +116,36 @@ export default {
     }
   },
   methods: {
+    convertLabelStatus(data) {
+      switch (data) {
+        case 'sous_compromis':
+          return 'Sous compromis';
+          break;
+        case 'a_vendre':
+          return 'A vendre';
+          break;
+        case 'vendu':
+          return 'Vendu';
+          break;
+        default:
+          return 'inconnu';
+      }
+    },
+    convertLabelTypeEstate(data) {
+      switch (data) {
+        case 'maison':
+          return 'Maison';
+          break;
+        case 'apartment':
+          return 'Appartement';
+          break;
+        case 'parking':
+          return 'PArking';
+          break;
+        default:
+          return 'inconnu';
+      }
+    },
     async addPhoto() {
       try {
         const response = await fetch(`http://localhost:3000/photo`, {
@@ -145,7 +172,7 @@ export default {
   margin-left: 272px;
 }
 .card-estate {
-  height: 707px;
+  height: 685px;
   min-width: 288px;
   width: 45%;
 }

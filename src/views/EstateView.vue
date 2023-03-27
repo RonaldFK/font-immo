@@ -33,6 +33,15 @@
               >Détails du bien</v-btn
             >
           </v-col>
+          <v-col cols="auto">
+            <v-btn
+              class="btn"
+              variant="tonal"
+              size="x-small"
+              @click="deleteEstate(estate.id)"
+              >Suprimer le bien</v-btn
+            >
+          </v-col>
         </v-row>
       </v-card>
     </div>
@@ -48,16 +57,6 @@
         <v-card-title>Aucune données disponibles</v-card-title>
       </v-card>
     </div>
-
-    <!-- <div v-if="data" class="content-view">
-      <div v-for="estate in estates" :key="estate.id" class="content-view__list">
-        <h2>{{ estate.name }}</h2>
-        <p><span class="bold">Prix :</span> {{ estate.price }} euros</p>
-        <p><span class="bold">Type du bien:</span> {{ estate.type }}</p>
-        <router-link :to="'/estate/' + estate.id">Détails</router-link>
-        <img src="../assets/img/house3.jpg" alt="" > -->
-    <!-- </div>
-    </div> -->
   </div>
 </template>
 
@@ -95,6 +94,22 @@ export default {
     }
   },
   methods: {
+    async deleteEstate(estateId) {
+      try {
+        const response = await fetch(`${this.baseUrl}/estate/${estateId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+          },
+        });
+        const result = await response.json();
+        console.log(result);
+        // this.$emit('emitCloseModal');
+      } catch (err) {
+        console.log(err);
+      }
+    },
     goTo(path) {
       this.$router.push(path);
     },
