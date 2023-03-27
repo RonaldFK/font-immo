@@ -1,52 +1,91 @@
 <template>
-  <!-- <router-view></router-view> -->
-  <div class="main-details-div">
-    <div class="describe-estate" v-for="info in oneEstate" :key="info.id">
-      <h2>{{ info.name }}</h2>
-      <div>
-        <p>Prix du bien : {{ info.price }}</p>
-        <p>Type de bien : {{ info.type }}</p>
-        <p v-if="info.location?.num">
-          Localisation : {{ info.location.num }} {{ info.location?.street }}
-          {{ info.location?.city }}
-        </p>
-        <p v-else>Localisation :</p>
-        <p>Code postale : {{ info.location?.code }}</p>
-      </div>
+  <div class="main-div d-flex flex-wrap h-100 flex-row justify-center">
+    <v-card
+      class="card card-estate ma-5 pa-5 d-flex flex-wrap flex-column justify-center"
+      v-for="info in oneEstate"
+      :key="info.id"
+    >
+      <v-card-title class="align-self-center">
+        Description du bien
+      </v-card-title>
+      <v-card-text> {{ info.name }}</v-card-text>
+      <v-card-subtitle>Prix du bien :</v-card-subtitle>
+      <v-card-text> {{ info.price }}</v-card-text>
+      <v-card-subtitle>Type du bien :</v-card-subtitle>
+      <v-card-text> {{ info.type }}</v-card-text>
+      <v-card-subtitle>Localisation :</v-card-subtitle>
+      <v-card-text v-if="info.location?.num">
+        {{ info.location.num }} {{ info.location?.street }}
+        {{ info.location?.city }}</v-card-text
+      >
+      <v-card-subtitle>Code postale :</v-card-subtitle>
+      <v-card-text>{{ info.location?.code }}</v-card-text>
+      <v-card-subtitle>Type du bien :</v-card-subtitle>
+      <v-card-text> {{ info.type }}</v-card-text>
+    </v-card>
+    <div class="card-manager">
+      <v-card
+        class="card ma-5 pa-5 d-flex flex-wrap w-100 flex-column justify-center"
+        v-for="info in oneEstate"
+        :key="info.id"
+      >
+        <v-card-title class="align-self-center">
+          Manager en charge
+        </v-card-title>
+        <v-card-text>
+          {{ info.manager?.firstname }}
+          {{ info.manager?.lastname }}</v-card-text
+        >
+        <v-card-subtitle>Mail :</v-card-subtitle>
+        <v-card-text> {{ info.manager?.email }}</v-card-text>
+      </v-card>
+      <v-card
+        class="card card-owner ma-5 pa-5 d-flex w-100 flex-wrap flex-column justify-center"
+        v-for="info in oneEstate"
+        :key="info.id"
+      >
+        <v-card-title class="align-self-center"> Propriétaire </v-card-title>
+        <v-card-text>
+          {{ info.manager?.firstname }}
+          {{ info.manager?.lastname }}</v-card-text
+        >
+        <v-card-subtitle>Prenom :</v-card-subtitle>
+        <v-card-text> {{ info.customer?.firstname }}</v-card-text>
+        <v-card-subtitle>Nom :</v-card-subtitle>
+        <v-card-text> {{ info.customer?.lastname }}</v-card-text>
+        <v-card-subtitle>Numéro :</v-card-subtitle>
+        <v-card-text> {{ info.customer?.tel }}</v-card-text>
+        <v-card-subtitle>Type de client :</v-card-subtitle>
+        <v-card-text> {{ info.customer?.type_of_customer }}</v-card-text>
+        <v-card-subtitle>Paiment :</v-card-subtitle>
+        <v-card-text> {{ info.customer?.cash_or_credit }}</v-card-text>
+      </v-card>
     </div>
-    <div class="handle-div-describe">
-      <div class="describe-manager" v-for="info in oneEstate" :key="info.id">
-        <h2>Manager en charge</h2>
-        <p>Prenom : {{ info.manager?.firstname }}</p>
-        <p>Nom : {{ info.manager?.lastname }}</p>
-        <p>Mail : {{ info.manager?.email }}</p>
-      </div>
-      <div class="describe-client" v-for="info in oneEstate" :key="info.id">
-        <h2>Propriétaire</h2>
-        <p>Prenom : {{ info.customer?.firstname }}</p>
-        <p>Nom : {{ info.customer?.lastname }}</p>
-        <p>Numéro : {{ info.customer?.tel }}</p>
-        <p>Type client : {{ info.customer?.type }}</p>
-        <p>Paiement : {{ info.customer?.cash_or_credit }}</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="describe-photo">
-    <div v-for="info in oneEstate" :key="info.id">
-      <img
+    <v-card
+      class="card-photos ma-5 pa-5 d-flex flex-wrap flex-column justify-center overflow-x-auto"
+      v-for="info in oneEstate"
+      :key="info.id"
+    >
+      <v-img
+        class="img ma-3 pa-3"
         v-for="photo in info.photos"
         :key="photo.id"
+        width="350"
+        aspect-ratio="16/9"
+        cover
         :src="'http://localhost:3000/estate/' + id + '/photo/' + photo.name"
-      />
-    </div>
-    <div class="div-form">
-      <form action="" method="POST" enctype="multipart/form-data">
-        <label for="">Ajouter des photos</label>
-        <input type="file" name="photo" accept="image/png, image/jpeg" />
-        <input type="submit" value="Valider" class="btn" @click="addPhoto" />
-      </form>
-    </div>
+      >
+        <template v-slot:placeholder>
+          <div class="d-flex align-center justify-center fill-height">
+            <v-progress-circular
+              color="grey-lighten-4"
+              indeterminate
+            ></v-progress-circular>
+          </div>
+        </template>
+      </v-img>
+    </v-card>
   </div>
 </template>
 
@@ -75,32 +114,10 @@ export default {
       const result = await response.json();
       this.oneEstate = result;
       this.data = true;
-      // this.estates.push(response)
-      console.log(result[0].photos[0]);
     } catch (err) {
-      console.log(err, 'TEST ICI');
+      console.log(err);
     }
   },
-  // beforeCreate: async function getPhoto(){
-  //   console.log('TESTGET');
-  //     try{
-  //           const response = await fetch(`http://localhost:3000/estate/${this.id}/photo/bien2-photo1.jpg`,
-  //           {
-  //               method:'GET',
-  //               headers:{
-  //                   "Content-Type": "multipart/form-data",
-  //                   "Access-Control-Allow-Origin":"http://localhost:8080"
-  //               }
-  //           })
-  //           let  result = await response.json()
-  //           result = result.filter(elem => elem.name != '.DS_Store')
-  //           console.log(result,'TEST');
-  //           this.photoUrl = result
-
-  //       } catch(err){
-  //           console.log(err,'TEST ICI');
-  //       }
-  // },
   methods: {
     async addPhoto() {
       try {
@@ -124,95 +141,25 @@ export default {
 </script>
 
 <style>
-.main-details-div {
-  display: flex;
-  margin-top: 12rem;
-  margin-left: 50%;
-  width: 54rem;
-  height: 26rem;
-  background: rgb(194, 222, 209);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+.main-div {
+  margin-left: 272px;
 }
-.describe-estate {
-  width: 50%;
-  border-radius: 17px;
-  margin-bottom: 1rem;
-  margin-right: 1rem;
-  height: 25rem;
-  padding-left: 1rem;
+.card-estate {
+  height: 707px;
+  min-width: 288px;
+  width: 45%;
 }
-.describe-estate h2 {
-  text-align: center;
+.card-manager {
+  min-width: 30rem;
+  height: 100px;
+  width: 45%;
 }
-.describe-manager {
-  padding-left: 1rem;
+.card-owner {
+  height: 490px;
+  background: red;
 }
-.describe-manager h2 {
-  text-align: center;
-}
-.describe-client {
-  padding-left: 1rem;
-}
-.describe-client h2 {
-  text-align: center;
-}
-.describe-photo {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
-  margin-left: 50%;
-  width: 54rem;
-  height: 23rem;
-  position: relative;
-  background: rgb(194, 222, 209);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-.describe-photo div {
-  display: flex;
-  gap: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  overflow-y: auto;
-  width: 52rem;
-}
-.describe-photo img {
-  border-radius: 5px;
-  margin-top: 50px;
-  width: 32rem;
-  height: 15rem;
-  vertical-align: middle;
-}
-.handle-div-describe {
-  width: 50%;
-  border-radius: 17px;
-  margin-bottom: 1rem;
-  margin-right: 1rem;
-  height: 25rem;
-}
-.div-form {
-  justify-content: center;
-
-  display: flex;
-  width: 80rem;
-}
-.div-form label {
-  color: white;
-}
-.div-form input {
-  color: white;
-  padding: 5px 20px;
-  border-radius: 10px;
-  color: rgb(100, 98, 98);
-}
-.btn {
-  color: white;
-  border: 3px solid rgb(228, 201, 136);
-  padding: 5px 20px;
-  border-radius: 10px;
-  color: rgb(100, 98, 98);
+.card-photos {
+  height: 400px;
+  width: 100%;
 }
 </style>
