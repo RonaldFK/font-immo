@@ -217,7 +217,9 @@ export default {
 </script>
 <style scoped>
 .card-customer {
-  background: rgba(228, 147, 147, 0.278);
+  /* background: rgba(228, 147, 147, 0.278); */
+  background-color: rgb(255, 241, 220);
+  border-left: 5px solid rgb(58, 152, 185);
 }
 .main-div {
   margin-left: 272px;

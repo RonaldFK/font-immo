@@ -5,7 +5,7 @@
     >
       <v-card
         max-width="500"
-        class="w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+        class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
       >
         <v-row align="center" justify="center" class="mb-5">
           <v-col cols="auto">
@@ -41,7 +41,7 @@
       </v-card>
       <v-card
         max-width="500"
-        class="w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+        class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
       >
         <v-row align="center" justify="center" class="mb-5">
           <v-col cols="auto">
@@ -75,7 +75,7 @@
     >
       <v-card
         max-width="500"
-        class="w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+        class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
       >
         <v-text-field
           prepend-icon="mdi-view-dashboard"
@@ -104,7 +104,7 @@
       </v-card>
       <v-card
         max-width="500"
-        class="w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+        class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
       >
         <v-row align="center" justify="center" class="mb-5">
           <v-col cols="auto">
@@ -270,4 +270,9 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.card {
+  background-color: rgb(255, 241, 220);
+  border-left: 5px solid rgb(58, 152, 185);
+}
+</style>

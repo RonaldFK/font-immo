@@ -1,9 +1,9 @@
 <template>
   <div class="main-div">
     <div class="d-flex h-100 flex-wrap justify-center" v-if="data">
-      <div class="modal" v-if="modal">
+      <!-- <div class="modal" v-if="modal">
         <ModalCreateEstate @closeEmit="closeModal"></ModalCreateEstate>
-      </div>
+      </div> -->
 
       <!-- <v-row align="center" justify="center" class="w-100">
         <v-col cols="auto">
@@ -12,6 +12,13 @@
           >
         </v-col>
       </v-row> -->
+      <!-- <v-alert border="start" border-color="deep-purple accent-4" elevation="2">
+        Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut
+        velit. Nulla facilisi.. Morbi mollis tellus ac sapien. Fusce vel dui.
+        Praesent ut ligula non mi varius sagittis. Vivamus consectetuer
+        hendrerit lacus. Suspendisse enim turpis, dictum sed, iaculis a,
+        condimentum nec, nisi.
+      </v-alert> -->
 
       <v-card
         class="card-estate ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
@@ -39,7 +46,7 @@
           </v-col>
           <v-col cols="auto">
             <v-btn
-              class="btn"
+              class="btn btn-right"
               variant="tonal"
               size="x-small"
               @click="deleteEstate(estate.id)"
@@ -130,13 +137,16 @@ export default {
 
 <style scoped>
 .card-estate {
-  max-width: 25%;
-  background: rgba(228, 147, 147, 0.278);
+  width: 400px;
+  /* background: rgba(228, 147, 147, 0.278); */
+  background-color: rgb(255, 241, 220);
+  border-left: 5px solid rgb(58, 152, 185);
 }
-.main-div {
-  /* margin-left: 202px; */
-}
+
 .btn {
   color: rebeccapurple;
+}
+.btn-right {
+  color: rgb(172, 38, 38);
 }
 </style>
