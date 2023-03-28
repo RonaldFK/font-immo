@@ -29,7 +29,7 @@
       max-width="300"
     >
       <v-card
-        class="w-100 ma-5 pa-5 rounded-shaped"
+        class="card-customer w-100 ma-5 pa-5 rounded-shaped"
         max-width="344"
         v-for="customer in customers"
         :key="customer.id"
@@ -41,7 +41,7 @@
             >
           </v-col>
         </v-row>
-        <v-card-subtitle class="text-subtitle-2 text-teal-darken-1" color="red">
+        <v-card-subtitle class="text-subtitle-2 text-teal-darken-1">
           Identité :</v-card-subtitle
         >
 
@@ -216,6 +216,9 @@ export default {
 };
 </script>
 <style scoped>
+.card-customer {
+  background: rgba(228, 147, 147, 0.278);
+}
 .main-div {
   margin-left: 272px;
   /* margin-left: 17rem; */

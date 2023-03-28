@@ -1,7 +1,12 @@
 <template>
-  <div class="overlay">
-    <div class="d-flex flex-wrap h-100 flex-row justify-center">
-      <v-card max-width="500" class="w-100">
+  <div class="main-div d-flex flex-wrap h-100 flex-column justify-center">
+    <div
+      class="w-100 ma-5 pa-5 rounded d-flex flex-row h-100 flex-wrap justify-center"
+    >
+      <v-card
+        max-width="500"
+        class="w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+      >
         <v-row align="center" justify="center" class="mb-5">
           <v-col cols="auto">
             <v-card-title>Création d'un nouveau bien</v-card-title>
@@ -34,48 +39,10 @@
         <v-file-input label="Ajouter des photos" ref="photos" multiple>
         </v-file-input>
       </v-card>
-      <v-card max-width="500" class="w-100 mt-5">
-        <v-row align="center" justify="center" class="mb-5">
-          <v-col cols="auto">
-            <v-card-title>Manager en charge</v-card-title>
-          </v-col>
-        </v-row>
-        <v-select
-          v-model="estateToCreate.manager_id"
-          :items="managers"
-          item-title="firstname"
-          item-value="id"
-          label="Manager"
-        >
-        </v-select>
-      </v-card>
-      <v-card max-width="500" class="w-100 mt-5">
-        <v-text-field
-          prepend-icon="mdi-view-dashboard"
-          @click:prepend="searchCustomer(customerToSearch)"
-          v-model="customerToSearch"
-          ref="customerToSearch"
-          label="Rechercher propriétaire :"
-        ></v-text-field>
-        <v-select
-          v-model="firstFilterToSearchCustomer"
-          :items="customers"
-          item-title="lastname"
-          item-value="lastname"
-          label="Nom du propriétaire"
-        >
-        </v-select>
-        <v-select
-          v-model="estateToCreate.customer_id"
-          :items="customers"
-          ref="firstname"
-          item-title="firstname"
-          item-value="id"
-          label="prénom"
-        >
-        </v-select>
-      </v-card>
-      <v-card max-width="500" class="w-100 mt-5">
+      <v-card
+        max-width="500"
+        class="w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+      >
         <v-row align="center" justify="center" class="mb-5">
           <v-col cols="auto">
             <v-card-title>Localisation du bien</v-card-title>
@@ -101,16 +68,67 @@
           v-model="locationToCreate.code"
           label="Code :"
         ></v-text-field>
-        <v-row align="center" justify="center">
-          <v-col cols="auto" class="mb-2">
-            <v-btn @click="createEstate">Valider</v-btn>
-          </v-col>
-          <v-col cols="auto" class="mb-2">
-            <v-btn @click="closeModal">Annuler</v-btn>
-          </v-col>
-        </v-row>
       </v-card>
     </div>
+    <div
+      class="w-100 ma-5 pa-5 rounded d-flex flex-row h-100 flex-wrap justify-center"
+    >
+      <v-card
+        max-width="500"
+        class="w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+      >
+        <v-text-field
+          prepend-icon="mdi-view-dashboard"
+          @click:prepend="searchCustomer(customerToSearch)"
+          v-model="customerToSearch"
+          ref="customerToSearch"
+          label="Rechercher propriétaire :"
+        ></v-text-field>
+        <v-select
+          v-model="firstFilterToSearchCustomer"
+          :items="customers"
+          item-title="lastname"
+          item-value="lastname"
+          label="Nom du propriétaire"
+        >
+        </v-select>
+        <v-select
+          v-model="estateToCreate.customer_id"
+          :items="customers"
+          ref="firstname"
+          item-title="firstname"
+          item-value="id"
+          label="prénom"
+        >
+        </v-select>
+      </v-card>
+      <v-card
+        max-width="500"
+        class="w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+      >
+        <v-row align="center" justify="center" class="mb-5">
+          <v-col cols="auto">
+            <v-card-title>Manager en charge</v-card-title>
+          </v-col>
+        </v-row>
+        <v-select
+          v-model="estateToCreate.manager_id"
+          :items="managers"
+          item-title="firstname"
+          item-value="id"
+          label="Manager"
+        >
+        </v-select>
+      </v-card>
+    </div>
+    <v-row align="center" justify="center">
+      <v-col cols="auto" class="mb-2">
+        <v-btn @click="createEstate">Valider</v-btn>
+      </v-col>
+      <v-col cols="auto" class="mb-2">
+        <v-btn @click="closeModal">Annuler</v-btn>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

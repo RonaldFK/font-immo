@@ -18,10 +18,14 @@
         v-for="estate in estates"
         :key="estate.id"
       >
-        <v-card-title class="align-self-center">{{ estate.name }}</v-card-title>
-        <v-card-subtitle>Prix :</v-card-subtitle>
+        <v-card-title class="align-self-center text-blue-grey-darken-1">{{
+          estate.name
+        }}</v-card-title>
+        <v-card-subtitle class="text-teal-darken-1">Prix :</v-card-subtitle>
         <v-card-text> {{ estate.price }}</v-card-text>
-        <v-card-subtitle>Type du bien :</v-card-subtitle>
+        <v-card-subtitle class="text-teal-darken-1"
+          >Type du bien :</v-card-subtitle
+        >
         <v-card-text> {{ estate.type }}</v-card-text>
         <v-row align="center" justify="center" class="w-100">
           <v-col cols="auto">
@@ -127,6 +131,7 @@ export default {
 <style scoped>
 .card-estate {
   max-width: 25%;
+  background: rgba(228, 147, 147, 0.278);
 }
 .main-div {
   /* margin-left: 202px; */
