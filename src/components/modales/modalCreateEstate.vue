@@ -56,9 +56,10 @@
           label="Propriétaire :"
         ></v-text-field>
         <v-select
+          v-model="firstFilterToSearchCustomer"
           :items="customers"
           item-title="lastname"
-          item-value="id"
+          item-value="lastname"
           label="Nom du propriétaire"
         >
         </v-select>
@@ -101,6 +102,9 @@
           <v-col cols="auto" class="mb-2">
             <v-btn @click="createEstate">Valider</v-btn>
           </v-col>
+          <v-col cols="auto" class="mb-2">
+            <v-btn @click="closeModal">Annuler</v-btn>
+          </v-col>
         </v-row>
       </v-card>
     </div>
@@ -129,6 +133,7 @@ export default {
       locations: [],
       managers: [],
       customerToSearch: '',
+      firstFilterToSearchCustomer: '',
       customers: [],
       estateToCreate: {
         name: '',
@@ -152,6 +157,10 @@ export default {
     customerToSearch: function (value) {
       this.searchCustomer(value);
     },
+    firstFilterToSearchCustomer: function (value) {
+      console.log(value);
+      this.searchCustomer(value);
+    },
   },
   created: async function getAllLocation() {
     try {
@@ -169,8 +178,6 @@ export default {
           'Access-Control-Allow-Origin': 'http://localhost:8080',
         },
       });
-      // const result = await response.json();
-      // this.locations = result;
       this.managers = await managers.json();
       console.log(this.managers, 'managers');
     } catch (err) {
