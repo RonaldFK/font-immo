@@ -93,6 +93,7 @@ export default {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:8080',
+            Authorization: `Bearer ${this.$cookies.get('token')}`,
           },
         });
         const result = await response.json();
@@ -112,6 +113,7 @@ export default {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:8080',
+            Authorization: `Bearer ${this.$cookies.get('token')}`,
           },
         });
         const result = await response.json();

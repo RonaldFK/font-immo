@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import EstateView from '../src/views/EstateView.vue';
-import FormAuth from '../src/views/FormAuth.vue';
+import Signup from '../src/views/Signup.vue';
+import Signin from '../src/views/Signin.vue';
 import DashboardView from '../src/views/DashboardView.vue';
 import EstateDetails from '../src/views/EstateDetails.vue';
 import CustomerView from '@/views/CustomerView.vue';
@@ -21,7 +22,8 @@ const routes = [
     path: '/estate/:id',
     component: EstateDetails,
   },
-  { path: '/login', component: FormAuth },
+  { path: '/signup', component: Signup },
+  { path: '/signin', component: Signin },
   {
     path: '/dashboard',
     component: DashboardView,
