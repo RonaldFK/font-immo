@@ -29,13 +29,13 @@
               v-if="this.$route.path === '/estate'"
               prepend-icon="mdi-gavel"
               title="Créer un bien"
-              @click="goTo('/manager/create-estate')"
+              @click="goTo('/estate/create-estate')"
             ></v-list-item>
             <v-list-item
               v-if="this.$route.path === '/customer'"
               prepend-icon="mdi-gavel"
               title="Créer client"
-              @click="goTo('/manager/create-customer')"
+              @click="goTo('/customer/create-customer')"
             ></v-list-item>
           </v-list>
 

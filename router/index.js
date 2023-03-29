@@ -29,8 +29,8 @@ const routes = [
     component: DashboardView,
   },
   { path: '/customer', component: CustomerView },
-  { path: '/manager/create-estate', component: ModalCreateEstate },
-  { path: '/manager/create-customer', component: ModalCreateCustomer },
+  { path: '/estate/create-estate', component: ModalCreateEstate },
+  { path: '/customer/create-customer', component: ModalCreateCustomer },
 ];
 
 export const router = createRouter({

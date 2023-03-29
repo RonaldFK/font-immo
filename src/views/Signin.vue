@@ -82,10 +82,11 @@ export default {
         this.userToLog = {};
         const result = await response.json();
         this.$cookies.set('token', result.tokenUser.token);
-        console.log('coockie : ', this.$cookies.get('token'));
-        // if (response.status === 200) {
-        //   this.$router.push('/estate');
-        // }
+        this.$cookies.set('userId', result.userId);
+        console.log('coockie : ', result);
+        if (response.status === 200) {
+          this.$router.push('/estate');
+        }
       } catch (err) {
         console.log(err);
       }

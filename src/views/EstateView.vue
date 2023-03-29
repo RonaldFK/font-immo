@@ -1,25 +1,6 @@
 <template>
   <div class="main-div">
     <div class="d-flex h-100 flex-wrap justify-center" v-if="data">
-      <!-- <div class="modal" v-if="modal">
-        <ModalCreateEstate @closeEmit="closeModal"></ModalCreateEstate>
-      </div> -->
-
-      <!-- <v-row align="center" justify="center" class="w-100">
-        <v-col cols="auto">
-          <v-btn class="btnn" variant="tonal" size="small" @click="openModal"
-            >Créer un nouveau bien</v-btn
-          >
-        </v-col>
-      </v-row> -->
-      <!-- <v-alert border="start" border-color="deep-purple accent-4" elevation="2">
-        Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut
-        velit. Nulla facilisi.. Morbi mollis tellus ac sapien. Fusce vel dui.
-        Praesent ut ligula non mi varius sagittis. Vivamus consectetuer
-        hendrerit lacus. Suspendisse enim turpis, dictum sed, iaculis a,
-        condimentum nec, nisi.
-      </v-alert> -->
-
       <v-card
         class="card-estate ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
         v-for="estate in estates"
@@ -99,16 +80,15 @@ export default {
         const result = await response.json();
         this.estates = result;
         this.data = true;
-        console.log(result);
       } catch (err) {
-        console.log(err, 'TEST ICI');
+        console.log(err);
       }
     }
   },
   methods: {
     async deleteEstate(estateId) {
       try {
-        const response = await fetch(`${this.baseUrl}/estate/${estateId}`, {
+        await fetch(`${this.baseUrl}/estate/${estateId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -116,9 +96,6 @@ export default {
             Authorization: `Bearer ${this.$cookies.get('token')}`,
           },
         });
-        const result = await response.json();
-        console.log(result);
-        // this.$emit('emitCloseModal');
       } catch (err) {
         console.log(err);
       }
@@ -128,7 +105,6 @@ export default {
     },
     closeModal() {
       this.modal = false;
-      console.log('TEST');
     },
     openModal() {
       this.modal = true;
