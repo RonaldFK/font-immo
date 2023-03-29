@@ -1,9 +1,9 @@
 <template>
   <div class="main-div">
     <div class="d-flex h-100 flex-wrap justify-center" v-if="data">
-      <div class="modal" v-if="modal">
+      <!-- <div class="modal" v-if="modal">
         <ModalCreateEstate @closeEmit="closeModal"></ModalCreateEstate>
-      </div>
+      </div> -->
 
       <!-- <v-row align="center" justify="center" class="w-100">
         <v-col cols="auto">
@@ -12,16 +12,27 @@
           >
         </v-col>
       </v-row> -->
+      <!-- <v-alert border="start" border-color="deep-purple accent-4" elevation="2">
+        Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut
+        velit. Nulla facilisi.. Morbi mollis tellus ac sapien. Fusce vel dui.
+        Praesent ut ligula non mi varius sagittis. Vivamus consectetuer
+        hendrerit lacus. Suspendisse enim turpis, dictum sed, iaculis a,
+        condimentum nec, nisi.
+      </v-alert> -->
 
       <v-card
         class="card-estate ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
         v-for="estate in estates"
         :key="estate.id"
       >
-        <v-card-title class="align-self-center">{{ estate.name }}</v-card-title>
-        <v-card-subtitle>Prix :</v-card-subtitle>
+        <v-card-title class="align-self-center text-blue-grey-darken-1">{{
+          estate.name
+        }}</v-card-title>
+        <v-card-subtitle class="text-teal-darken-1">Prix :</v-card-subtitle>
         <v-card-text> {{ estate.price }}</v-card-text>
-        <v-card-subtitle>Type du bien :</v-card-subtitle>
+        <v-card-subtitle class="text-teal-darken-1"
+          >Type du bien :</v-card-subtitle
+        >
         <v-card-text> {{ estate.type }}</v-card-text>
         <v-row align="center" justify="center" class="w-100">
           <v-col cols="auto">
@@ -31,6 +42,15 @@
               size="x-small"
               @click="goTo(`/estate/${estate.id}`)"
               >Détails du bien</v-btn
+            >
+          </v-col>
+          <v-col cols="auto">
+            <v-btn
+              class="btn btn-right"
+              variant="tonal"
+              size="x-small"
+              @click="deleteEstate(estate.id)"
+              >Suprimer le bien</v-btn
             >
           </v-col>
         </v-row>
@@ -48,16 +68,6 @@
         <v-card-title>Aucune données disponibles</v-card-title>
       </v-card>
     </div>
-
-    <!-- <div v-if="data" class="content-view">
-      <div v-for="estate in estates" :key="estate.id" class="content-view__list">
-        <h2>{{ estate.name }}</h2>
-        <p><span class="bold">Prix :</span> {{ estate.price }} euros</p>
-        <p><span class="bold">Type du bien:</span> {{ estate.type }}</p>
-        <router-link :to="'/estate/' + estate.id">Détails</router-link>
-        <img src="../assets/img/house3.jpg" alt="" > -->
-    <!-- </div>
-    </div> -->
   </div>
 </template>
 
@@ -95,6 +105,22 @@ export default {
     }
   },
   methods: {
+    async deleteEstate(estateId) {
+      try {
+        const response = await fetch(`${this.baseUrl}/estate/${estateId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+          },
+        });
+        const result = await response.json();
+        console.log(result);
+        // this.$emit('emitCloseModal');
+      } catch (err) {
+        console.log(err);
+      }
+    },
     goTo(path) {
       this.$router.push(path);
     },
@@ -110,13 +136,20 @@ export default {
 </script>
 
 <style scoped>
-.card-estate {
-  max-width: 25%;
-}
 .main-div {
-  /* margin-left: 202px; */
+  margin-top: 50px;
 }
+.card-estate {
+  width: 400px;
+  /* background: rgba(228, 147, 147, 0.278); */
+  background-color: rgb(255, 241, 220);
+  border-left: 5px solid rgb(58, 152, 185);
+}
+
 .btn {
   color: rebeccapurple;
+}
+.btn-right {
+  color: rgb(172, 38, 38);
 }
 </style>

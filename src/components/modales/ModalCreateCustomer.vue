@@ -60,14 +60,14 @@ export default {
     return {
       baseUrl: 'http://localhost:3000',
       typeOfClients: [
-        { id: 0, value: '', label: ' ' },
+        { id: 0, value: null, label: null },
         { id: 1, value: 'seller', label: 'Vendeur' },
         { id: 2, value: 'renter', label: 'Locataire' },
         { id: 3, value: 'buyer', label: 'Acheteur' },
         { id: 4, value: 'lessor', label: 'Bailleur' },
       ],
       typeOfPayments: [
-        { id: 0, value: '', label: ' ' },
+        { id: 0, value: null, label: null },
         { id: 1, value: 'cash', label: 'Paiement comptant' },
         { id: 2, value: 'credit', label: 'Paiement crédit' },
       ],
