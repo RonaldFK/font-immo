@@ -1,5 +1,18 @@
 <template>
   <div class="main-div d-flex flex-wrap h-100 flex-column justify-center">
+    <v-alert
+      v-model="alert"
+      border="start"
+      variant="tonal"
+      closable
+      close-label="Close Alert"
+      color="deep-purple-accent-4"
+      title="Message Important !"
+      max-width="500"
+      class="align-self-center"
+    >
+      Tous les champs sont obligatoirs
+    </v-alert>
     <div
       class="w-100 ma-5 pa-5 rounded d-flex flex-row h-100 flex-wrap justify-center"
     >
@@ -15,6 +28,7 @@
         <v-text-field
           v-model="estateToCreate.name"
           label="Nom du bien :"
+          ref="nomForm"
         ></v-text-field>
         <v-text-field
           v-model="estateToCreate.price"
@@ -151,6 +165,7 @@ export default {
         { value: 'sous_compromis', label: 'Sous compromis' },
         { value: 'a_vendre', label: 'A vendre' },
       ],
+      alert: false,
       locations: [],
       managers: [],
       customerToSearch: '',
@@ -230,6 +245,9 @@ export default {
      * Création d'un bien ainsi d'une nouvelle localisation
      */
     async createEstate() {
+      if (!this.checkForm()) {
+        throw new Error('Formulaire incomplet');
+      }
       const urlLocation = 'http://localhost:3000/location';
       const form = new FormData();
       const urlEstate = 'http://localhost:3000/estate';
@@ -265,6 +283,18 @@ export default {
         });
       } catch (err) {
         console.log(err);
+      }
+    },
+    checkForm() {
+      for (const elem in this.estateToCreate) {
+        if (this.estateToCreate[elem] === '') {
+          this.alert = true;
+          return false;
+        }
+        if (this.locationToCreate[elem] === '') {
+          this.alert = true;
+          return false;
+        }
       }
     },
   },

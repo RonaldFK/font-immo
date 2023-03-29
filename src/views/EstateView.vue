@@ -136,6 +136,9 @@ export default {
 </script>
 
 <style scoped>
+.main-div {
+  margin-top: 50px;
+}
 .card-estate {
   width: 400px;
   /* background: rgba(228, 147, 147, 0.278); */

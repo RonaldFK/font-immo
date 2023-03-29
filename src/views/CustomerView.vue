@@ -223,6 +223,7 @@ export default {
 }
 .main-div {
   margin-left: 272px;
+  margin-top: 50px;
   /* margin-left: 17rem; */
 }
 .btn {
