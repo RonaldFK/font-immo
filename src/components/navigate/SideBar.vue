@@ -15,12 +15,12 @@
               @click="goTo('/customer')"
             ></v-list-item>
             <v-list-item
-              prepend-icon="mdi-gavel"
+              prepend-icon="mdi-home-group"
               title="Biens gérés"
               @click="goTo('/estate')"
             ></v-list-item>
             <v-list-item
-              prepend-icon="mdi-gavel"
+              prepend-icon="mdi-account-key"
               title="Mes biens"
               @click="goTo('/manager/my-estate')"
             ></v-list-item>
@@ -41,7 +41,7 @@
 
           <template v-slot:append>
             <div class="pa-2">
-              <v-btn block> Logout </v-btn>
+              <v-btn block @click="goTo('/login')"> Logout </v-btn>
             </div>
           </template>
         </v-navigation-drawer>

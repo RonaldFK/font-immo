@@ -104,7 +104,7 @@
         class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
       >
         <v-text-field
-          prepend-icon="mdi-view-dashboard"
+          prepend-icon="mdi-magnify"
           @click:prepend="searchCustomer(customerToSearch)"
           v-model="customerToSearch"
           ref="customerToSearch"
