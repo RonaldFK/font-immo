@@ -41,7 +41,7 @@
 
           <template v-slot:append>
             <div class="pa-2">
-              <v-btn block @click="goTo('/login')"> Logout </v-btn>
+              <v-btn block @click="goTo('/login')"> Connexion </v-btn>
             </div>
           </template>
         </v-navigation-drawer>

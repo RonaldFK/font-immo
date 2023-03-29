@@ -1,135 +1,78 @@
 <template>
-  <section class="section" method="POST">
-    <form action="../html/index1.html" class="section__form" id="form-login">
-      <div class="section__form-login">
-        <label for=""></label>
-        <input
-          class="input-form"
-          type="text"
-          placeholder="Login"
-          v-model="userToLog.login"
-        />
-      </div>
-      <div class="section__form-pwd">
-        <label for=""></label>
-        <input
-          class="input-form"
-          type="password"
-          placeholder="Password"
-          v-model="userToLog.password"
-        />
-      </div>
-      <div>
-        <label for="">Admin : </label>
-        <input
-          type="checkbox"
-          name="admin"
-          id="admin"
-          v-model="userToCreate.type"
-        />
-      </div>
-      <!-- <div>{{ errMsg }}</div> -->
-      <span v-if="errMsg">Login ou mot de passe incorrect</span>
-      <h2 class="section__form-title">Se connecter</h2>
-      <button
-        class="btn"
-        type="submit"
-        form="form-login"
-        @click="sendRequestLogin"
+  <div class="main-div d-flex flex-wrap h-100 flex-column justify-center">
+    <div class="d-flex flex-wrap h-100 flex-row justify-center">
+      <v-alert
+        v-model="alert"
+        border="start"
+        variant="tonal"
+        closable
+        close-label="Close Alert"
+        color="deep-purple-accent-4"
+        title="Message Important !"
+        max-width="500"
+        class="align-self-center mt-5"
       >
-        Valider
-      </button>
-    </form>
-    <!-- Form request acces -->
-    <form action="" class="section__form" id="form-acces" method="POST">
-      <div class="section__form-request">
-        <div class="section__form_content">
-          <label for="">Prénom : </label>
-          <input
-            class="input-form"
-            type="text"
-            placeholder="Jhon"
-            id="firstname"
-            name="firstname"
-            v-model="userToCreate.firstname"
-            required
-          />
+        Tous les champs sont obligatoirs pour une inscription
+      </v-alert>
 
-          <label for="">Nom : </label>
-          <input
-            class="input-form"
-            type="text"
-            placeholder="Doe"
-            id="lastname"
-            name="lastname"
-            v-model="userToCreate.lastname"
-            required
-          />
-        </div>
-        <div class="section__form_content">
-          <div>
-            <label for="">Login : </label>
-            <input
-              class="input-form"
-              type="text"
-              placeholder="john95"
-              id="firstname"
-              name="login"
-              v-model="userToCreate.login"
-              required
-            />
-          </div>
-          <div>
-            <label for="">Email : </label>
-            <input
-              class="input-form"
-              type="text"
-              placeholder="john.doe@domain.com"
-              id="lastname"
-              name="email"
-              v-model="userToCreate.email"
-              required
-            />
-          </div>
-        </div>
-        <div class="section__form_content">
-          <div>
-            <label for="">Mot de passe : </label>
-            <input
-              class="input-form"
-              type="password"
-              placeholder="******"
-              id="firstname"
-              name="login"
-              v-model="userToCreate.password"
-              required
-            />
-          </div>
-          <div>
-            <label for="">Confirmer : </label>
-            <input
-              class="input-form"
-              type="password"
-              placeholder="******"
-              id="firstname"
-              name="login"
-              v-model="userToCreate.checkPassword"
-              required
-            />
-          </div>
-          <h2 class="section__form-title">Demander l'accès</h2>
-          <button
-            class="btn"
-            type="submit"
-            form="form-acces"
-            @click="sendRequestAccess"
-          >
-            Valider
-          </button>
-        </div>
-      </div>
-    </form>
-  </section>
+      <v-alert type="success" variant="outlined" v-model="accept">
+        Votre compte a été créé avec succès
+      </v-alert>
+    </div>
+    <div class="d-flex flex-wrap h-100 flex-row justify-center">
+      <v-card
+        max-width="500"
+        class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+      >
+        <v-card-title class="align-self-center mt-5"
+          >J'ai un compte</v-card-title
+        >
+        <v-text-field label="login" v-model="userToLog.login"></v-text-field>
+        <v-text-field
+          label="Mot de passe"
+          type="password"
+          v-model="userToLog.password"
+        ></v-text-field>
+        <v-row align="center" justify="center">
+          <v-col cols="auto" class="mb-2">
+            <v-btn @click="sendRequestLogin">Me connecter</v-btn>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card
+        max-width="500"
+        class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+      >
+        <v-card-title class="align-self-center mt-5"
+          >Je demande accès</v-card-title
+        >
+        <v-text-field
+          v-model="userToCreate.lastname"
+          label="Nom"
+        ></v-text-field>
+        <v-text-field
+          v-model="userToCreate.firstname"
+          label="Prénom"
+        ></v-text-field>
+        <v-text-field v-model="userToCreate.email" label="Email"></v-text-field>
+        <v-text-field label="login" v-model="userToCreate.login"></v-text-field>
+        <v-text-field
+          label="Mot de passe"
+          type="password"
+          v-model="userToCreate.password"
+        ></v-text-field>
+        <v-text-field
+          v-model="userToCreate.checkPassword"
+          label="Confirmation"
+        ></v-text-field>
+        <v-row align="center" justify="center">
+          <v-col cols="auto" class="mb-2">
+            <v-btn @click="sendRequestAccess">Créer mon compte</v-btn>
+          </v-col>
+        </v-row>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -140,16 +83,32 @@ export default {
   },
   data() {
     return {
+      accept: false,
+      acceptLogin: false,
+      alert: false,
       baseUrl: 'http://localhost:3000',
-      userToCreate: {},
+      userToCreate: {
+        firstname: '',
+        lastname: '',
+        login: '',
+        email: '',
+        password: '',
+        checkPassword: '',
+      },
       userToLog: {},
       errMsg: false,
     };
   },
   methods: {
     async sendRequestAccess(e) {
+      for (const elem in this.userToCreate) {
+        console.log(this.userToCreate[elem]);
+        if (this.userToCreate[elem] === '') {
+          this.alert = true;
+          throw new Error('test err');
+        }
+      }
       e.preventDefault();
-      console.log(this.userToCreate);
       try {
         const response = await fetch(`${this.baseUrl}/auth/signup`, {
           method: 'POST',
@@ -159,19 +118,18 @@ export default {
           },
           body: JSON.stringify(this.userToCreate),
         });
-        if (response.ok) {
-          console.log(response.status);
+        if (response.status === 200) {
+          this.accept = true;
         }
 
-        this.userToCreate = {};
+        // this.userToCreate = {};
       } catch (err) {
         console.log(err);
-        // Prévoir message d'erreur utilisateur
       }
     },
     async sendRequestLogin(e) {
       e.preventDefault();
-      console.log('ici');
+
       try {
         const response = await fetch(`${this.baseUrl}/auth/signin`, {
           method: 'POST',
@@ -184,11 +142,26 @@ export default {
         this.userToLog = {};
         if (response.status === 200) {
           this.$router.push('/estate');
-        } else {
-          this.errMsg = true;
         }
       } catch (err) {
         console.log(err);
+      }
+    },
+    checkForm() {
+      for (const elem in this.userToCreate) {
+        console.log(this.userToCreate[elem]);
+        if (this.userToCreate[elem] === '') {
+          this.alert = true;
+          return false;
+        }
+      }
+    },
+    checkFormLogin() {
+      for (const elem in this.userToLog) {
+        if (this.userToLog[elem] === '') {
+          this.alert = true;
+          return false;
+        }
       }
     },
   },

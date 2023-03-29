@@ -10,6 +10,10 @@ import ModalCreateCustomer from '../src/components/modales/ModalCreateCustomer.v
 
 const routes = [
   {
+    path: '/',
+    component: DashboardView,
+  },
+  {
     path: '/estate',
     component: EstateView,
   },
