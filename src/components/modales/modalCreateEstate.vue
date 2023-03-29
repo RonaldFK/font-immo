@@ -9,9 +9,21 @@
       color="deep-purple-accent-4"
       title="Message Important !"
       max-width="500"
-      class="align-self-center"
+      class="align-self-center mt-5"
     >
       Tous les champs sont obligatoirs
+    </v-alert>
+
+    <v-alert
+      border="top"
+      border-color="success"
+      closable
+      elevation="2"
+      v-model="accept"
+      max-width="500"
+      class="align-self-center mt-5"
+    >
+      Bien créé avec succès
     </v-alert>
     <div
       class="w-100 ma-5 pa-5 rounded d-flex flex-row h-100 flex-wrap justify-center"
@@ -166,6 +178,7 @@ export default {
         { value: 'a_vendre', label: 'A vendre' },
       ],
       alert: false,
+      accept: true,
       locations: [],
       managers: [],
       customerToSearch: '',
@@ -214,9 +227,6 @@ export default {
     }
   },
   methods: {
-    test(value) {
-      console.log(value);
-    },
     async searchCustomer(value) {
       // Déclenchement de la recherche uniquement à partir de 3 caractères
       if (value.length > 2) {
@@ -245,15 +255,36 @@ export default {
      * Création d'un bien ainsi d'une nouvelle localisation
      */
     async createEstate() {
-      if (!this.checkForm()) {
-        throw new Error('Formulaire incomplet');
-      }
-      const urlLocation = 'http://localhost:3000/location';
+      await this.createLocation();
+      // if (!this.createLocation()) {
+      //   throw new Error('Formulaire incomplet');
+      // }
+
       const form = new FormData();
       const urlEstate = 'http://localhost:3000/estate';
       for (let i = 0; i < this.$refs.photos.files.length; i++) {
         form.append('photo', this.$refs.photos.files[i]);
       }
+
+      form.append('estate', JSON.stringify(this.estateToCreate));
+      try {
+        const response = await fetch(urlEstate, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+          },
+          body: form,
+        });
+        console.log(response.status);
+        response.status === 200 && (this.accept = true);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async createLocation() {
+      console.log('ici');
+      const urlLocation = 'http://localhost:3000/location';
       try {
         const location = await fetch(urlLocation, {
           method: 'POST',
@@ -264,28 +295,14 @@ export default {
           body: JSON.stringify(this.locationToCreate),
         });
         const result = await location.json();
+        console.log('localisationLog', result[0]);
         // gestion d'erreur : si la localisation est bien créé, je passe son id, sinon null
-        result[0].id
-          ? (this.estateToCreate.location_id = result[0].id)
+        result[0]?.id
+          ? (this.estateToCreate.location_id = result[0]?.id)
           : (this.estateToCreate.location_id = null);
       } catch (err) {
         console.log(err);
       }
-      form.append('estate', JSON.stringify(this.estateToCreate));
-      try {
-        await fetch(urlEstate, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:8080',
-          },
-          body: form,
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    checkForm() {
       for (const elem in this.estateToCreate) {
         if (this.estateToCreate[elem] === '') {
           this.alert = true;
@@ -296,6 +313,20 @@ export default {
           return false;
         }
       }
+    },
+    checkForm() {
+      // for (const elem in this.estateToCreate) {
+      //   if (this.estateToCreate[elem] === '') {
+      //     console.log(this.estateToCreate);
+      //     this.alert = true;
+      //     return false;
+      //   }
+      //   if (this.locationToCreate[elem] === '') {
+      //     console.log('manager', this.estateToCreate.manager_id);
+      //     this.alert = true;
+      //     return false;
+      //   }
+      // }
     },
   },
 };
