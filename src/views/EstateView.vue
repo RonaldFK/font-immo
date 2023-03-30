@@ -62,12 +62,15 @@ export default {
       baseUrl: 'http://localhost:3000',
       estates: [],
       data: false,
+
       modal: false,
     };
   },
   created: async function () {
     {
-      console.log('test');
+      if (!this.$cookies.get('token')) {
+        return this.$router.push('/signin');
+      }
       try {
         const response = await fetch(`${this.baseUrl}/estate`, {
           method: 'GET',

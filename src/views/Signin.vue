@@ -5,14 +5,13 @@
         v-model="alert"
         border="start"
         variant="tonal"
+        type="error"
         closable
         close-label="Close Alert"
-        color="deep-purple-accent-4"
-        title="Message Important !"
+        title="Login ou mot de passe incorrecte"
         max-width="500"
         class="align-self-center mt-5"
       >
-        Tous les champs sont obligatoirs pour une inscription
       </v-alert>
 
       <v-alert type="success" variant="outlined" v-model="accept">
@@ -20,7 +19,7 @@
       </v-alert>
     </div>
     <div
-      v-if="this.$cookies.get('token')"
+      v-if="this.$cookies.get('token') || this.$cookies.get('userId')"
       class="d-flex flex-wrap h-100 flex-row justify-center"
     >
       <v-card
@@ -100,11 +99,13 @@ export default {
         });
         this.userToLog = {};
         const result = await response.json();
-        this.$cookies.set('token', result.tokenUser.token);
-        this.$cookies.set('userId', result.userId);
-        console.log('coockie : ', result);
+
         if (response.status === 200) {
+          this.$cookies.set('token', result?.tokenUser?.token);
+          this.$cookies.set('userId', result?.userId);
           this.$router.push('/estate');
+        } else {
+          this.alert = true;
         }
       } catch (err) {
         console.log(err);

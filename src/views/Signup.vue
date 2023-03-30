@@ -7,7 +7,7 @@
         variant="tonal"
         closable
         close-label="Close Alert"
-        color="deep-purple-accent-4"
+        type="error"
         title="Message Important !"
         max-width="500"
         class="align-self-center mt-5"
