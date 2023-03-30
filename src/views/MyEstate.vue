@@ -53,17 +53,15 @@
 </template>
 
 <script>
-import ModalCreateEstate from '@/components/modales/ModalCreateEstate.vue';
 export default {
-  name: 'EstateView',
-  components: { ModalCreateEstate },
+  name: 'MyEstate',
+
   data() {
     return {
       baseUrl: 'http://localhost:3000',
       estates: [],
       data: false,
-
-      modal: false,
+      userId: this.$cookies.get('userId'),
     };
   },
   created: async function () {
@@ -72,15 +70,19 @@ export default {
         return this.$router.push('/signin');
       }
       try {
-        const response = await fetch(`${this.baseUrl}/estate`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:8080',
-            Authorization: `Bearer ${this.$cookies.get('token')}`,
+        const response = await fetch(
+          `${this.baseUrl}/manager/${this.userId}/estate`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:8080',
+              Authorization: `Bearer ${this.$cookies.get('token')}`,
+            },
           },
-        });
+        );
         const result = await response.json();
+
         this.estates = result;
         this.data = true;
       } catch (err) {
@@ -106,12 +108,6 @@ export default {
     goTo(path) {
       this.$router.push(path);
     },
-    closeModal() {
-      this.modal = false;
-    },
-    openModal() {
-      this.modal = true;
-    },
   },
 };
 </script>
@@ -119,18 +115,5 @@ export default {
 <style scoped>
 .main-div {
   margin-top: 50px;
-}
-.card-estate {
-  width: 400px;
-  /* background: rgba(228, 147, 147, 0.278); */
-  background-color: rgb(255, 241, 220);
-  border-left: 5px solid rgb(58, 152, 185);
-}
-
-.btn {
-  color: rebeccapurple;
-}
-.btn-right {
-  color: rgb(172, 38, 38);
 }
 </style>

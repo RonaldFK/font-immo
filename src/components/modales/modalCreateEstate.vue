@@ -178,7 +178,7 @@ export default {
         { value: 'a_vendre', label: 'A vendre' },
       ],
       alert: false,
-      accept: true,
+      accept: false,
       locations: [],
       managers: [],
       customerToSearch: '',
@@ -219,6 +219,7 @@ export default {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': 'http://localhost:8080',
+          Authorization: `Bearer ${this.$cookies.get('token')}`,
         },
       });
       this.managers = await managers.json();
@@ -238,6 +239,7 @@ export default {
               headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': 'http://localhost:8080',
+                Authorization: `Bearer ${this.$cookies.get('token')}`,
               },
             },
           );
@@ -273,10 +275,11 @@ export default {
           headers: {
             Accept: 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:8080',
+            Authorization: `Bearer ${this.$cookies.get('token')}`,
           },
           body: form,
         });
-        console.log(response.status);
+
         response.status === 200 && (this.accept = true);
       } catch (err) {
         console.log(err);
@@ -291,11 +294,12 @@ export default {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:8080',
+            Authorization: `Bearer ${this.$cookies.get('token')}`,
           },
           body: JSON.stringify(this.locationToCreate),
         });
         const result = await location.json();
-        console.log('localisationLog', result[0]);
+
         // gestion d'erreur : si la localisation est bien créé, je passe son id, sinon null
         result[0]?.id
           ? (this.estateToCreate.location_id = result[0]?.id)
@@ -303,6 +307,7 @@ export default {
       } catch (err) {
         console.log(err);
       }
+      // Vérification formulaire complet
       for (const elem in this.estateToCreate) {
         if (this.estateToCreate[elem] === '') {
           this.alert = true;
@@ -313,20 +318,6 @@ export default {
           return false;
         }
       }
-    },
-    checkForm() {
-      // for (const elem in this.estateToCreate) {
-      //   if (this.estateToCreate[elem] === '') {
-      //     console.log(this.estateToCreate);
-      //     this.alert = true;
-      //     return false;
-      //   }
-      //   if (this.locationToCreate[elem] === '') {
-      //     console.log('manager', this.estateToCreate.manager_id);
-      //     this.alert = true;
-      //     return false;
-      //   }
-      // }
     },
   },
 };

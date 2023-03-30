@@ -1,3 +1,5 @@
+<!-- eslint-disable no-unreachable -->
+<!-- eslint-disable indent -->
 <template>
   <div class="main-div d-flex flex-wrap h-100 flex-row justify-center">
     <v-card
@@ -106,6 +108,7 @@ export default {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': 'http://localhost:8080',
+          Authorization: `Bearer ${this.$cookies.get('token')}`,
         },
       });
       const result = await response.json();
@@ -153,6 +156,7 @@ export default {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Access-Control-Allow-Origin': 'http://localhost:8080',
+            Authorization: `Bearer ${this.$cookies.get('token')}`,
           },
         });
         let result = await response.json();

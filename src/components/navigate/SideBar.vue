@@ -29,19 +29,22 @@
               v-if="this.$route.path === '/estate'"
               prepend-icon="mdi-gavel"
               title="Créer un bien"
-              @click="goTo('/manager/create-estate')"
+              @click="goTo('/estate/create-estate')"
             ></v-list-item>
             <v-list-item
               v-if="this.$route.path === '/customer'"
               prepend-icon="mdi-gavel"
               title="Créer client"
-              @click="goTo('/manager/create-customer')"
+              @click="goTo('/customer/create-customer')"
             ></v-list-item>
           </v-list>
 
           <template v-slot:append>
             <div class="pa-2">
-              <v-btn block @click="goTo('/login')"> Logout </v-btn>
+              <v-btn block @click="goTo('/signup')"> Créer un compte </v-btn>
+            </div>
+            <div class="pa-2">
+              <v-btn block @click="goTo('/signin')"> Connexion </v-btn>
             </div>
           </template>
         </v-navigation-drawer>

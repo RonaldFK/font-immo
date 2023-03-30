@@ -17,13 +17,13 @@
         }"
       ></ModalHandleCustomer>
     </div>
-    <div v-if="modalCreateCustomer">
+    <!-- <div v-if="modalCreateCustomer">
       <ModalCreateCustomer
         @CloseModalCreateCustomer="closeModalCreateCustomer"
         @closeModalNothingChange="closeModalNothingChange"
       ></ModalCreateCustomer>
       <input type="button" value="X" />
-    </div>
+    </div> -->
     <div
       class="div-create-customer d-flex w-100 h-100 flex-wrap justify-center"
       max-width="300"
@@ -116,12 +116,16 @@ export default {
   },
   created: async function getAllCustomer() {
     {
+      if (!this.$cookies.get('token')) {
+        return this.$router.push('/signin');
+      }
       try {
         const response = await fetch(`${this.baseUrl}/customer`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:8080',
+            Authorization: `Bearer ${this.$cookies.get('token')}`,
           },
         });
         const result = await response.json();
@@ -202,6 +206,7 @@ export default {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': 'http://localhost:8080',
+              Authorization: `Bearer ${this.$cookies.get('token')}`,
             },
           },
         );

@@ -125,13 +125,14 @@ export default {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': 'http://localhost:8080',
+              Authorization: `Bearer ${this.$cookies.get('token')}`,
             },
             body: JSON.stringify(this.buildCustomer),
           },
         );
         const result = await response.json();
-        console.log(result);
-        // this.$emit('emitCloseModal');
+
+        this.$emit('emitCloseModal');
       } catch (err) {
         console.log(err);
       }

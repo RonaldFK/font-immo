@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import '../public/style.css';
 import App from './App.vue';
 import { router } from './../router/index';
-
+import VueCookies from 'vue-cookies';
 // Vuetify
 import 'vuetify/styles';
 import { createVuetify } from 'vuetify';
@@ -16,4 +16,4 @@ const vuetify = createVuetify({
   directives,
 });
 
-createApp(App).use(router).use(vuetify).mount('#app');
+createApp(App).use(router).use(vuetify).use(VueCookies).mount('#app');
