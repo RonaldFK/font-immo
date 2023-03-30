@@ -19,7 +19,26 @@
         Votre compte a été créé avec succès
       </v-alert>
     </div>
-    <div class="d-flex flex-wrap h-100 flex-row justify-center">
+    <div
+      v-if="this.$cookies.get('token')"
+      class="d-flex flex-wrap h-100 flex-row justify-center"
+    >
+      <v-card
+        max-width="500"
+        class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
+      >
+        <v-card-title class="align-self-center mt-5"
+          >Vous êtes déjà connecté</v-card-title
+        >
+
+        <v-row align="center" justify="center">
+          <v-col cols="auto" class="mb-2">
+            <v-btn @click="disconnect">Me Déconnecter</v-btn>
+          </v-col>
+        </v-row>
+      </v-card>
+    </div>
+    <div class="d-flex flex-wrap h-100 flex-row justify-center" v-else>
       <v-card
         max-width="500"
         class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
@@ -90,6 +109,11 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    disconnect() {
+      this.$cookies.remove('token');
+      this.$cookies.remove('userId');
+      this.$router.go();
     },
   },
 };

@@ -299,7 +299,7 @@ export default {
           body: JSON.stringify(this.locationToCreate),
         });
         const result = await location.json();
-        console.log('localisationLog', result[0]);
+
         // gestion d'erreur : si la localisation est bien créé, je passe son id, sinon null
         result[0]?.id
           ? (this.estateToCreate.location_id = result[0]?.id)

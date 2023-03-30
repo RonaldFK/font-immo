@@ -7,6 +7,7 @@ import EstateDetails from '../src/views/EstateDetails.vue';
 import CustomerView from '@/views/CustomerView.vue';
 import ModalCreateEstate from '../src/components/modales/ModalCreateEstate.vue';
 import ModalCreateCustomer from '../src/components/modales/ModalCreateCustomer.vue';
+import MyEstate from '../src/views/MyEstate.vue';
 // import NavBarEstate from "../src/views/navigate/NavBarEstate.vue";
 
 const routes = [
@@ -17,6 +18,10 @@ const routes = [
   {
     path: '/estate',
     component: EstateView,
+  },
+  {
+    path: '/manager/my-estate',
+    component: MyEstate,
   },
   {
     path: '/estate/:id',
