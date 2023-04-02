@@ -1,7 +1,12 @@
 <template>
   <!-- <h1>dashboard</h1> -->
   <div class="main-div d-flex h-100 flex-wrap justify-center">
-    <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+    <Bar
+      v-if="loaded"
+      ref="myChart"
+      :options="chartOptions"
+      :data="chartData"
+    />
   </div>
 </template>
 
@@ -31,16 +36,17 @@ export default {
   components: { Bar },
   data() {
     return {
+      loaded: false,
       chartData: {
         labels: [],
         datasets: [
           {
-            data: this.countEstate(),
+            data: [],
             label: 'Biens en vente',
             backgroundColor: '#19376D',
           },
           {
-            data: this.countEstateSold(),
+            data: [],
             label: 'Biens vendus',
             backgroundColor: '#f87979',
           },
@@ -50,58 +56,34 @@ export default {
         responsive: true,
       },
       baseUrl: 'http://localhost:3000',
-      estates: 0,
+      month: [],
     };
   },
-  // created: async function () {
-  //   {
-  //     // if (!this.$cookies.get('token')) {
-  //     //   return this.$router.push('/signin');
-  //     // }
-  //     try {
-  //       const response = await fetch(`${this.baseUrl}/estate`, {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Access-Control-Allow-Origin': 'http://localhost:8080',
-  //           Authorization: `Bearer ${this.$cookies.get('token')}`,
-  //         },
-  //       });
-  //       const result = await response.json();
-  //       this.estates = result.length;
-  //       this.chartData.datasets[0].data = [5, 5];
-
-  //       // console.log(test.length);
-  //       // console.log(this.chartData.datasets[0].data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // },
   created: async function () {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/statistics/estateMonth`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:8080',
-            Authorization: `Bearer ${this.$cookies.get('token')}`,
-          },
-        },
-      );
-      const result = await response.json();
-      // this.chartData.labels = result;
-      this.$set(this.chartData, 'labels', result);
-      // console.log(result);
-    } catch (err) {
-      console.log(err);
-    }
+    await this.getMonth();
+    await this.countEstate();
   },
+
   methods: {
-    countEstate() {
-      return [15, 25, 35, 45, 50];
+    async countEstate() {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/statistics/allEstate`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:8080',
+              Authorization: `Bearer ${this.$cookies.get('token')}`,
+            },
+          },
+        );
+        const result = await response.json();
+        this.chartData.datasets[0].data = result;
+      } catch (err) {
+        console.log(err);
+      }
+      this.loaded = true;
     },
     countEstateSold() {
       return [10, 20, 30, 40, 45];
@@ -120,8 +102,8 @@ export default {
           },
         );
         const result = await response.json();
-        this.chartData.labels = JSON.stringify(result);
-        // console.log(result);
+        this.chartData.labels = result;
+        // this.chartData.datasets[1].data = this.countEstateSold();
       } catch (err) {
         console.log(err);
       }

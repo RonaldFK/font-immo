@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <nav class="navbar">
     <div>
       <router-link to="/dashboard">Dashboard</router-link> |
@@ -17,4 +17,4 @@
 export default {
   name: 'NavBar',
 };
-</script>
+</script> -->
