@@ -66,9 +66,6 @@ export default {
   },
   created: async function () {
     {
-      if (!this.$cookies.get('token')) {
-        return this.$router.push('/signin');
-      }
       try {
         const response = await fetch(
           `${this.baseUrl}/manager/${this.userId}/estate`,

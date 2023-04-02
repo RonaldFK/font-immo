@@ -101,7 +101,6 @@ export default {
     };
   },
   created: async function getEstateDetails() {
-    // console.log(id);
     try {
       const response = await fetch(`${this.baseUrl}/estate/${this.id}`, {
         method: 'GET',

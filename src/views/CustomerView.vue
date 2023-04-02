@@ -116,9 +116,6 @@ export default {
   },
   created: async function getAllCustomer() {
     {
-      if (!this.$cookies.get('token')) {
-        return this.$router.push('/signin');
-      }
       try {
         const response = await fetch(`${this.baseUrl}/customer`, {
           method: 'GET',

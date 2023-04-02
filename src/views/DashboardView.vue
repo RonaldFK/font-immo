@@ -57,11 +57,26 @@ export default {
       },
       baseUrl: 'http://localhost:3000',
       month: [],
+      initMonth: [
+        { label: 'Janvier', num_month: 1 },
+        { label: 'Février', num_month: 2 },
+        { label: 'Mars', num_month: 3 },
+        { label: 'Avril', num_month: 4 },
+        { label: 'Mai', num_month: 5 },
+        { label: 'Juin', num_month: 6 },
+        { label: 'Juillet', num_month: 7 },
+        { label: 'Août', num_month: 8 },
+        { label: 'Septembre', num_month: 9 },
+        { label: 'Octobre', num_month: 10 },
+        { label: 'Novembre', num_month: 11 },
+        { label: 'Décembre', num_month: 12 },
+      ],
     };
   },
   created: async function () {
     await this.getMonth();
     await this.countEstate();
+    await this.countEstateSold();
   },
 
   methods: {
@@ -83,15 +98,11 @@ export default {
       } catch (err) {
         console.log(err);
       }
-      this.loaded = true;
     },
-    countEstateSold() {
-      return [10, 20, 30, 40, 45];
-    },
-    async getMonth() {
+    async countEstateSold() {
       try {
         const response = await fetch(
-          `http://localhost:3000/statistics/estateMonth`,
+          `http://localhost:3000/statistics/estateSold`,
           {
             method: 'GET',
             headers: {
@@ -102,11 +113,18 @@ export default {
           },
         );
         const result = await response.json();
-        this.chartData.labels = result;
-        // this.chartData.datasets[1].data = this.countEstateSold();
+        this.chartData.datasets[1].data = result;
       } catch (err) {
         console.log(err);
       }
+      this.loaded = true;
+    },
+    async getMonth() {
+      const object = [];
+      this.initMonth.map((elem) => {
+        object.push(elem.label);
+      });
+      this.chartData.labels = object;
     },
   },
 };

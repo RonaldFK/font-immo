@@ -9,36 +9,94 @@ import ModalCreateEstate from '../src/components/modales/ModalCreateEstate.vue';
 import ModalCreateCustomer from '../src/components/modales/ModalCreateCustomer.vue';
 import MyEstate from '../src/views/MyEstate.vue';
 // import NavBarEstate from "../src/views/navigate/NavBarEstate.vue";
-
+import Vue from 'vue';
 const routes = [
   {
     path: '/',
     component: DashboardView,
+    beforeEnter: () => {
+      if (!Vue?.$cookies?.get('token')) {
+        router.push('/signin');
+      }
+    },
   },
   {
     path: '/estate',
     component: EstateView,
+    beforeEnter: () => {
+      if (!Vue?.$cookies?.get('token')) {
+        router.push('/signin');
+      }
+    },
   },
   {
     path: '/manager/my-estate',
     component: MyEstate,
+    beforeEnter: () => {
+      if (!Vue?.$cookies?.get('token')) {
+        router.push('/signin');
+      }
+    },
   },
   {
     path: '/estate/:id',
     component: EstateDetails,
+    beforeEnter: () => {
+      if (!Vue?.$cookies?.get('token')) {
+        router.push('/signin');
+      }
+    },
   },
   { path: '/signup', component: Signup },
   { path: '/signin', component: Signin },
   {
     path: '/dashboard',
     component: DashboardView,
+    beforeEnter: () => {
+      if (!Vue?.$cookies?.get('token')) {
+        router.push('/signin');
+      }
+    },
   },
-  { path: '/customer', component: CustomerView },
-  { path: '/estate/create-estate', component: ModalCreateEstate },
-  { path: '/customer/create-customer', component: ModalCreateCustomer },
+  {
+    path: '/customer',
+    component: CustomerView,
+    beforeEnter: () => {
+      if (!Vue?.$cookies?.get('token')) {
+        router.push('/signin');
+      }
+    },
+  },
+  {
+    path: '/estate/create-estate',
+    component: ModalCreateEstate,
+    beforeEnter: () => {
+      if (!Vue?.$cookies?.get('token')) {
+        router.push('/signin');
+      }
+    },
+  },
+  {
+    path: '/customer/create-customer',
+    component: ModalCreateCustomer,
+    beforeEnter: () => {
+      if (!Vue?.$cookies?.get('token')) {
+        router.push('/signin');
+      }
+    },
+  },
+  // { path: "*", component: PageNotFound }
 ];
 
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
+
+// import Vue from 'vue';
+// router.beforeEach(() => {
+//   if (!Vue?.$cookies?.get('token')) {
+//     router.push('/signin');
+//
+//   }
+// });
