@@ -7,6 +7,7 @@ import EstateDetails from '../src/views/EstateDetails.vue';
 import CustomerView from '@/views/CustomerView.vue';
 import ModalCreateEstate from '../src/components/modales/ModalCreateEstate.vue';
 import ModalCreateCustomer from '../src/components/modales/ModalCreateCustomer.vue';
+import notFound from '../src/views/notFound.vue';
 import MyEstate from '../src/views/MyEstate.vue';
 // import NavBarEstate from "../src/views/navigate/NavBarEstate.vue";
 import Vue from 'vue';
@@ -85,7 +86,7 @@ const routes = [
       }
     },
   },
-  // { path: "*", component: PageNotFound }
+  { path: '/:pathMatch(.*)*', component: notFound },
 ];
 
 export const router = createRouter({
