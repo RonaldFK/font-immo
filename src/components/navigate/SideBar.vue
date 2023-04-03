@@ -44,6 +44,9 @@
               <v-btn block @click="goTo('/signup')"> Créer un compte </v-btn>
             </div>
             <div class="pa-2">
+              <v-btn block @click="goTo('/socket')"> test </v-btn>
+            </div>
+            <div class="pa-2">
               <v-btn block @click="goTo('/signin')"> Connexion </v-btn>
             </div>
           </template>

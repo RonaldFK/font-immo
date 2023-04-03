@@ -9,9 +9,11 @@ import ModalCreateEstate from '../src/components/modales/ModalCreateEstate.vue';
 import ModalCreateCustomer from '../src/components/modales/ModalCreateCustomer.vue';
 import notFound from '../src/views/notFound.vue';
 import MyEstate from '../src/views/MyEstate.vue';
-
+import MyForm from '../src/views/MyForm.vue';
+// import ConnectionManager from '../src/views/ConnectionManager.vue';
 // import Vue from 'vue';
 const routes = [
+  { path: '/socket', component: MyForm },
   {
     path: '/',
     component: DashboardView,
