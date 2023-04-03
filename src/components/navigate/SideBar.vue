@@ -52,15 +52,6 @@
       </v-layout>
     </v-card>
   </div>
-
-  <!-- <nav class="sidenav">
-    <div>
-      <router-link to="/estate">Mes Biens</router-link>
-      <router-link to="/dashboard">Rechercher un bien</router-link>
-      <router-link to="/test">Voir les prêts de clés</router-link>
-      <router-link to="/test">Biens sous compromis</router-link>
-    </div>
-  </nav> -->
 </template>
 <script>
 export default {

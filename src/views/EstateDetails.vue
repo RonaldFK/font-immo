@@ -101,7 +101,9 @@ export default {
     };
   },
   created: async function getEstateDetails() {
-    // console.log(id);
+    if (!this?.$cookies?.get('token')) {
+      this.$router.push('/signin');
+    }
     try {
       const response = await fetch(`${this.baseUrl}/estate/${this.id}`, {
         method: 'GET',
@@ -161,7 +163,7 @@ export default {
         });
         let result = await response.json();
         result = result.filter((elem) => elem.name != '.DS_Store');
-        console.log(result, 'TEST');
+
         this.photoUrl = result;
       } catch (err) {
         console.log(err, 'TEST ICI');

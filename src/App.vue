@@ -8,12 +8,11 @@
 </template>
 
 <script>
-import NavBar from './components/navigate/NavBar.vue';
+// import NavBar from './components/navigate/NavBar.vue';
 import SideBar from './components/navigate/SideBar.vue';
 export default {
   name: 'App',
   components: {
-    NavBar,
     SideBar,
   },
   data() {

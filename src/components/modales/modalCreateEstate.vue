@@ -213,6 +213,9 @@ export default {
     },
   },
   created: async function getAllLocation() {
+    if (!this?.$cookies?.get('token')) {
+      this.$router.push('/signin');
+    }
     try {
       const managers = await fetch(`${this.baseUrl}/manager`, {
         method: 'GET',
@@ -258,9 +261,9 @@ export default {
      */
     async createEstate() {
       await this.createLocation();
-      // if (!this.createLocation()) {
-      //   throw new Error('Formulaire incomplet');
-      // }
+      if (!this.createLocation()) {
+        throw new Error('Formulaire incomplet');
+      }
 
       const form = new FormData();
       const urlEstate = 'http://localhost:3000/estate';

@@ -7,9 +7,10 @@ import EstateDetails from '../src/views/EstateDetails.vue';
 import CustomerView from '@/views/CustomerView.vue';
 import ModalCreateEstate from '../src/components/modales/ModalCreateEstate.vue';
 import ModalCreateCustomer from '../src/components/modales/ModalCreateCustomer.vue';
+import notFound from '../src/views/notFound.vue';
 import MyEstate from '../src/views/MyEstate.vue';
-// import NavBarEstate from "../src/views/navigate/NavBarEstate.vue";
 
+// import Vue from 'vue';
 const routes = [
   {
     path: '/',
@@ -33,12 +34,30 @@ const routes = [
     path: '/dashboard',
     component: DashboardView,
   },
-  { path: '/customer', component: CustomerView },
-  { path: '/estate/create-estate', component: ModalCreateEstate },
-  { path: '/customer/create-customer', component: ModalCreateCustomer },
+  {
+    path: '/customer',
+    component: CustomerView,
+  },
+  {
+    path: '/estate/create-estate',
+    component: ModalCreateEstate,
+  },
+  {
+    path: '/customer/create-customer',
+    component: ModalCreateCustomer,
+  },
+  { path: '/:pathMatch(.*)*', component: notFound },
 ];
 
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
+
+// import Vue from 'vue';
+// router.beforeEach(() => {
+//   if (!Vue?.$cookies?.get('token')) {
+//     router.push('/signin');
+//
+//   }
+// });
