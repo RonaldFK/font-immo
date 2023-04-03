@@ -101,7 +101,9 @@ export default {
   },
   methods: {
     closeModal() {
-      console.log('result', this.customerFirstname);
+      if (!this?.$cookies?.get('token')) {
+        this.$router.push('/signin');
+      }
       this.$emit('closeModalNothingChange');
     },
     // mise à jour avec la valeur input
@@ -115,7 +117,9 @@ export default {
     //   };
     // },
     async modifyCustomer() {
-      console.log('result :', this.buildCustomer);
+      if (!this?.$cookies?.get('token')) {
+        this.$router.push('/signin');
+      }
 
       try {
         await fetch(`${this.baseUrl}/customer/${parseInt(this.clientNumber)}`, {
@@ -148,12 +152,7 @@ export default {
   margin-left: 20%;
   margin-right: 20%;
   margin-top: 8%;
-  display: flex;
-  /* overflow-y: scroll; */
-  overflow-x: hidden;
   align-items: center;
-  height: 40rem;
-  /* background: rgba(236, 232, 232, 0.825); */
 }
 .overlay {
   background: rgba(44, 41, 41, 0.433);

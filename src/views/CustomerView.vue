@@ -116,6 +116,9 @@ export default {
   },
   created: async function getAllCustomer() {
     {
+      if (!this?.$cookies?.get('token')) {
+        this.$router.push('/signin');
+      }
       try {
         const response = await fetch(`${this.baseUrl}/customer`, {
           method: 'GET',
@@ -138,7 +141,6 @@ export default {
       switch (data) {
         case 'cash':
           return 'Paiement comptant';
-
           break;
         case 'credit':
           return 'Paiement crédit';
@@ -194,7 +196,6 @@ export default {
       this.$router.go();
     },
     async deleteCustomer(customer) {
-      console.log(this.clientNumber);
       try {
         const response = await fetch(
           `${this.baseUrl}/customer/${customer.id}`,
@@ -208,7 +209,6 @@ export default {
           },
         );
         const result = await response.json();
-        console.log(result);
         // this.$emit('emitCloseModal');
       } catch (err) {
         console.log(err);
@@ -219,34 +219,20 @@ export default {
 </script>
 <style scoped>
 .card-customer {
-  /* background: rgba(228, 147, 147, 0.278); */
   background-color: rgb(255, 241, 220);
   border-left: 5px solid rgb(58, 152, 185);
 }
 .main-div {
   margin-left: 272px;
   margin-top: 50px;
-  /* margin-left: 17rem; */
 }
 .btn {
   color: rebeccapurple;
-  /* position: absolute; */
-  /* right: 20px;
-  bottom: 10px; */
 }
 .btn-left {
   color: rgb(172, 38, 38);
-  /* position: absolute; */
-  /* left: 20px;
-  bottom: 10px; */
 }
 .div-create-btn {
-  /* position: absolute; */
-  /* top: 8rem; */
   width: 100%;
-}
-.div-create-customer {
-  /* position: absolute; */
-  /* top: 15rem; */
 }
 </style>

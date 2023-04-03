@@ -1,7 +1,7 @@
 <template>
-  <!-- <h1>dashboard</h1> -->
   <div class="main-div d-flex h-100 flex-wrap justify-center">
     <Bar
+      class="card-estate ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"
       v-if="loaded"
       ref="myChart"
       :options="chartOptions"
@@ -42,7 +42,7 @@ export default {
         datasets: [
           {
             data: [],
-            label: 'Biens en vente',
+            label: 'Biens rentrés',
             backgroundColor: '#19376D',
           },
           {
@@ -74,6 +74,9 @@ export default {
     };
   },
   created: async function () {
+    if (!this?.$cookies?.get('token')) {
+      this.$router.push('/signin');
+    }
     await this.getMonth();
     await this.countEstate();
     await this.countEstateSold();

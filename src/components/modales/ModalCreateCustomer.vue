@@ -102,9 +102,15 @@ export default {
 
   methods: {
     closeModal() {
+      if (!this?.$cookies?.get('token')) {
+        this.$router.push('/signin');
+      }
       this.$router.push('/customer');
     },
     async createCustomer() {
+      if (!this?.$cookies?.get('token')) {
+        this.$router.push('/signin');
+      }
       const newCustomer = {
         firstname: this.buildCustomer?.firstname || null,
         lastname: this.buildCustomer.lastname || null,
@@ -126,7 +132,6 @@ export default {
         if (response.status === 200) {
           this.accept = true;
           this.buildCustomer = {};
-          // this.$router.push('/customer');
         }
       } catch (err) {
         console.log(err);
@@ -139,28 +144,5 @@ export default {
 .w-100 {
   padding-right: 10px;
   padding-left: 10px;
-}
-.modal-customer {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 8%;
-  display: flex;
-  /* overflow-y: scroll; */
-  overflow-x: hidden;
-  align-items: center;
-  height: 40rem;
-  /* background: rgba(236, 232, 232, 0.825); */
-}
-.overlay {
-  background: rgba(44, 41, 41, 0.433);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 2;
 }
 </style>
