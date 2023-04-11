@@ -176,6 +176,8 @@ export default {
 <style>
 .main-div {
   margin-left: 272px;
+  /* background-color: rgb(255, 241, 220);
+  border-left: 5px solid rgb(58, 152, 185); */
 }
 .card-estate {
   height: 685px;
@@ -189,10 +191,15 @@ export default {
 }
 .card-owner {
   height: 490px;
-  background: red;
 }
 .card-photos {
   height: 400px;
   width: 100%;
+  background-color: rgb(255, 241, 220) !important;
+  border-left: 5px solid rgb(58, 152, 185) !important;
+}
+.card {
+  background-color: rgb(255, 241, 220) !important;
+  border-left: 5px solid rgb(58, 152, 185) !important;
 }
 </style>
