@@ -9,7 +9,7 @@ import ModalCreateEstate from '../src/components/modales/ModalCreateEstate.vue';
 import ModalCreateCustomer from '../src/components/modales/ModalCreateCustomer.vue';
 import notFound from '../src/views/notFound.vue';
 import MyEstate from '../src/views/MyEstate.vue';
-
+import ModalHandleEstate from '../src/components/modales/ModalHandleEstate';
 // import Vue from 'vue';
 const routes = [
   {
@@ -27,6 +27,10 @@ const routes = [
   {
     path: '/estate/:id',
     component: EstateDetails,
+  },
+  {
+    path: '/estate/modify/:id',
+    component: ModalHandleEstate,
   },
   { path: '/signup', component: Signup },
   { path: '/signin', component: Signin },

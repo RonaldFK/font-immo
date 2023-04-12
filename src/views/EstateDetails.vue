@@ -85,6 +85,11 @@
         </template>
       </v-img>
     </v-card>
+    <v-row align="center" justify="center">
+      <v-col cols="auto" class="mb-2">
+        <v-btn @click="modifyEstate">Modifier ce bien</v-btn>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -168,6 +173,10 @@ export default {
       } catch (err) {
         console.log(err, 'TEST ICI');
       }
+    },
+    modifyEstate() {
+      this.$router.push(`/estate/modify/${this.id}`);
+      console.log('test');
     },
   },
 };

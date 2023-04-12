@@ -39,12 +39,13 @@
         </v-row>
         <v-text-field
           v-model="estateToCreate.name"
-          label="Nom du bien :"
+          :label="'Nom actuel: '"
           ref="nomForm"
-        ></v-text-field>
+          >{{ currentEstate.name }}</v-text-field
+        >
         <v-text-field
           v-model="estateToCreate.price"
-          label="Prix du bien :"
+          :label="'Prix actuel : ' + currentEstate.price"
         ></v-text-field>
 
         <v-select
@@ -52,14 +53,16 @@
           :items="typeEstates"
           item-title="label"
           item-value="value"
-          label="Type de bien :"
+          :label="
+            'Type de bien : ' + convertLabelTypeEstate(currentEstate.type)
+          "
         ></v-select>
         <v-select
           v-model="estateToCreate.statut"
           :items="status"
           item-title="label"
           item-value="value"
-          label="Statut"
+          :label="'Statut : ' + convertLabelStatus(currentEstate.status)"
         >
         </v-select>
         <v-file-input label="Ajouter des photos" ref="photos" multiple>
@@ -76,23 +79,23 @@
         </v-row>
         <v-text-field
           v-model="locationToCreate.num"
-          label="Numéro de rue :"
+          :label="'Numéro de rue :' + currentLocation.num"
         ></v-text-field>
         <v-text-field
           v-model="locationToCreate.street"
-          label="Nom de rue :"
+          :label="'Nom de rue :' + currentLocation.street"
         ></v-text-field>
         <v-text-field
           v-model="locationToCreate.city"
-          label="Ville :"
+          :label="'Ville :' + currentLocation.city"
         ></v-text-field>
         <v-text-field
           v-model="locationToCreate.country"
-          label="Pays :"
+          :label="'Pays :' + currentLocation.country"
         ></v-text-field>
         <v-text-field
           v-model="locationToCreate.code"
-          label="Code :"
+          :label="'Code :' + currentLocation.code"
         ></v-text-field>
       </v-card>
     </div>
@@ -115,7 +118,7 @@
           :items="customers"
           item-title="lastname"
           item-value="lastname"
-          label="Nom du propriétaire"
+          :label="'Nom du propriétaire: ' + currentCustomer.lastname"
         >
         </v-select>
         <v-select
@@ -124,7 +127,7 @@
           ref="firstname"
           item-title="firstname"
           item-value="id"
-          label="prénom"
+          :label="'prénom: ' + currentCustomer.firstname"
         >
         </v-select>
       </v-card>
@@ -142,7 +145,12 @@
           :items="managers"
           item-title="firstname"
           item-value="id"
-          label="Manager"
+          :label="
+            'Manager: ' +
+            currentManager.firstname +
+            ' ' +
+            currentManager.lastname
+          "
         >
         </v-select>
       </v-card>
@@ -160,7 +168,7 @@
 
 <script>
 export default {
-  name: 'ModalCreateEstate',
+  name: 'ModalHandleEstate',
   data() {
     return {
       baseUrl: 'http://localhost:3000',
@@ -184,15 +192,11 @@ export default {
       customerToSearch: '',
       firstFilterToSearchCustomer: '',
       customers: [],
-      estateToCreate: {
-        name: '',
-        price: '',
-        statut: '',
-        type: '',
-        manager_id: '',
-        location_id: '',
-        customer_id: '',
-      },
+      estateToCreate: {},
+      currentEstate: '',
+      currentLocation: '',
+      currentManager: '',
+      currentCustomer: '',
       locationToCreate: {
         num: '',
         street: '',
@@ -200,6 +204,7 @@ export default {
         country: '',
         code: '',
       },
+      id: this.$route.params.id,
     };
   },
   watch: {
@@ -208,16 +213,16 @@ export default {
     },
     firstFilterToSearchCustomer: function (value) {
       // remise à zéro de l'id prénom qui s'affichait à la regénération du filtre.
-      this.estateToCreate.customer_id = '';
+      //   this.estateToCreate.customer_id = '';
       this.searchCustomer(value);
     },
   },
-  created: async function getAllManagers() {
+  created: async function getEstateDetails() {
     if (!this?.$cookies?.get('token')) {
       this.$router.push('/signin');
     }
     try {
-      const managers = await fetch(`${this.baseUrl}/manager`, {
+      const response = await fetch(`${this.baseUrl}/estate/${this.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -225,12 +230,66 @@ export default {
           Authorization: `Bearer ${this.$cookies.get('token')}`,
         },
       });
-      this.managers = await managers.json();
+      const result = await response.json();
+      this.currentEstate = result[0];
+      this.currentLocation = result[0].location;
+      this.currentManager = result[0].manager;
+      this.currentCustomer = result[0].customer;
+      console.log(result);
     } catch (err) {
       console.log(err);
     }
+    this.getAllManager();
   },
   methods: {
+    async getAllManager() {
+      if (!this?.$cookies?.get('token')) {
+        this.$router.push('/signin');
+      }
+      try {
+        const managers = await fetch(`${this.baseUrl}/manager`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+            Authorization: `Bearer ${this.$cookies.get('token')}`,
+          },
+        });
+        this.managers = await managers.json();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    convertLabelStatus(data) {
+      switch (data) {
+        case 'sous_compromis':
+          return 'Sous compromis';
+          break;
+        case 'a_vendre':
+          return 'A vendre';
+          break;
+        case 'vendu':
+          return 'Vendu';
+          break;
+        default:
+          return 'inconnu';
+      }
+    },
+    convertLabelTypeEstate(data) {
+      switch (data) {
+        case 'maison':
+          return 'Maison';
+          break;
+        case 'apartment':
+          return 'Appartement';
+          break;
+        case 'parking':
+          return 'PArking';
+          break;
+        default:
+          return 'inconnu';
+      }
+    },
     async searchCustomer(value) {
       // Déclenchement de la recherche uniquement à partir de 3 caractères
       if (value.length > 2) {
@@ -266,7 +325,7 @@ export default {
       }
 
       const form = new FormData();
-      const urlEstate = 'http://localhost:3000/estate';
+      const urlEstate = `http://localhost:3000/estate/${this.id}`;
       for (let i = 0; i < this.$refs.photos.files.length; i++) {
         form.append('photo', this.$refs.photos.files[i]);
       }
@@ -274,7 +333,7 @@ export default {
       form.append('estate', JSON.stringify(this.estateToCreate));
       try {
         const response = await fetch(urlEstate, {
-          method: 'POST',
+          method: 'PATCH',
           headers: {
             Accept: 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:8080',
