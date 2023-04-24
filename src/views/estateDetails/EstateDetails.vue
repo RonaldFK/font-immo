@@ -24,7 +24,8 @@
       >
       <v-card-subtitle>Code postale :</v-card-subtitle>
       <v-card-text>{{ info.location?.code }}</v-card-text>
-      <v-textarea :label="info.bio"></v-textarea>
+      <v-card-subtitle>Description du bien :</v-card-subtitle>
+      <v-card-text>{{ info.bio }}</v-card-text>
     </v-card>
     <div class="card-manager">
       <v-card

@@ -50,7 +50,8 @@
                 '/photo/' +
                 photo.name
               "
-            ></v-carousel-item>
+            >
+            </v-carousel-item>
           </v-carousel>
         </v-row>
         <v-row align="center" justify="center" class="w-100">
