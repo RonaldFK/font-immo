@@ -1,0 +1,17 @@
+.card-customer {
+    background-color: rgb(255, 241, 220);
+    border-left: 5px solid rgb(58, 152, 185);
+  }
+  .main-div {
+    margin-left: 272px;
+    margin-top: 50px;
+  }
+  .btn {
+    color: rebeccapurple;
+  }
+  .btn-left {
+    color: rgb(172, 38, 38);
+  }
+  .div-create-btn {
+    width: 100%;
+  }

@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import '../public/style.css';
-import App from './App.vue';
+import App from './views/app/App.vue';
 import { router } from './../router/index';
 import VueCookies from 'vue-cookies';
 // Vuetify

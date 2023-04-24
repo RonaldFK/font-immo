@@ -1,0 +1,16 @@
+.main-div {
+    margin-top: 50px;
+  }
+  .card-estate {
+    width: 400px;
+    /* background: rgba(228, 147, 147, 0.278); */
+    background-color: rgb(255, 241, 220);
+    border-left: 5px solid rgb(58, 152, 185);
+  }
+  
+  .btn {
+    color: rebeccapurple;
+  }
+  .btn-right {
+    color: rgb(172, 38, 38);
+  }
