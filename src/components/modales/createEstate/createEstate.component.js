@@ -31,6 +31,7 @@ export default {
         manager_id: '',
         location_id: '',
         customer_id: '',
+        bio: '',
       },
       locationToCreate: {
         num: '',

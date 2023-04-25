@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 export default {
   name: 'ModalHandleEstate',
   data() {
@@ -119,13 +120,13 @@ export default {
       switch (data) {
         case 'sous_compromis':
           return 'Sous compromis';
-          break;
+
         case 'a_vendre':
           return 'A vendre';
-          break;
+
         case 'vendu':
           return 'Vendu';
-          break;
+
         default:
           return 'inconnu';
       }
@@ -134,13 +135,13 @@ export default {
       switch (data) {
         case 'maison':
           return 'Maison';
-          break;
+
         case 'apartment':
           return 'Appartement';
-          break;
+
         case 'parking':
           return 'PArking';
-          break;
+
         default:
           return 'inconnu';
       }
@@ -168,7 +169,7 @@ export default {
       }
     },
     closeModal() {
-      this.$router.push('/estate');
+      this.$router.push(`/estate/${this.id}`);
     },
     /**
      * Création d'un bien ainsi d'une nouvelle localisation
@@ -201,6 +202,7 @@ export default {
       } catch (err) {
         console.log(err);
       }
+      this.$router.push(`/estate/${this.id}`);
     },
     async createLocation() {
       console.log('ici');

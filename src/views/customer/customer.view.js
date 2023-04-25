@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import ModalHandleCustomer from '@/components/modales/handleCustomer/ModalHandleCustomer.vue';
 import ModalCreateCustomer from '@/components/modales/createCustomer/ModalCreateCustomer.vue';
 
@@ -48,7 +49,7 @@ export default {
       switch (data) {
         case 'cash':
           return 'Paiement comptant';
-          break;
+
         case 'credit':
           return 'Paiement crédit';
         default:
@@ -59,16 +60,16 @@ export default {
       switch (data) {
         case 'seller':
           return 'Vendeur';
-          break;
+
         case 'renter':
           return 'Locataire';
-          break;
+
         case 'buyer':
           return 'Acheteur';
-          break;
+
         case 'lessor':
           return 'Bailleur';
-          break;
+
         default:
           return 'inconnu';
       }
@@ -116,6 +117,7 @@ export default {
           },
         );
         const result = await response.json();
+        console.log(result);
         // this.$emit('emitCloseModal');
       } catch (err) {
         console.log(err);

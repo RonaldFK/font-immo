@@ -50,6 +50,7 @@
         ></v-text-field>
         <v-text-field
           v-model="userToCreate.checkPassword"
+          type="password"
           label="Confirmation"
         ></v-text-field>
         <v-row align="center" justify="center">

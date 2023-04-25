@@ -64,7 +64,9 @@
         </v-select>
         <v-file-input label="Ajouter des photos" ref="photos" multiple>
         </v-file-input>
+        <v-textarea v-model="estateToCreate.bio"></v-textarea>
       </v-card>
+
       <v-card
         max-width="500"
         class="card w-100 ma-5 pa-5 rounded d-flex flex-column h-100 flex-wrap justify-center"

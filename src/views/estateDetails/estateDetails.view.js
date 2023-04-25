@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 export default {
   name: 'EstateDetails',
   data() {
@@ -34,13 +35,13 @@ export default {
       switch (data) {
         case 'sous_compromis':
           return 'Sous compromis';
-          break;
+
         case 'a_vendre':
           return 'A vendre';
-          break;
+
         case 'vendu':
           return 'Vendu';
-          break;
+
         default:
           return 'inconnu';
       }
@@ -49,13 +50,13 @@ export default {
       switch (data) {
         case 'maison':
           return 'Maison';
-          break;
+
         case 'apartment':
           return 'Appartement';
-          break;
+
         case 'parking':
           return 'PArking';
-          break;
+
         default:
           return 'inconnu';
       }
