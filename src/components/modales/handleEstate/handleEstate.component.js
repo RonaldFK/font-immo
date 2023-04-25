@@ -140,7 +140,7 @@ export default {
           return 'Appartement';
 
         case 'parking':
-          return 'PArking';
+          return 'Parking';
 
         default:
           return 'inconnu';
