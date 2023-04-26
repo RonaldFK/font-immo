@@ -31,6 +31,11 @@ export default {
     }
   },
   methods: {
+    /**
+     * En focntion de la valeur en base de données, je retourne une valeur plus parlante pour l'utilisateur
+     * @param {*} data La valeur à convertir
+     * @returns
+     */
     convertLabelStatus(data) {
       switch (data) {
         case 'sous_compromis':
@@ -46,6 +51,11 @@ export default {
           return 'inconnu';
       }
     },
+    /**
+     * En focntion de la valeur en base de données, je retourne une valeur plus parlante pour l'utilisateur
+     * @param {*} data La valeur à convertir
+     * @returns
+     */
     convertLabelTypeEstate(data) {
       switch (data) {
         case 'maison':

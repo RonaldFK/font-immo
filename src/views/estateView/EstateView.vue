@@ -17,28 +17,6 @@
         <v-card-text> {{ estate.type }}</v-card-text>
 
         <v-row align="center" justify="center" class="w-100">
-          <!-- <v-img
-            class="img ma-3 pa-3"
-            width="350"
-            height="300"
-            aspect-ratio="16/9"
-            cover
-            :src="
-              'http://localhost:3000/estate/' +
-              estate.id +
-              '/photo/' +
-              estate.photos[0]?.name
-            "
-          >
-            <template v-slot:placeholder>
-              <div class="d-flex align-center justify-center fill-height">
-                <v-progress-circular
-                  color="grey-lighten-4"
-                  indeterminate
-                ></v-progress-circular>
-              </div>
-            </template>
-          </v-img> -->
           <v-carousel width="350" height="300">
             <v-carousel-item
               cover

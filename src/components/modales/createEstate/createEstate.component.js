@@ -44,6 +44,7 @@ export default {
   },
   watch: {
     customerToSearch: function (value) {
+      // Quand l'utilisateur rentre 3 caractère, je déclenche
       this.searchCustomer(value);
     },
     firstFilterToSearchCustomer: function (value) {
