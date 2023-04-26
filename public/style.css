@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 body{
     font-family: 'Poppins', sans-serif;
-    background: rgb(236, 229, 199);
-    display: flex;
+    background: rgb(216, 216, 216)
+    /* display: flex;
     align-items: center;
-    position: relative;
+    position: relative; */
   
   }
   #app{
-    margin: 10px; 
+    /* margin: 10px;  */
   }
   .navbar{
     color: white;
@@ -26,7 +26,7 @@ body{
     height: 6rem;
     z-index: 1;
   }
-.navbar div {
+.navbarr div {
     border: 3px solid rgb(228, 201, 136);
     padding: 5px;
     border-radius: 10px;
