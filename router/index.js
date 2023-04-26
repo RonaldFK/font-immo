@@ -1,15 +1,15 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import EstateView from '../src/views/EstateView.vue';
-import Signup from '../src/views/Signup.vue';
-import Signin from '../src/views/Signin.vue';
-import DashboardView from '../src/views/DashboardView.vue';
-import EstateDetails from '../src/views/EstateDetails.vue';
-import CustomerView from '@/views/CustomerView.vue';
-import ModalCreateEstate from '../src/components/modales/ModalCreateEstate.vue';
-import ModalCreateCustomer from '../src/components/modales/ModalCreateCustomer.vue';
-import notFound from '../src/views/notFound.vue';
-import MyEstate from '../src/views/MyEstate.vue';
-
+import EstateView from '../src/views/estateView/EstateView.vue';
+import Signup from '../src/views/signup/Signup.vue';
+import Signin from '../src/views/signin/Signin.vue';
+import DashboardView from '../src/views/dashboard/DashboardView.vue';
+import EstateDetails from '../src/views/estateDetails/EstateDetails.vue';
+import CustomerView from '@/views/customer/CustomerView.vue';
+import ModalCreateEstate from '../src/components/modales/createEstate/ModalCreateEstate.vue';
+import ModalCreateCustomer from '@/components/modales/createCustomer/ModalCreateCustomer.vue';
+import notFound from '../src/views/notFound/notFound.vue';
+import MyEstate from '../src/views/myEstate/MyEstate.vue';
+import ModalHandleEstate from '../src/components/modales/handleEstate/ModalHandleEstate';
 // import Vue from 'vue';
 const routes = [
   {
@@ -27,6 +27,10 @@ const routes = [
   {
     path: '/estate/:id',
     component: EstateDetails,
+  },
+  {
+    path: '/estate/modify/:id',
+    component: ModalHandleEstate,
   },
   { path: '/signup', component: Signup },
   { path: '/signin', component: Signin },

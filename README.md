@@ -1,24 +1,39 @@
-# font-immo
+[![forthebadge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ronald-fonlebeck)
+[![forthebadge](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)](https://forthebadge.com)
+[![forthebadge](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
 
-## Project setup
+## README :
+
+### Projet :
+
+Font-immo est le front-end du projet api-immo présent sur mon github<br />
+Rappel : application web à destination permétant la gestion des biens pour une agence immobilière.
+
+### Outils :
+
+- Vuejs
+- Vue Router pour la gestion des routes.
+- Utilisation de composants VueTify.
+- Vue Cookies: j'utilise les cookies sur ce projet pour stocker des informations comme le token.
+- ChartJS pour la présentation de graphique.
+
+### Cloner le projet :
 ```
-npm install
+git@github.com:RonaldFK/font-immo.git
+```
+### Installer les dépendances :
+
+```bash
+npm i
 ```
 
-### Compiles and hot-reloads for development
+### Création des tables de la base de données :
+
+Utilise les scripts dans  /database
+
+### Démarré le projet
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
